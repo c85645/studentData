@@ -2,13 +2,12 @@
 <html>
 
 <head>
-  @include('layout.head')
+  {{-- @include('layout.backend.head') --}}
 </head>
 
 <body>
-  @include('layout.nav')
   @yield('html')
-  @include('layout.script')
+  @include('layout.common.script')
   @yield('javascript')
 </body>
 

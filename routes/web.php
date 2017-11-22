@@ -41,3 +41,7 @@ Route::get('/admin/roleSetting', function () {
 Route::get('/admin/authSetting', function () {
     return view('admin.authSetting');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

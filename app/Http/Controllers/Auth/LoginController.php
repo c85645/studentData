@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -25,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = 'admin.index';
 
     /**
      * Create a new controller instance.
@@ -36,4 +37,40 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function username()
+    {
+        return 'name';
+    }
+
+    // 登入頁
+    public function showLoginForm()
+    {
+        dd(bcrypt('admin'));
+        // return view('auth.login');
+    }
+
+    // 登入
+    public function authenticate()
+    {
+        $email = request()->input('email');
+        $password = request()->input('password');
+
+        // dd(request()->input());
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            // Authentication passed...
+            return redirect()->to('admin.index');
+            // return 'loggin success';
+        } else {
+            return '失敗';
+        }
+    }
+
+    // 登出並導頁
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->to('/');
+    }
+
 }

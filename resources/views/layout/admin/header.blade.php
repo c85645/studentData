@@ -1,10 +1,11 @@
-<header>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">{使用者名稱}您好！</a>
-      </div>
-      <div class="collapse navbar-collapse justify-content-end" id="bs-example-navbar-collapse-1">
-        <button class="btn btn-outline-success my-2 my-sm-12" type="submit">登出</button>
-      </div>
-  </nav>
-</header>
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span></button>
+        <a class="navbar-brand" href="#"><span>Dlab</span>Admin</a>
+    </div>
+  </div><!-- /.container-fluid -->
+</nav>

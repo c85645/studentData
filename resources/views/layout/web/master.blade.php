@@ -6,7 +6,7 @@
 </head>
 
 <body>
-  @include('layout.web.nav')
+  {{-- @include('layout.web.nav') --}}
   @yield('html')
   @include('layout.common.script')
   @yield('javascript')

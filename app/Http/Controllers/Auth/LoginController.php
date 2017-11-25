@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Auth;
 
 class LoginController extends Controller
@@ -46,8 +47,8 @@ class LoginController extends Controller
     // 登入頁
     public function showLoginForm()
     {
-        dd(bcrypt('admin'));
-        // return view('auth.login');
+        // dd(bcrypt('admin'));
+        return view('auth.login');
     }
 
     // 登入
@@ -57,12 +58,13 @@ class LoginController extends Controller
         $password = request()->input('password');
 
         // dd(request()->input());
-        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+        if (Auth::attempt(['email' => $email, 'password' => $password, 'status' => 1])) {
             // Authentication passed...
-            return redirect()->to('admin.index');
+            return redirect()->to('/admin.index');
             // return 'loggin success';
         } else {
-            return '失敗';
+            // TODO 這邊要做一個錯誤頁或是改顯示方式
+            return '您輸入的資料有錯誤或帳號已被停用';
         }
     }
 

@@ -28,6 +28,6 @@
           </a></li>
         </ul>
       </li>
-      <li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+      <li><a href="{{ url('/logout') }}"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
     </ul>
   </div>

@@ -35,7 +35,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
+                            {{-- <li><a href="{{ route('login') }}">登入</a></li> --}}
                             {{-- <li><a href="{{ route('register') }}">Register</a></li> --}}
                         @else
                             <li class="dropdown">
@@ -48,7 +48,7 @@
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            登出
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -73,22 +73,22 @@
                             <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                                 {{ csrf_field() }}
 
-                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                    <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                                <div class="form-group{{ $errors->has('account') ? ' has-error' : '' }}">
+                                    <label for="account" class="col-md-4 control-label">帳號</label>
 
                                     <div class="col-md-6">
-                                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                                        <input id="account" type="text" class="form-control" name="account" value="{{ old('account') }}" required autofocus>
 
-                                        @if ($errors->has('email'))
+                                        @if ($errors->has('account'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('email') }}</strong>
+                                                <strong>{{ $errors->first('account') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                 </div>
 
                                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                    <label for="password" class="col-md-4 control-label">Password</label>
+                                    <label for="password" class="col-md-4 control-label">密碼</label>
 
                                     <div class="col-md-6">
                                         <input id="password" type="password" class="form-control" name="password" required>
@@ -101,7 +101,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <div class="col-md-6 col-md-offset-4">
                                         <div class="checkbox">
                                             <label>
@@ -109,7 +109,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="form-group">
                                     <div class="col-md-8 col-md-offset-4">

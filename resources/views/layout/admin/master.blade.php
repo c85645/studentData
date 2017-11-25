@@ -6,7 +6,7 @@
 </head>
 
 <body>
-  @include('layout.admin.header')
+  @include('layout.admin.nav')
   @include('layout.admin.body')
   @include('layout.common.script')
   @yield('javascript')

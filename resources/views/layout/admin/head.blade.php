@@ -6,3 +6,12 @@
 <link href="{{ asset('css/datepicker3.css') }}" rel="stylesheet">
 <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+<!-- table-middle的class ">" 連接下一層 直到td 給置中的css -->
+<style type="text/css">
+.table-middle > tbody > tr > td{
+  vertical-align: middle;
+}
+.table-middle > tbody > tr > td > form{
+  vertical-align: middle;
+}
+</style>

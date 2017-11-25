@@ -119,6 +119,7 @@
                                     </div>
                                 </div>
                             </form>
+                            @include('layout.common.errors')
                         </div>
                     </div>
                 </div>

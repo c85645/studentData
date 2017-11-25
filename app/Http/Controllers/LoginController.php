@@ -25,9 +25,10 @@ class LoginController extends Controller
         if (Auth::attempt(['account' => $account, 'password' => $password, 'status' => 1])) {
             // Authentication passed...
             return redirect()->to('/admin/');
-            // return 'loggin success';
         } else {
-            return '您輸入的資料有錯誤或帳號已被停用';
+            // TODO 要如何將錯誤訊息往前帶
+            // return '您輸入的資料有錯誤或帳號已被停用';
+            return back()->withInput();
         }
     }
 

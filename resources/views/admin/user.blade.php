@@ -2,15 +2,12 @@
 
 @section('html')
 <div class="container">
-  <h4> <i class="fa fa-user" aria-hidden="true"></i>帳號管理-使用者設定</h4>
-
-  {{-- <section class="row text-center placeholders">
-    <h4>第一個區塊</h4>
-  </section> --}}
-
-  <div align="center">
-    <input type="button" class="btn btn-success btn-sm" value="新增使用者" />
-  </div>
+  <section class="row placeholders">
+    <h4><i class="fa fa-user" aria-hidden="true"></i>帳號管理-使用者設定</h4>
+    <div align="center">
+      <input type="button" class="btn btn-success btn-sm" value="新增帳號" />
+    </div>
+  </section>
 
   <div class="table-responsive">
     <table class="table table-striped">

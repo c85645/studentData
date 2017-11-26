@@ -8,7 +8,9 @@
     </div>
     <div class="divider"></div>
     <ul class="nav menu">
+      @if(auth()->user()->canDo('manage_students'))
       <li><a href="/admin/studentData"><em class="fa fa-dashboard">&nbsp;</em> 學生資料管理</a></li>
+      @endif
       <li><a href="/admin/academy"><em class="fa fa-calendar">&nbsp;</em> 學制管理</a></li>
       <li><a href="/admin/academyPermission"><em class="fa fa-bar-chart">&nbsp;</em> 學制權限管理</a></li>
       <li><a href="/admin/user"><em class="fa fa-toggle-off">&nbsp;</em> 帳號管理</a></li>

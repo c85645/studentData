@@ -6,20 +6,20 @@
     <li><a href="{{ url('/admin/') }}">
       <em class="fa fa-home"></em>
     </a></li>
-    <li class="active">帳號管理</li>
+    <li class="active">角色管理</li>
   </ol>
 </div><!--/.row-->
 
-<h1 class="page-header">帳號管理</h1>
+<h1 class="page-header">角色管理</h1>
 
 <div class="row">
   <div class="col-xs-4">
-    <a class="btn btn-primary btn-lg" href="/admin/user/create" role="button"><i class="fa fa-plus"></i>新增</a>
+    <a class="btn btn-primary btn-lg" href="/admin/role/create" role="button"><i class="fa fa-plus"></i>新增</a>
     {{-- <a class="btn btn-default" href="/admin" role="button"><i class="fa fa-home"></i>回上頁</a> --}}
   </div>
   <div class="col-xs-offset-4 col-xs-4">
-    <form class="input-group form-group" method="GET" action="/admin/user">
-      <input name="keyword" type="text" class="form-control" placeholder="請輸入帳號..." value="{{ $keyword }}" onkeyup="enterArabEng(this);">
+    <form class="input-group form-group" method="GET" action="/admin/role">
+      <input name="keyword" type="text" class="form-control" placeholder="請輸入角色代碼..." value="{{ $keyword }}" onkeyup="enterArabEng(this);">
       <span class="input-group-btn">
         <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
       </span>
@@ -30,30 +30,21 @@
 <table class="table table-bordered table-hover table-middle">
   <thead>
     {{-- <th width="10%">ID</th> --}}
-    <th width="20%">帳號</th>
-    <th width="20%">名稱</th>
-    <th width="20%">角色</th>
-    <th width="20%">狀態</th>
+    <th width="40%">角色代碼</th>
+    <th width="40%">角色名稱</th>
     <th width="20%">操作</th>
   </thead>
   <tbody>
-    @foreach($rows as $user)
+    @foreach($rows as $role)
     <tr>
-      <td>{{ $user->account }}</td>
-      <td><a href="/admin/user/{{ $user->id }}">{{ $user->name }}</a></td>
+      {{-- <td>{{ $role->id }}</td> --}}
       <td>
-        {{ implode(', ', $user->roles->pluck('role_name')->toArray()) }}
+        <a href="/admin/role/{{ $role->id }}">{{ $role->role_id }}</a>
       </td>
+      <td><label>{{ $role->role_name }}</label></td>
       <td>
-        @if( $user->status == 1)
-          啟用
-        @else
-          停用
-        @endif
-      </td>
-      <td>
-        <form class="form-inline" method="post" action="/admin/user/{{ $user->id }}">
-          <a class="btn btn-success" href="/admin/user/{{ $user->id }}/edit"><i class="fa fa-pencil"> </i>修改</a>
+        <form class="form-inline" method="post" action="/admin/role/{{ $role->id }}">
+          <a class="btn btn-success" href="/admin/role/{{ $role->id }}/edit"><i class="fa fa-pencil"> </i>修改</a>
           <input type="hidden" name="_method" value="delete">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <button class="btn btn-danger" type="submit" name=""><i class="fa fa-trash"></i>刪除</button>

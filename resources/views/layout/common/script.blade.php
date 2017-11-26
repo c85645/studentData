@@ -7,6 +7,8 @@
 <script src="{{ asset('js/easypiechart-data.js') }}"></script>
 <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
+<script src="{{ asset('js/common/common.js') }}"/></script>
+
 {{-- <script>
 $.get('/thankGod.txt', function (response) {
   console.log(response);

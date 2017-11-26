@@ -67,7 +67,7 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
-                        <div class="panel-heading">登入</div>
+                        <div class="panel-heading">後台管理系統</div>
 
                         <div class="panel-body">
                             <form class="form-horizontal" method="POST" action="{{ route('login') }}">
@@ -77,7 +77,7 @@
                                     <label for="account" class="col-md-4 control-label">帳號</label>
 
                                     <div class="col-md-6">
-                                        <input id="account" type="text" class="form-control" name="account" value="{{ old('account') }}" required autofocus>
+                                        <input id="account" type="text" class="form-control" name="account" value="{{ old('account') }}" onkeyup="enterArabEng(this);" required autofocus maxlength="20">
 
                                         @if ($errors->has('account'))
                                             <span class="help-block">
@@ -91,7 +91,7 @@
                                     <label for="password" class="col-md-4 control-label">密碼</label>
 
                                     <div class="col-md-6">
-                                        <input id="password" type="password" class="form-control" name="password" required>
+                                        <input id="password" type="password" class="form-control" name="password" onkeyup="enterArabEng(this);" required maxlength="20">
 
                                         @if ($errors->has('password'))
                                             <span class="help-block">
@@ -129,5 +129,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/common/common.js') }}"/></script>
 </body>
 </html>

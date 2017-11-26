@@ -28,14 +28,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
     // 學生資料管理
     // 使用者設定
     Route::resource('user', 'UserController');
-
-    // Route::get('user', function () {
-    //     return view('admin.user');
-    // });
     // 角色設定
-    Route::get('role', function () {
-        return view('admin.role');
-    });
+    Route::resource('role', 'RoleController');
     // 學制權限設定
     Route::get('academyPermission', function () {
         return view('admin.permission');

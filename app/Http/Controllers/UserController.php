@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -21,10 +22,11 @@ class UserController extends Controller
         } else {
             $user = User::where('account', 'like', '%'.request()->input('keyword').'%')->get();
         }
+        // dd(auth()->user()->roles);
 
         // 若要多回傳值的話，就要用陣列的key value方式回傳
         return view('admin.user.index')->with([
-            'rows' => $user,
+            'rows' => $user ,
             'keyword' => $keyword
         ]);
     }
@@ -56,14 +58,29 @@ class UserController extends Controller
         $account = request()->input('account');
         $name = request()->input('name');
         $password = request()->input('password');
-        $status = requiest()->input('status');
+        $status = request()->input('status');
+        $role_id = request()->input('role_id');
 
-        User::create([
+        $tmp = User::where('account', '=', $account);
+        if ($tmp != null) {
+            return back()->withInput()->withErrors([
+                'errors' => '帳號重複',
+            ]);
+        }
+
+        $user = User::create([
             'account' => $account,
             'name' => $name,
             'password' => bcrypt($password),
-            'status' => $status
+            'status' => $status,
         ]);
+
+        // 用attach寫法就可以不需要手動新增role_user這張表
+        $user->roles()->attach($role_id);
+        // \DB::table('role_users')->insert([
+        //     'role_id' => $role_id,
+        //     'user_id' => $user->id,
+        // ]);
 
         return redirect()->to('/admin/user');
     }
@@ -106,12 +123,23 @@ class UserController extends Controller
             'password' => 'required',
         ]);
 
-        // dd($user);
+        $name = request()->input('name');
+        $password = request()->input('password');
+        $status = request()->input('status');
+        $role_id = request()->input('role_id');
+
         $user->update([
-            'name' => $user->name,
-            'password' => bcrypt($user->password),
-            'status' => $user->status,
+            'name' => $name,
+            'password' => bcrypt($password),
+            'status' => $status,
         ]);
+
+        // $user->roles()->detach($role_id);
+        $user->roles()->sync($role_id);
+        // \DB::table('role_user')->where('user_id', $user->id)->update([
+        //     'role_id' => $role_id,
+        //     'user_id' => $user->id,
+        // ]);
         return redirect()->to('/admin/user');
     }
 
@@ -125,5 +153,13 @@ class UserController extends Controller
     {
         $user->delete();
         return redirect()->to('/admin/user');
+    }
+
+    // 一鍵重置密碼
+    public function resetPassword(User $user)
+    {
+        $user = User::where('id', '=', $user->id)->get();
+        dd($user);
+        // return ;
     }
 }

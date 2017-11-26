@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Role;
 
 class User extends Authenticatable
 {
@@ -29,9 +30,10 @@ class User extends Authenticatable
 
     protected $guarded = ['account'];
 
-    public function hasRole()
+    public function getRoleId(User $user)
     {
-        return false;
+        $role_id = $user->roles()->where('user_id', $user->id)->get()->first()->id;
+        return $role_id;
     }
 
     public function canDo($things_to_do)

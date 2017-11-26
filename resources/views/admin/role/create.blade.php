@@ -11,27 +11,35 @@
 </div><!--/.row-->
 
 <h1 class="page-header">角色管理</h1>
-
+@include('layout.common.errors')
 <div class="row">
-  <div class="col-xs-offset-4 col-xs-4">
-    <form method="post" action="/admin/role">
+  <div class="col-xs-offset-2 col-xs-8">
+    <form method="post" action="/admin/role" class="form-horizontal">
       <input type="hidden" name="_token" value="{{ csrf_token() }}">
       <div class="form-group">
-        <h3>角色代碼</h3>
-        <input type="text" name="role_id" class="form-control" value="{{ old('role_id') }}" placeholder="請輸入角色代碼(英文)..." maxlength="20" onkeyup="enterArabEng(this);"><br>
+        <label class="col-sm-2 control-label" for="role_id"><span style="color: red">*</span> 角色代碼</label>
+
+        <div class="col-sm-8">
+          <input type="text" name="role_id" class="form-control" value="{{ old('role_id') }}" placeholder="請輸入角色代碼(英文)..." maxlength="20" onkeyup="enterArabEng(this);">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="role_name"><span style="color: red">*</span> 角色名稱</label>
+
+        <div class="col-sm-8">
+          <input type="text" name="role_name" class="form-control" value="{{ old('role_name') }}" placeholder="請輸入角色名稱..." maxlength="20">
+        </div>
       </div>
       <div class="form-group">
-        <h3>角色名稱</h3>
-        <input type="text" name="role_name" class="form-control" value="{{ old('role_name') }}" placeholder="請輸入角色名稱..." maxlength="20"><br>
-      </div>
-      <div class="form-group">
-        <h3>操作權限</h3>
-        {{-- <input type="text" name="role_name" class="form-control" value="{{ old('role_name') }}" placeholder="請輸入角色名稱..." maxlength="20"><br> --}}
+        <label class="col-sm-2 control-label">操作權限</label>
+        <div class="col-sm-8">
+          TODO
+        </div>
       </div>
       <div align="center">
          <input class="btn btn-primary" type="submit" value="儲存">
       </div>
-      @include('layout.common.errors')
     </form>
   </div>
 </div>

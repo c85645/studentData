@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -38,7 +39,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+        $roles = Role::get();
+        return view('admin.user.create')->with([
+            'roles' => $roles,
+        ]);
     }
 
     /**
@@ -52,12 +56,14 @@ class UserController extends Controller
         $this -> validate(request(), [
             'account' => 'required',
             'name' => 'required',
-            'password' => 'required',
+            // 'password' => 'required',
+            'role_id' => 'required',
+            'status' => 'required',
         ]);
 
         $account = request()->input('account');
         $name = request()->input('name');
-        $password = request()->input('password');
+        // $password = request()->input('password');
         $status = request()->input('status');
         $role_id = request()->input('role_id');
 
@@ -71,7 +77,7 @@ class UserController extends Controller
         $user = User::create([
             'account' => $account,
             'name' => $name,
-            'password' => bcrypt($password),
+            'password' => bcrypt($account),
             'status' => $status,
         ]);
 
@@ -106,7 +112,12 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.user.edit')->with(compact('user'));
+        $roles = Role::get();
+        // dd($user->getRoleId($user));
+
+        return view('admin.user.edit')->with(compact('user'))->with([
+            'roles' => $roles,
+        ]);
     }
 
     /**
@@ -120,17 +131,19 @@ class UserController extends Controller
     {
         $this -> validate(request(), [
             'name' => 'required',
-            'password' => 'required',
+            // 'password' => 'required',
+            'role_id' => 'required',
+            'status' => 'required',
         ]);
 
         $name = request()->input('name');
-        $password = request()->input('password');
+        // $password = request()->input('password');
         $status = request()->input('status');
         $role_id = request()->input('role_id');
 
         $user->update([
             'name' => $name,
-            'password' => bcrypt($password),
+            // 'password' => bcrypt($password),
             'status' => $status,
         ]);
 

@@ -40,7 +40,8 @@
     @foreach($rows as $user)
     <tr>
       <td>{{ $user->account }}</td>
-      <td><a href="/admin/user/{{ $user->id }}">{{ $user->name }}</a></td>
+      {{-- <td><a href="/admin/user/{{ $user->id }}">{{ $user->name }}</a></td> --}}
+      <td>{{ $user->name }}</td>
       <td>
         {{ implode(', ', $user->roles->pluck('role_name')->toArray()) }}
       </td>

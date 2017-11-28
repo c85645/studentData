@@ -73,31 +73,31 @@
                             <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                                 {{ csrf_field() }}
 
-                                <div class="form-group{{ $errors->has('account') ? ' has-error' : '' }}">
+                                <div class="form-group{{-- {{ $errors->has('account') ? ' has-error' : '' }} --}}">
                                     <label for="account" class="col-md-4 control-label">帳號</label>
 
                                     <div class="col-md-6">
                                         <input id="account" type="text" class="form-control" name="account" value="{{ old('account') }}" onkeyup="enterArabEng(this);" required autofocus maxlength="20">
 
-                                        @if ($errors->has('account'))
+                                        {{-- @if ($errors->has('account'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('account') }}</strong>
                                             </span>
-                                        @endif
+                                        @endif --}}
                                     </div>
                                 </div>
 
-                                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                <div class="form-group{{-- {{ $errors->has('password') ? ' has-error' : '' }} --}}">
                                     <label for="password" class="col-md-4 control-label">密碼</label>
 
                                     <div class="col-md-6">
                                         <input id="password" type="password" class="form-control" name="password" onkeyup="enterArabEng(this);" required maxlength="20">
 
-                                        @if ($errors->has('password'))
+                                        {{-- @if ($errors->has('password'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('password') }}</strong>
                                             </span>
-                                        @endif
+                                        @endif --}}
                                     </div>
                                 </div>
 
@@ -119,12 +119,12 @@
                                     </div>
                                 </div>
                             </form>
-                            @include('layout.common.errors')
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        @include('layout.common.errors')
     </div>
 
     <!-- Scripts -->

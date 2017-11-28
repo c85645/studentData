@@ -13,7 +13,7 @@ class CreateRolePermissionTable extends Migration
      */
     public function up()
     {
-        Schema::create('role_menu', function (Blueprint $table) {
+        Schema::create('role_permission', function (Blueprint $table) {
             $table->integer('role_id');
             $table->integer('menu_id');
             $table->index(['role_id', 'menu_id']);
@@ -28,6 +28,6 @@ class CreateRolePermissionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('role_menu');
+        Schema::dropIfExists('role_permission');
     }
 }

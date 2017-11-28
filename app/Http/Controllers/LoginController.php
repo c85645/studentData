@@ -28,7 +28,9 @@ class LoginController extends Controller
         } else {
             // TODO 要如何將錯誤訊息往前帶
             // return '您輸入的資料有錯誤或帳號已被停用';
-            return back()->withInput();
+            return back()->withInput()->withErrors([
+                'errors' => '您輸入的資料有錯誤或帳號已被停用',
+            ]);
         }
     }
 

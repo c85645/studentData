@@ -9,12 +9,12 @@
     <div class="divider"></div>
     <ul class="nav menu">
       @if(auth()->user()->canDo('manage_students'))
-      <li><a href="/admin/studentData"><em class="fa fa-dashboard">&nbsp;</em> 學生資料管理</a></li>
+      <li><a href="/admin/studentData"><em class="fa fa-file-text">&nbsp;</em> 學生資料管理</a></li>
       @endif
       <li><a href="/admin/academy"><em class="fa fa-calendar">&nbsp;</em> 學制管理</a></li>
-      <li><a href="/admin/academyPermission"><em class="fa fa-bar-chart">&nbsp;</em> 學制權限管理</a></li>
-      <li><a href="/admin/user"><em class="fa fa-toggle-off">&nbsp;</em> 帳號管理</a></li>
-      <li><a href="/admin/role"><em class="fa fa-clone">&nbsp;</em> 角色管理</a></li>
+      <li><a href="/admin/academyPermission"><em class="fa fa-ban">&nbsp;</em> 學制權限管理</a></li>
+      <li><a href="/admin/user"><em class="fa fa-sliders">&nbsp;</em> 帳號管理</a></li>
+      <li><a href="/admin/role"><em class="fa fa-users">&nbsp;</em> 角色管理</a></li>
       {{-- <li class="parent">
         <a data-toggle="collapse" href="#sub-item-1">
           <em class="fa fa-navicon">&nbsp;</em> Multilevel <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
@@ -31,6 +31,7 @@
           </a></li>
         </ul>
       </li> --}}
+      <li><a href="/admin/accountSetting"><em class="fa fa-cog">&nbsp;</em> 帳號設定</a></li>
       <li><a href="{{ url('/logout') }}"><em class="fa fa-power-off">&nbsp;</em> 登出</a></li>
     </ul>
   </div>

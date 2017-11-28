@@ -15,7 +15,6 @@
 <div class="row">
   <div class="col-xs-4">
     <a class="btn btn-primary btn-lg" href="/admin/user/create" role="button"><i class="fa fa-plus"></i>新增</a>
-    {{-- <a class="btn btn-default" href="/admin" role="button"><i class="fa fa-home"></i>回上頁</a> --}}
   </div>
   <div class="col-xs-offset-4 col-xs-4">
     <form class="input-group form-group" method="GET" action="/admin/user">
@@ -29,7 +28,6 @@
 
 <table class="table table-bordered table-hover table-middle">
   <thead>
-    {{-- <th width="10%">ID</th> --}}
     <th width="20%">帳號</th>
     <th width="20%">名稱</th>
     <th width="20%">角色</th>
@@ -40,13 +38,12 @@
     @foreach($rows as $user)
     <tr>
       <td>{{ $user->account }}</td>
-      {{-- <td><a href="/admin/user/{{ $user->id }}">{{ $user->name }}</a></td> --}}
       <td>{{ $user->name }}</td>
       <td>
         {{ implode(', ', $user->roles->pluck('role_name')->toArray()) }}
       </td>
       <td>
-        @if( $user->status == 1)
+        @if($user->status == 1)
           啟用
         @else
           停用
@@ -55,9 +52,11 @@
       <td>
         <form class="form-inline" method="post" action="/admin/user/{{ $user->id }}">
           <a class="btn btn-success" href="/admin/user/{{ $user->id }}/edit"><i class="fa fa-pencil"> </i>修改</a>
-          <input type="hidden" name="_method" value="delete">
-          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          {{ method_field('delete') }}
+          {{ csrf_field() }}
+          @if($user->getRoleId($user) != 1)
           <button class="btn btn-danger" type="submit" name=""><i class="fa fa-trash"></i>刪除</button>
+          @endif
         </form>
       </td>
     </tr>

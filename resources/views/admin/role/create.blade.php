@@ -15,7 +15,7 @@
 <div class="row">
   <div class="col-xs-offset-2 col-xs-8">
     <form method="post" action="/admin/role" class="form-horizontal">
-      <input type="hidden" name="_token" value="{{ csrf_token() }}">
+      {{ csrf_field() }}
       <div class="form-group">
         <label class="col-sm-2 control-label" for="role_id"><span style="color: red">*</span> 角色代碼</label>
 

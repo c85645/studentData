@@ -67,8 +67,9 @@ class UserController extends Controller
         $status = request()->input('status');
         $role_id = request()->input('role_id');
 
-        $tmp = User::where('account', '=', $account);
-        if ($tmp != null) {
+        $tmp = User::where('account', '=', $account)->exists();
+        // dd($tmp);
+        if ($tmp == true) {
             return back()->withInput()->withErrors([
                 'errors' => '帳號重複',
             ]);

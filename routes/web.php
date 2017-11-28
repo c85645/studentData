@@ -24,15 +24,21 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
     Route::get('/', function () {
         return view('admin.index');
     });
-    // 學制管理
-    // 學生資料管理
     // 使用者設定
     Route::resource('user', 'UserController');
     // 角色設定
     Route::resource('role', 'RoleController');
     // 學制權限設定
     Route::get('academyPermission', function () {
-        return view('admin.permission');
+        return view('admin.academyPermission.index');
+    });
+    // 學制管理
+    Route::get('academy' ,function () {
+        return view('admin.academy.index');
+    });
+    // 學生資料管理
+    Route::get('studentData', function () {
+        return view('admin.studentData.index');
     });
 });
 

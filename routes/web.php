@@ -33,13 +33,19 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
         return view('admin.academyPermission.index');
     });
     // 學制管理
-    Route::get('academy' ,function () {
+    Route::get('academy', function () {
         return view('admin.academy.index');
     });
     // 學生資料管理
     Route::get('studentData', function () {
         return view('admin.studentData.index');
     });
+    // 帳號設定
+    Route::get('account', function () {
+        return view('admin.account.edit');
+    });
+
+    Route::put('account/{id}', 'UserController@updateAccount');
 });
 
 // 登入頁GET Request

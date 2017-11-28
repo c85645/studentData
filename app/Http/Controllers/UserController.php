@@ -23,7 +23,7 @@ class UserController extends Controller
         } else {
             $user = User::where('account', 'like', '%'.request()->input('keyword').'%')->get();
         }
-        // dd(auth()->user()->roles);
+        // dd(auth()->user()->roles());
 
         // 若要多回傳值的話，就要用陣列的key value方式回傳
         return view('admin.user.index')->with([
@@ -68,7 +68,6 @@ class UserController extends Controller
         $role_id = request()->input('role_id');
 
         $tmp = User::where('account', '=', $account)->exists();
-        // dd($tmp);
         if ($tmp == true) {
             return back()->withInput()->withErrors([
                 'errors' => '帳號重複',
@@ -114,7 +113,6 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $roles = Role::get();
-        // dd($user->getRoleId($user));
 
         return view('admin.user.edit')->with(compact('user'))->with([
             'roles' => $roles,
@@ -175,5 +173,24 @@ class UserController extends Controller
         $user = User::where('id', '=', $user->id)->get();
         dd($user);
         // return ;
+    }
+
+    public function updateAccount(User $user)
+    {
+        $this -> validate(request(), [
+            'name' => 'required',
+            'password' => 'required',
+        ]);
+
+        $name = request()->input('name');
+        $password = request()->input('password');
+
+        auth()->user()->update([
+            'name' => $name,
+            'password' => bcrypt($password),
+        ]);
+
+
+        return redirect()->to('/admin');
     }
 }

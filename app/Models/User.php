@@ -30,9 +30,9 @@ class User extends Authenticatable
 
     protected $guarded = [];
 
-    public function getRoleId(User $user)
+    public function getRoleId()
     {
-        $role_id = $user->roles()->where('user_id', $user->id)->get()->first()->id;
+        $role_id = auth()->user()->roles()->where('user_id', auth()->user()->id)->get()->first()->id;
         return $role_id;
     }
 
@@ -48,5 +48,14 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany('App\Models\Role');
+    }
+
+    public function isAdministrator()
+    {
+        if (auth()->user()->getRoleId() == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

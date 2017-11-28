@@ -8,13 +8,23 @@
     </div>
     <div class="divider"></div>
     <ul class="nav menu">
-      @if(auth()->user()->canDo('manage_students'))
-      <li><a href="/admin/studentData"><em class="fa fa-file-text">&nbsp;</em> 學生資料管理</a></li>
+      {{-- @if(auth()->user()->canDo('manage_students'))
+      @endif --}}
+
+      <li><a href="/admin/studentData"><i class="fa fa-file-text">&nbsp;</i> 學生資料管理</a></li>
+      <li><a href="/admin/academy"><i class="fa fa-calendar">&nbsp;</i> 學制管理</a></li>
+      <li><a href="/admin/academyPermission"><i class="fa fa-ban">&nbsp;</i> 學制權限管理</a></li>
+
+      {{-- 只有管理員身份有帳號管理/角色管理 --}}
+      @if(auth()->user()->isAdministrator() == true)
+        <li><a href="/admin/user"><i class="fa fa-sliders">&nbsp;</i> 帳號管理</a></li>
+        <li><a href="/admin/role"><i class="fa fa-users">&nbsp;</i> 角色管理</a></li>
       @endif
-      <li><a href="/admin/academy"><em class="fa fa-calendar">&nbsp;</em> 學制管理</a></li>
-      <li><a href="/admin/academyPermission"><em class="fa fa-ban">&nbsp;</em> 學制權限管理</a></li>
-      <li><a href="/admin/user"><em class="fa fa-sliders">&nbsp;</em> 帳號管理</a></li>
-      <li><a href="/admin/role"><em class="fa fa-users">&nbsp;</em> 角色管理</a></li>
+
+      <li><a href="/admin/account"><i class="fa fa-cog">&nbsp;</i> 帳號設定</a></li>
+      <li><a href="{{ url('/logout') }}"><i class="fa fa-power-off">&nbsp;</i> 登出</a></li>
+    </ul>
+  </div>
       {{-- <li class="parent">
         <a data-toggle="collapse" href="#sub-item-1">
           <em class="fa fa-navicon">&nbsp;</em> Multilevel <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
@@ -31,7 +41,3 @@
           </a></li>
         </ul>
       </li> --}}
-      <li><a href="/admin/accountSetting"><em class="fa fa-cog">&nbsp;</em> 帳號設定</a></li>
-      <li><a href="{{ url('/logout') }}"><em class="fa fa-power-off">&nbsp;</em> 登出</a></li>
-    </ul>
-  </div>

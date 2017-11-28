@@ -28,7 +28,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    protected $guarded = ['account'];
+    protected $guarded = [];
 
     public function getRoleId(User $user)
     {

@@ -17,9 +17,8 @@ class Role extends Model
       return $this->belongsToMany('App\Models\Menu','role_permission');
     }
 
-    // TODO
     public function hasPermissions(Role $role)
     {
-        return $role->permissions()->where('role_id', $role->id)->get()->toArray();
+        return $role->permissions()->where('role_id', $role->id)->get();
     }
 }

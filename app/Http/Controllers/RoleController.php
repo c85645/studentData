@@ -103,8 +103,7 @@ class RoleController extends Controller
     {
         $menus = Menu::get();
         // TODO
-        $permissions = $role->hasPermissions($role);
-        // dd($permissions);
+        $permissions = $role->hasPermissions($role)->pluck('id')->toArray();
         return view('admin.role.edit')->with(compact('role'))->with([
             'menus' => $menus,
             'permissions' => $permissions,

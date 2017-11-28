@@ -39,7 +39,7 @@
         <div class="col-sm-8">
           @foreach($menus as $menu)
             <label class="checkbox-inline">
-              <input type="checkbox" name="menus[]" value="{{ $menu->id }}" {{-- @if() checked @endif --}}> {{ $menu->title }}
+              <input type="checkbox" name="menus[]" value="{{ $menu->id }}" @if(in_array($menu->id,$permissions)) checked @endif> {{ $menu->title }}
             </label>
           @endforeach
         </div>

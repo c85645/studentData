@@ -10,7 +10,6 @@
     <ul class="nav menu">
       {{-- @if(auth()->user()->canDo('manage_students'))
       @endif --}}
-
       <li><a href="/admin/studentData"><i class="fa fa-file-text">&nbsp;</i> 學生資料管理</a></li>
       <li><a href="/admin/academy"><i class="fa fa-calendar">&nbsp;</i> 學制管理</a></li>
       <li><a href="/admin/academyPermission"><i class="fa fa-ban">&nbsp;</i> 學制權限管理</a></li>
@@ -30,7 +29,7 @@
           <em class="fa fa-navicon">&nbsp;</em> Multilevel <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
         </a>
         <ul class="children collapse" id="sub-item-1">
-          <li><a class="" href="#">
+          <li><a class="" href="#">ㄝ
             <span class="fa fa-arrow-right">&nbsp;</span> Sub Item 1
           </a></li>
           <li><a class="" href="#">

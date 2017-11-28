@@ -37,9 +37,14 @@
         <label class="col-sm-2 control-label">操作權限</label>
 
         <div class="col-sm-8">
-          TODO
+          @foreach($menus as $menu)
+            <label class="checkbox-inline">
+              <input type="checkbox" name="menus[]" value="{{ $menu->id }}" {{-- @if() checked @endif --}}> {{ $menu->title }}
+            </label>
+          @endforeach
         </div>
       </div>
+
       <div align="center">
          <input class="btn btn-primary" type="submit" value="儲存">
       </div>

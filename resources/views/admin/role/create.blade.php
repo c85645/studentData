@@ -33,8 +33,13 @@
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label">操作權限</label>
+
         <div class="col-sm-8">
-          TODO
+          @foreach($menus as $menu)
+            <label class="checkbox-inline">
+              <input type="checkbox" name="menus[]" value="{{ $menu->id }}"> {{ $menu->title }}
+            </label>
+          @endforeach
         </div>
       </div>
       <div align="center">

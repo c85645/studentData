@@ -39,7 +39,7 @@
     <tr>
       <td>{{ $role->role_id }}</td>
       <td><label>{{ $role->role_name }}</label></td>
-      <td>XOXO</td>
+      <td>{{ implode(', ', $role->permissions()->pluck('title')->toArray()) }}</td>
       <td>
         <form class="form-inline" method="post" action="/admin/role/{{ $role->id }}">
           <a class="btn btn-success" href="/admin/role/{{ $role->id }}/edit"><i class="fa fa-pencil"> </i>修改</a>

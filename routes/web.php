@@ -44,7 +44,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
     Route::get('account', function () {
         return view('admin.account.edit');
     });
-
     Route::put('account/{id}', 'UserController@updateAccount');
 });
 

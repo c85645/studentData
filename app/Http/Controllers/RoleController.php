@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Role;
+use App\Models\Menu;
+
 
 class RoleController extends Controller
 {
@@ -35,7 +37,10 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('admin.role.create');
+        $menus = Menu::get();
+        return view('admin.role.create')->with([
+            'menus' => $menus,
+        ]);
     }
 
     /**
@@ -53,12 +58,22 @@ class RoleController extends Controller
 
         $role_id = request()->input('role_id');
         $role_name = request()->input('role_name');
+        $menus = request()->input('menus');
 
-        Role::create([
+        $tmp = Role::where('role_id', '=', $role_id)->exists();
+        if ($tmp == true) {
+            return back()->withInput()->withErrors([
+                'errors' => '角色代碼重複',
+            ]);
+        }
+
+        $role = Role::create([
             'role_id' => $role_id,
             'role_name' => $role_name,
             'created_name' => auth()->user()->account,
         ]);
+
+        $role->permissions()->attach($menus);
 
         return redirect()->to('/admin/role');
     }
@@ -71,8 +86,10 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
+        $menus = Menu::get();
         return view('admin.role.show')->with([
-            'role' => $role
+            'role' => $role,
+            'menus' => $menus,
         ]);
     }
 
@@ -84,7 +101,14 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        return view('admin.role.edit')->with(compact('role'));
+        $menus = Menu::get();
+        // TODO
+        $permissions = $role->hasPermissions($role);
+        // dd($permissions);
+        return view('admin.role.edit')->with(compact('role'))->with([
+            'menus' => $menus,
+            'permissions' => $permissions,
+        ]);
     }
 
     /**
@@ -101,11 +125,14 @@ class RoleController extends Controller
         ]);
 
         $role_name = request()->input('role_name');
+        $menus = request()->input('menus');
 
         $role->update([
             'role_name' => $role_name,
             'updated_name' => auth()->user()->account,
         ]);
+
+        $role->permissions()->sync($menus);
         return redirect()->to('/admin/role');
     }
 

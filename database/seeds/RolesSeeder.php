@@ -13,7 +13,6 @@ class RolesSeeder extends Seeder
     public function run()
     {
         // 預設三個角色
-        Role::truncate();
         Role::insert([
             [
                 'role_id' => 'administrator',
@@ -30,6 +29,29 @@ class RolesSeeder extends Seeder
                 'role_name' => '考試委員',
                 'created_name' => 'admin',
                 'updated_name' => 'admin',
+            ],
+        ]);
+
+        // 預設角色權限
+        \DB::table('role_permission')->insert([
+            [
+                'role_id' => 1,
+                'menu_id' => 1,
+            ],[
+                'role_id' => 1,
+                'menu_id' => 2,
+            ],[
+                'role_id' => 1,
+                'menu_id' => 3,
+            ],[
+                'role_id' => 2,
+                'menu_id' => 1,
+            ],[
+                'role_id' => 2,
+                'menu_id' => 2,
+            ],[
+                'role_id' => 3,
+                'menu_id' => 1,
             ],
         ]);
     }

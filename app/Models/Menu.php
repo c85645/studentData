@@ -11,4 +11,9 @@ class Menu extends Model
     protected $fillable = [
         'parent_id', 'title', 'url', 'icon', 'order',
     ];
+
+    public static function getMenus()
+    {
+      return Menu::get();
+    }
 }

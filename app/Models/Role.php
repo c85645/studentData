@@ -18,8 +18,8 @@ class Role extends Model
     }
 
     // 查權限列表
-    public function hasPermissions(Role $role)
+    public function hasPermissions()
     {
-        return $role->permissions()->where('role_id', $role->id)->get();
+        return $this->permissions()->where('role_id', $this->id)->get();
     }
 }

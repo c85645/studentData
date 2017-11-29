@@ -10,9 +10,15 @@
     <ul class="nav menu">
       {{-- @if(auth()->user()->canDo('manage_students'))
       @endif --}}
-      <li><a href="/admin/studentData"><i class="fa fa-file-text">&nbsp;</i> 學生資料管理</a></li>
+
+      @foreach(auth()->user()->getMenus() as $menu)
+        @if(in_array($menu->id, auth()->user()->hasPermissions()))
+          <li><a href="{{ $menu->url }}"><i class="{{ $menu->icon }}">&nbsp;</i> {{ $menu->title }}</a></li>
+        @endif
+      @endforeach
+      {{-- <li><a href="/admin/studentData"><i class="fa fa-file-text">&nbsp;</i> 學生資料管理</a></li>
       <li><a href="/admin/academy"><i class="fa fa-calendar">&nbsp;</i> 學制管理</a></li>
-      <li><a href="/admin/academyPermission"><i class="fa fa-ban">&nbsp;</i> 學制權限管理</a></li>
+      <li><a href="/admin/academyPermission"><i class="fa fa-ban">&nbsp;</i> 學制權限管理</a></li> --}}
 
       {{-- 只有管理員身份有帳號管理/角色管理 --}}
       @if(auth()->user()->isAdministrator() == true)

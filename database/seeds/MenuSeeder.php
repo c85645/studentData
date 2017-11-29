@@ -17,7 +17,7 @@ class MenuSeeder extends Seeder
                 'parent_id' => 0,
                 'order'     => 1,
                 'title'     => '學生資料管理',
-                'icon'      => 'a fa-file-text',
+                'icon'      => 'fa fa-file-text',
                 'url'       => '/admin/studentData',
             ],
             [

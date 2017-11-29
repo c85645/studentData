@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
     Route::get('/', function () {
         return view('admin.index');
     });
+
     // 使用者設定
     Route::resource('user', 'UserController');
     // 角色設定

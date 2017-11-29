@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Models\Menu;
 
-
 class RoleController extends Controller
 {
     /**
@@ -18,10 +17,10 @@ class RoleController extends Controller
     {
         $keyword = request()->input('keyword');
 
-        if($keyword == '') {
+        if ($keyword == '') {
             $role = Role::get();
         } else {
-            $role = Role::where('role_id', 'like' , '%'.request()->input('keyword').'%')->get();
+            $role = Role::where('role_id', 'like', '%'.request()->input('keyword').'%')->get();
         }
 
         return view('admin.role.index')->with([

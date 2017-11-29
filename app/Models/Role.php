@@ -14,7 +14,7 @@ class Role extends Model
 
     public function permissions()
     {
-      return $this->belongsToMany('App\Models\Menu','role_permission');
+        return $this->belongsToMany('App\Models\Menu', 'role_permission');
     }
 
     // 查權限列表

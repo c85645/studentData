@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         $keyword = request()->input('keyword');
 
-        if($keyword == '') {
+        if ($keyword == '') {
             $user = User::get();
         } else {
             $user = User::where('account', 'like', '%'.request()->input('keyword').'%')->get();

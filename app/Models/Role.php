@@ -17,6 +17,7 @@ class Role extends Model
       return $this->belongsToMany('App\Models\Menu','role_permission');
     }
 
+    // 查權限列表
     public function hasPermissions(Role $role)
     {
         return $role->permissions()->where('role_id', $role->id)->get();

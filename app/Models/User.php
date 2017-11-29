@@ -30,29 +30,30 @@ class User extends Authenticatable
 
     protected $guarded = [];
 
-    public function getRoleId()
+    public function roles()
     {
-        $role_id = auth()->user()->roles()->where('user_id', auth()->user()->id)->get()->first()->id;
-        return $role_id;
+        return $this->belongsToMany('App\Models\Role');
     }
 
-    public function canDo($things_to_do)
+    // 查該角色代碼
+    public function getRoleId()
     {
-        if ($things_to_do == 'manage_students') {
+        return auth()->user()->roles()->where('user_id', auth()->user()->id)->get()->first()->id;
+    }
+
+    // 判斷是不是最高管理員
+    public function isAdministrator()
+    {
+        if (auth()->user()->getRoleId() == 1) {
             return true;
         } else {
             return false;
         }
     }
 
-    public function roles()
+    public function canDo($things_to_do)
     {
-        return $this->belongsToMany('App\Models\Role');
-    }
-
-    public function isAdministrator()
-    {
-        if (auth()->user()->getRoleId() == 1) {
+        if ($things_to_do == 'manage_students') {
             return true;
         } else {
             return false;

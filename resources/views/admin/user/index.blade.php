@@ -10,7 +10,11 @@
   </ol>
 </div><!--/.row-->
 
-<h1 class="page-header">帳號管理</h1>
+<div class="row">
+  <div class="col-lg-12">
+    <h2 class="page-header">帳號管理</h2>
+  </div>
+</div><!--/.row-->
 
 <div class="row">
   <div class="col-xs-4">

@@ -10,7 +10,12 @@
   </ol>
 </div><!--/.row-->
 
-<h1 class="page-header">帳號設定</h1>
+<div class="row">
+  <div class="col-lg-12">
+    <h2 class="page-header">帳號設定</h2>
+  </div>
+</div><!--/.row-->
+
 @include('layout.common.errors')
 <div class="row">
   <div class="col-xs-offset-2 col-xs-8">

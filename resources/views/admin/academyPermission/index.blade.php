@@ -1,5 +1,9 @@
 @extends('layout.admin.master')
 
 @section('html')
-<h1>學制權限管理</h1>
+<div class="row">
+  <div class="col-lg-12">
+    <h2 class="page-header">學制權限管理</h2>
+  </div>
+</div><!--/.row-->
 @endsection

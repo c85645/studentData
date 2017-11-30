@@ -58,8 +58,8 @@
           <a class="btn btn-success" href="/admin/user/{{ $user->id }}/edit"><i class="fa fa-pencil"> </i>修改</a>
           {{ method_field('delete') }}
           {{ csrf_field() }}
-          @if($user->getRoleId($user) != 1)
-          <button class="btn btn-danger" type="submit" name=""><i class="fa fa-trash"></i>刪除</button>
+          @if($user->id != 1)
+            <button class="btn btn-danger" type="submit" name=""><i class="fa fa-trash"></i>刪除</button>
           @endif
         </form>
       </td>

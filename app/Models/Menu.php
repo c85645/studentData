@@ -14,6 +14,6 @@ class Menu extends Model
 
     public static function getMenus()
     {
-      return Menu::get();
+        return Menu::get();
     }
 }

@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
           UsersSeeder::class,
           RolesSeeder::class,
           MenuSeeder::class,
+          AcademiesSeeder::class,
         ]);
     }
 }

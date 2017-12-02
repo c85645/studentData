@@ -10,8 +10,14 @@
 <style type="text/css">
 .table-middle > tbody > tr > td{
   vertical-align: middle;
+  text-align: center;
 }
 .table-middle > tbody > tr > td > form{
   vertical-align: middle;
+  text-align: center;
+}
+.table-middle > thead > tr > th{
+  vertical-align: middle;
+  text-align: center;
 }
 </style>

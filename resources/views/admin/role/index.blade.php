@@ -8,13 +8,13 @@
     </a></li>
     <li class="active">角色管理</li>
   </ol>
-</div><!--/.row-->
+</div>
 
 <div class="row">
   <div class="col-lg-12">
     <h2 class="page-header">角色管理</h2>
   </div>
-</div><!--/.row-->
+</div>
 
 <div class="row">
   <div class="col-xs-4">

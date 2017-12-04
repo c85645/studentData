@@ -6,10 +6,9 @@
     <li><a href="{{ url('/admin/') }}">
       <em class="fa fa-home"></em>
     </a></li>
-    <li class="active">首頁</li>
     <li class="active">角色管理</li>
   </ol>
-</div><!--/.row-->
+</div>
 
 <h1 class="page-header">角色管理</h1>
 

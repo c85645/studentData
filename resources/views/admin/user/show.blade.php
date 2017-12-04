@@ -9,7 +9,7 @@
     <li class="active">首頁</li>
     <li class="active">帳號管理</li>
   </ol>
-</div><!--/.row-->
+</div>
 
 <h1 class="page-header">帳號管理</h1>
 

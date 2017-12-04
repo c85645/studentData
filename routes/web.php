@@ -38,13 +38,11 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'admin'],
     // 學制管理
     Route::get('academy', 'AcademyController@index');
 
-    // Route::get('academy', function () {
-    //     return view('admin.academy.index');
-    // });
     // 學制權限設定
     Route::get('academyPermission', function () {
         return view('admin.academyPermission.index');
     });
+
     // 學生資料管理
     Route::get('studentData', function () {
         return view('admin.studentData.index');

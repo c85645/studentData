@@ -8,7 +8,7 @@
     </a></li>
     <li class="active">角色管理</li>
   </ol>
-</div><!--/.row-->
+</div>
 
 <h1 class="page-header">角色管理</h1>
 @include('layout.common.errors')

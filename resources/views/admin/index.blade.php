@@ -8,11 +8,13 @@
     </a></li>
     <li class="active">首頁</li>
   </ol>
-</div><!--/.row-->
+</div>
 
 <div class="row">
   <div class="col-lg-12">
     <h2 class="page-header">歡迎使用東吳大學巨量資料學院後台管理系統</h2>
   </div>
-</div><!--/.row-->
+</div>
+@include('layout.common.errors')
+
 @endsection

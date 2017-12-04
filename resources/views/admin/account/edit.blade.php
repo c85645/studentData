@@ -8,13 +8,13 @@
     </a></li>
     <li class="active">帳號設定</li>
   </ol>
-</div><!--/.row-->
+</div>
 
 <div class="row">
   <div class="col-lg-12">
     <h2 class="page-header">帳號設定</h2>
   </div>
-</div><!--/.row-->
+</div>
 
 @include('layout.common.errors')
 <div class="row">

@@ -15,6 +15,7 @@ class CheckPermission
      */
     public function handle($request, Closure $next)
     {
+        $returnMsg = "權限不足";
         //  依照各功能去查詢帳號是否有所屬權限
         //  user/role >>> 判斷角色是否為administrator
         //  academy/academyPermission/studentData >>> 判斷角色是否有權限
@@ -26,10 +27,14 @@ class CheckPermission
 
             if($roles_id->exists()) {
                 if($roles_id->get()->first()->role_id != 'administrator'){
-                    return redirect('admin');
+                    return redirect('admin')->withErrors([
+                        'errors' => $returnMsg,
+                    ]);
                 }
             } else {
-                return redirect('admin');
+                return redirect('admin')->withErrors([
+                    'errors' => $returnMsg,
+                ]);
             }
         } elseif ($request->is('admin/academy') || $request->is('admin/academyPermission') || $request->is('admin/studentData')) {
             $menus = \DB::table('users')
@@ -43,19 +48,27 @@ class CheckPermission
                 $menus = $menus->get()->pluck('id')->toArray();
                 if($request->is('admin/academy')) {
                     if(!in_array(2, $menus)) {
-                        return redirect('admin');
+                        return redirect('admin')->withErrors([
+                            'errors' => $returnMsg,
+                        ]);
                     }
                 } elseif ($request->is('admin/academyPermission')) {
                     if(!in_array(3, $menus)) {
-                        return redirect('admin');
+                        return redirect('admin')->withErrors([
+                            'errors' => $returnMsg,
+                        ]);
                     }
                 } elseif ($request->is('admin/studentData')) {
                     if(!in_array(1, $menus)) {
-                        return redirect('admin');
+                        return redirect('admin')->withErrors([
+                            'errors' => $returnMsg,
+                        ]);
                     }
                 }
             } else {
-                return redirect('admin');
+                return redirect('admin')->withErrors([
+                    'errors' => $returnMsg,
+                ]);;
             }
         } else {
             return $next($request);

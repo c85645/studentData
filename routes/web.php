@@ -38,7 +38,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
     // 學制管理
     Route::get('academy', 'AcademyController@index');
 
-
     // Route::get('academy', function () {
     //     return view('admin.academy.index');
     // });

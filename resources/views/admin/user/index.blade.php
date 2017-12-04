@@ -67,5 +67,5 @@
     @endforeach
   </tbody>
 </table>
-<span class="pagebanner">共 {{ count($rows) }} 筆資料。</span><span class="pagelinks"></span>
+{!! $rows->render() !!}
 @endsection

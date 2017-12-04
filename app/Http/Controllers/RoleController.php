@@ -18,9 +18,9 @@ class RoleController extends Controller
         $keyword = request()->input('keyword');
 
         if ($keyword == '') {
-            $role = Role::get();
+            $role = Role::paginate(15);
         } else {
-            $role = Role::where('role_id', 'like', '%'.request()->input('keyword').'%')->get();
+            $role = Role::where('role_id', 'like', '%'.request()->input('keyword').'%')->paginate(15);
         }
 
         return view('admin.role.index')->with([

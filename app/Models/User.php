@@ -39,12 +39,19 @@ class User extends Authenticatable
     // 查該角色代碼
     public function getRoleId()
     {
-        return auth()->user()->roles()->where('user_id', auth()->user()->id)->get()->first()->id;
+        $role = auth()->user()->roles()->where('user_id', auth()->user()->id);
+        $isNull = $role->exists();
+        if($isNull == true) {
+            return $role->get()->first()->id;
+        } else {
+            return 0;
+        }
     }
 
     // 取得該角色
     public function getRole()
     {
+
         return auth()->user()->roles()->where('user_id', auth()->user()->id)->get()->first();
     }
 

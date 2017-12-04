@@ -19,9 +19,9 @@ class UserController extends Controller
         $keyword = request()->input('keyword');
 
         if ($keyword == '') {
-            $user = User::get();
+            $user = User::paginate(15);
         } else {
-            $user = User::where('account', 'like', '%'.request()->input('keyword').'%')->get();
+            $user = User::where('account', 'like', '%'.request()->input('keyword').'%')->paginate(15);
         }
         // dd(auth()->user()->roles());
 

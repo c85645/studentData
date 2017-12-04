@@ -18,7 +18,7 @@
 
 <div class="row">
   <div class="col-xs-4">
-    <a class="btn btn-primary btn-lg" href="/admin/role/create" role="button"><i class="fa fa-plus"></i>新增</a>
+    <a class="btn btn-primary btn-lg" href="/admin/role/create" role="button"><i class="fa fa-plus"></i></a>
     {{-- <a class="btn btn-default" href="/admin" role="button"><i class="fa fa-home"></i>回上頁</a> --}}
   </div>
   <div class="col-xs-offset-4 col-xs-4">
@@ -46,11 +46,11 @@
       <td>{{ implode(', ', $role->permissions()->pluck('title')->toArray()) }}</td>
       <td>
         <form class="form-inline" method="post" action="/admin/role/{{ $role->id }}">
-          <a class="btn btn-success" href="/admin/role/{{ $role->id }}/edit"><i class="fa fa-pencil"> </i>修改</a>
+          <a class="btn btn-success" href="/admin/role/{{ $role->id }}/edit"><i class="fa fa-pencil"> </i></a>
           {{ method_field('delete') }}
           {{ csrf_field() }}
           @if($role->role_id != 'administrator' && $role->role_id != 'manager' && $role->role_id != 'teacher')
-            <button class="btn btn-danger" type="submit" name=""><i class="fa fa-trash"></i>刪除</button>
+            <button class="btn btn-danger" type="submit" name=""><i class="fa fa-trash"></i></button>
           @endif
         </form>
       </td>

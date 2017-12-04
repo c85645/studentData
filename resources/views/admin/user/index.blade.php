@@ -18,7 +18,7 @@
 
 <div class="row">
   <div class="col-xs-4">
-    <a class="btn btn-primary btn-lg" href="/admin/user/create" role="button"><i class="fa fa-plus"></i>新增</a>
+    <a class="btn btn-primary btn-lg" href="/admin/user/create" role="button"><i class="fa fa-plus"></i></a>
   </div>
   <div class="col-xs-offset-4 col-xs-4">
     <form class="input-group form-group" method="GET" action="/admin/user">
@@ -55,11 +55,11 @@
       </td>
       <td>
         <form class="form-inline" method="post" action="/admin/user/{{ $user->id }}">
-          <a class="btn btn-success" href="/admin/user/{{ $user->id }}/edit"><i class="fa fa-pencil"> </i>修改</a>
+          <a class="btn btn-success" href="/admin/user/{{ $user->id }}/edit"><i class="fa fa-pencil"> </i></a>
           {{ method_field('delete') }}
           {{ csrf_field() }}
           @if($user->id != 1)
-            <button class="btn btn-danger" type="submit" name=""><i class="fa fa-trash"></i>刪除</button>
+            <button class="btn btn-danger" type="submit" name=""><i class="fa fa-trash"></i></button>
           @endif
         </form>
       </td>

@@ -19,7 +19,7 @@ Route::get('/', function(){
 // Auth::routes();
 // Route::get('/', 'HomeController@index');
 
-Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function(){
+Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'admin'], function(){
     // // 後台首頁
     Route::get('/', function () {
         return view('admin.index');

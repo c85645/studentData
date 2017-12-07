@@ -16,8 +16,7 @@ class CreateAcademiesTable extends Migration
         Schema::create('academies', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('year')->nullable();
-            $table->string('code', 10)->nullable();
-            $table->string('name', 50)->nullable();
+            $table->string('name_id', 10)->nullable();
             $table->string('intro')->nullable();
             $table->string('pdf_url')->nullable();
             $table->string('fill_out_sdate', 8)->nullable();

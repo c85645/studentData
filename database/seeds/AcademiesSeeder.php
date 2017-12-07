@@ -15,48 +15,39 @@ class AcademiesSeeder extends Seeder
         Academy::insert([
           [
             'year'  =>  107,
-            'code'  =>  'A',
-            'name'  =>  '轉學',
+            'name_id'  =>  'A',
           ],
           [
             'year'  =>  107,
-            'code'  =>  'B',
-            'name'  =>  '轉系',
+            'name_id'  =>  'B',
           ],
           [
             'year'  =>  107,
-            'code'  =>  'C',
-            'name'  =>  '雙主修',
+            'name_id'  =>  'C',
+           ],
+          [
+            'year'  =>  107,
+            'name_id'  =>  'D',
           ],
           [
             'year'  =>  107,
-            'code'  =>  'D',
-            'name'  =>  '輔系',
+            'name_id'  =>  'E',
+           ],
+          [
+            'year'  =>  107,
+            'name_id'  =>  'F',
           ],
           [
             'year'  =>  107,
-            'code'  =>  'E',
-            'name'  =>  '學士後',
+            'name_id'  =>  'G',
           ],
           [
             'year'  =>  107,
-            'code'  =>  'F',
-            'name'  =>  '學程',
+            'name_id'  =>  'H',
           ],
           [
             'year'  =>  107,
-            'code'  =>  'G',
-            'name'  =>  '碩士（考試）',
-          ],
-          [
-            'year'  =>  107,
-            'code'  =>  'H',
-            'name'  =>  '碩士（甄試）',
-          ],
-          [
-            'year'  =>  107,
-            'code'  =>  'I',
-            'name'  =>  '碩專',
+            'name_id'  =>  'I',
           ],
         ]);
     }

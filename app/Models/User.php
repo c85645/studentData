@@ -41,7 +41,7 @@ class User extends Authenticatable
     {
         $role = auth()->user()->roles()->where('user_id', auth()->user()->id);
         $isNull = $role->exists();
-        if($isNull == true) {
+        if ($isNull == true) {
             return $role->get()->first()->id;
         } else {
             return 0;

@@ -17,12 +17,11 @@ class CreateAcademiesTable extends Migration
             $table->increments('id');
             $table->integer('year')->nullable();
             $table->string('name_id', 10)->nullable();
-            $table->string('intro')->nullable();
             $table->string('pdf_url')->nullable();
-            $table->string('fill_out_sdate', 8)->nullable();
-            $table->string('fill_out_edate', 8)->nullable();
-            $table->string('score_sdate', 8)->nullable();
-            $table->string('score_edate', 8)->nullable();
+            $table->string('fill_out_sdate')->nullable();
+            $table->string('fill_out_edate')->nullable();
+            $table->string('score_sdate')->nullable();
+            $table->string('score_edate')->nullable();
             $table->timestamps();
         });
     }

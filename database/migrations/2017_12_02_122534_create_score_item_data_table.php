@@ -15,19 +15,12 @@ class CreateScoreItemDataTable extends Migration
     {
         Schema::create('score_item_data', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('year')->unique();
-            $table->integer('code')->unique();
-            $table->integer('step');
-            $table->string('item1', 20)->nullable();
-            $table->string('item2', 20)->nullable();
-            $table->string('item3', 20)->nullable();
-            $table->string('item4', 20)->nullable();
-            $table->string('item5', 20)->nullable();
-            $table->decimal('item1_percent', 5, 2)->nullable();
-            $table->decimal('item2_percent', 5, 2)->nullable();
-            $table->decimal('item3_percent', 5, 2)->nullable();
-            $table->decimal('item4_percent', 5, 2)->nullable();
-            $table->decimal('item5_percent', 5, 2)->nullable();
+            $table->integer('year')->index();
+            $table->integer('code')->index();
+            $table->integer('step')->default(1);
+            $table->integer('no');
+            $table->string('name', 20)->nullable();
+            $table->decimal('percent', 5, 0)->nullable();
         });
     }
 

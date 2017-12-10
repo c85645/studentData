@@ -148,21 +148,26 @@
   function checkCol() {
     var isPass = true;
     // 檢查有多少個評分標準，就幾個必填
+    // 這裡有Bug，待補強
     var sum = 0;
+    var count = 0;
     $('input[name="dataList\[percent\]\[\]"]').each(function(index) {
         if($(this).val() == ''){
           // 檢查欄位是否輸入
-          alert("「評分項目」或「比重」尚未全部輸入完畢哦！");
+          alert("「比重」尚未全部輸入完畢哦！");
           isPass = false;
           return false;
         }
         sum += Number($(this).val());
+        count++;
     });
 
-    if(Number(sum) != Number(100)){
-        alert("比重總和需為100!");
-        isPass = false;
-        return false;
+    if(count > 0) {
+      if(Number(sum) != Number(100)){
+          alert("比重總和需為100!");
+          isPass = false;
+          return false;
+      }
     }
     return isPass;
   }

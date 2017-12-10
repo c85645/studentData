@@ -46,8 +46,8 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'admin'],
     });
 
     // 學生資料管理
-    Route::get('studentData', function () {
-        return view('admin.studentData.index');
+    Route::get('applicant', function () {
+        return view('admin.applicant.index');
     });
 });
 

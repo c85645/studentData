@@ -27,20 +27,11 @@
         <div class="panel-heading">權限設定<span class="pull-right clickable panel-toggle {{-- panel-collapsed --}}"><em class="fa fa-toggle-up"></em></span></div>
         <div class="panel-body">
           <div class="canvas-wrapper main-chart">
-            <table class="table table-middle">
-              <thead>
-                {{-- <th width="30%">帳號</th>
-                <th width="50%">權限</th>
-                <th width="20%">操作</th> --}}
-              </thead>
-              <tbody>
-                {{-- <tr>
-                  <td><input type="text" name="text1" class="form-control"></td>
-                  <td><input type="text" name="text1" class="form-control"></td>
-                  <td><input type="text" name="text1" class="form-control"></td>
-                </tr> --}}
-              </tbody>
-            </table>
+            @foreach ($teachers as $teacher)
+              <label class="checkbox-inline">
+                <input type="checkbox" name="owners[]" value="{{ $teacher->id }}" @if(in_array($teacher->id,$permissions)) checked @endif> {{ $teacher->name }}
+              </label>
+            @endforeach
           </div>
         </div>
       </div>

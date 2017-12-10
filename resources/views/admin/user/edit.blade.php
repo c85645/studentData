@@ -39,7 +39,7 @@
         <div class="col-sm-8">
           @foreach($roles as $role)
             <label class="radio-inline">
-              <input type="radio" name="role_id" id="radio1" value="{{ $role->id }}" {{ $user->getRoleId($user) == $role->id ? 'checked' : ''}}> {{ $role->role_name }}
+              <input type="radio" name="role_id" value="{{ $role->id }}" {{ $user->getRoleId($user) == $role->id ? 'checked' : ''}}> {{ $role->role_name }}
             </label>
           @endforeach
         </div>
@@ -50,10 +50,10 @@
 
         <div class="col-sm-8">
           <label class="radio-inline">
-            <input type="radio" name="status" id="radio1" value="1" {{ $user->status == '1' ? 'checked' : '' }}> 啟用
+            <input type="radio" name="status" value="1" {{ $user->status == '1' ? 'checked' : '' }}> 啟用
           </label>
           <label class="radio-inline">
-            <input type="radio" name="status" id="radio2" value="0" {{ $user->status == '0' ? 'checked' : '' }}> 停用
+            <input type="radio" name="status" value="0" {{ $user->status == '0' ? 'checked' : '' }}> 停用
           </label>
         </div>
       </div>

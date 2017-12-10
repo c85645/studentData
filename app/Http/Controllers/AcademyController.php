@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Academy;
+use App\Models\User;
 
 class AcademyController extends Controller
 {
@@ -38,9 +39,22 @@ class AcademyController extends Controller
         $score_items = \DB::table('score_item_data')
                         ->where('code', '=', $academy->id)
                         ->get();
+        $teachers = User::join('role_user', 'users.id', '=', 'role_user.user_id')
+                      ->join('roles', 'roles.id', '=', 'role_user.role_id')
+                      ->select('users.*')
+                      ->where([
+                        ['roles.id', '=', 3],
+                        ['users.status', '=', true]
+                      ])
+                      ->get();
+        $permissions = \DB::table('academy_teacher')
+                        ->where('academy_id', '=', $academy->id)
+                        ->pluck('teacher_id')->toArray();
         return view('admin.academy.edit')->with([
           'academy' => $academy,
           'score_items' => $score_items,
+          'teachers' => $teachers,
+          'permissions' => $permissions,
         ]);
     }
 
@@ -60,8 +74,27 @@ class AcademyController extends Controller
         $fill_out_edate = request()->input('fill_out_edate');
         $score_sdate = request()->input('score_sdate');
         $score_edate = request()->input('score_edate');
+        $owners = request()->input('owners');
 
-        // dd($nameList[0],$percentList[0]);
+        // 先刪除該學制的對應老師，在新增
+        \DB::table('academy_teacher')
+              ->where('academy_id', '=', $academy->id)
+              ->delete();
+        if($owners != null) {
+            $ownerList = array();
+            for($i = 0; $i < count($owners); $i++) {
+                array_push($ownerList, [
+                    'academy_id' => $academy->id,
+                    'teacher_id' => $owners[$i],
+                ]);
+            }
+
+            foreach ($ownerList as $record) {
+                \DB::table('academy_teacher')->insert($record);
+            }
+        }
+
+        // dd($owners);
 
         $dataList = array();
         if ($nameList != null) {
@@ -80,15 +113,13 @@ class AcademyController extends Controller
             }
         }
 
-        // dd($dataList);
-
         $temp = \DB::table('score_item_data')
                     ->where([
                       ['year', '=', $academy->year],
                       ['code', '=', $academy->id],
                     ])->exists();
         if ($temp == true) {
-          // Delete & Insert
+            // Delete & Insert
             \DB::table('score_item_data')
                       ->where([
                         ['year', '=', $academy->year],

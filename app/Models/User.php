@@ -37,7 +37,19 @@ class User extends Authenticatable
     }
 
     // 查該角色代碼
-    public function getRoleId()
+    public function getRoleId(User $user)
+    {
+        $role = $user->roles()->where('user_id', $user->id);
+        $isNull = $role->exists();
+        if ($isNull == true) {
+            return $role->get()->first()->id;
+        } else {
+            return 0;
+        }
+    }
+
+    // 查該帳號自己的角色代碼
+    public function getOwnRoleId()
     {
         $role = auth()->user()->roles()->where('user_id', auth()->user()->id);
         $isNull = $role->exists();
@@ -58,16 +70,7 @@ class User extends Authenticatable
     // 判斷是不是最高管理員
     public function isAdministrator()
     {
-        if (auth()->user()->getRoleId() == 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function canDo($things_to_do)
-    {
-        if ($things_to_do == 'manage_students') {
+        if (auth()->user()->getOwnRoleId() == 1) {
             return true;
         } else {
             return false;
@@ -77,11 +80,12 @@ class User extends Authenticatable
     // 查權限列表
     public function hasPermissions()
     {
-        $permission = \DB::table('role_permission')->where('role_id', auth()->user()->getRoleId())->get();
+        $permission = \DB::table('role_permission')->where('role_id', auth()->user()->getOwnRoleId())->get();
         // dd($permission->pluck('menu_id')->toArray());
         return $permission->pluck('menu_id')->toArray();
     }
 
+    // 取得清單
     public function getMenus()
     {
         return Menu::getMenus();

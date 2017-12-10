@@ -17,6 +17,9 @@ class CreateAcademyTeacherTable extends Migration
             $table->integer('academy_id')->unsigned();
             $table->integer('teacher_id')->unsigned();
             $table->index(['academy_id', 'teacher_id']);
+            $table->foreign('academy_id')
+                    ->references('id')->on('academies')
+                    ->onDelete('cascade');
         });
     }
 

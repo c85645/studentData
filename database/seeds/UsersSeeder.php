@@ -23,7 +23,7 @@ class UsersSeeder extends Seeder
                 'updated_name' => 'admin',
             ],[
                 'account' => 'user',
-                'name' => '傑夫',
+                'name' => '老師一',
                 'password' => bcrypt('user'),
                 'status' => true,
                 'created_name' => 'admin',

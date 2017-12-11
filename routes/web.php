@@ -42,6 +42,9 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'admin'],
 
     // 學制權限設定
     Route::get('academyPermission', 'AcademyPermissionController@index');
+    Route::get('academyPermission/edit', 'AcademyPermissionController@edit');
+    Route::put('academyPermission/update', 'AcademyPermissionController@update');
+
 
     // 學生資料管理
     Route::get('applicant', function () {

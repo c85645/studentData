@@ -119,20 +119,16 @@ class AcademyController extends Controller
                       ['code', '=', $academy->id],
                     ])->exists();
         if ($temp == true) {
-            // Delete & Insert
+            // Delete 若有資料則先刪除
             \DB::table('score_item_data')
                       ->where([
                         ['year', '=', $academy->year],
                         ['code', '=', $academy->id],
                       ])->delete();
-            foreach ($dataList as $record) {
-                \DB::table('score_item_data')->insert($record);
-            }
-        } else {
-            // Insert
-            foreach ($dataList as $record) {
-                \DB::table('score_item_data')->insert($record);
-            }
+        }
+        // Insert
+        foreach ($dataList as $record) {
+            \DB::table('score_item_data')->insert($record);
         }
 
         \DB::table('academies')

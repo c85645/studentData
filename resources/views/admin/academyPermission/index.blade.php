@@ -25,7 +25,7 @@
           <th>
             <select id="year" name="year" class="form-control">
               @foreach($options as $option)
-                <option value="{{ $option }}">{{ $option }}</option>
+                <option value="{{ $option }}" @if($year == $option) selected @endif>{{ $option }}</option>
               @endforeach
             </select>
           </th>
@@ -39,25 +39,28 @@
 <table class="table table-striped table-middle">
   <thead>
     <tr>
-      <th rowspan="2">帳號</th>
-      <th rowspan="2">職位</th>
+      <th rowspan="2" width="5%">帳號</th>
+      <th rowspan="2" width="5%">職位</th>
       <th colspan="10">學制</th>
     </tr>
     <tr>
-      <th>轉學</th>
-      <th>轉系</th>
-      <th>雙主修</th>
-      <th>輔系</th>
-      <th>學士後</th>
-      <th>學程</th>
-      <th>碩士（考試）</th>
-      <th>碩士（甄試）</th>
-      <th>碩專</th>
-      <th>功能</th>
+      <th width="5%">轉學</th>
+      <th width="5%">轉系</th>
+      <th width="5%">雙主修</th>
+      <th width="5%">輔系</th>
+      <th width="5%">學士後</th>
+      <th width="5%">學程</th>
+      <th width="5%">碩士（考試）</th>
+      <th width="5%">碩士（甄試）</th>
+      <th width="5%">碩專</th>
+      <th width="5%">功能</th>
     </tr>
   </thead>
   <tbody>
     @foreach ($users as $user)
+      <form action="/admin/academyPermission/edit" method="get">
+      <input type="hidden" name="year" value="{{ $year }}">
+      <input type="hidden" name="user_id" value="{{ $user->id }}">
       <tr>
         <td>{{ $user->name }}</td>
         <td>{{ $user->getRoleName() }}</td>
@@ -70,8 +73,9 @@
         <td>@if(in_array('G', $user->getAcademyPermission($year))) V @endif</td>
         <td>@if(in_array('H', $user->getAcademyPermission($year))) V @endif</td>
         <td>@if(in_array('I', $user->getAcademyPermission($year))) V @endif</td>
-        <td><a href="#"><i class="fa fa-pencil"></i></a></td>
+        <td><button class="btn btn-success" type="submit"><i class="fa fa-pencil"></i></button></td>
       </tr>
+      </form>
     @endforeach
   </tbody>
 </table>

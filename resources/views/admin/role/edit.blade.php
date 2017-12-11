@@ -10,8 +10,13 @@
   </ol>
 </div>
 
-<h1 class="page-header">角色管理</h1>
+<div class="row">
+  <div class="col-lg-12">
+    <h2 class="page-header">角色管理</h2>
+  </div>
+</div>
 @include('layout.common.errors')
+
 <div class="row">
   <div class="col-xs-offset-2 col-xs-8">
     <form method="post" action="/admin/role/{{$role->id}}" class="form-horizontal">

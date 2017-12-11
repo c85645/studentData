@@ -80,9 +80,9 @@ class AcademyController extends Controller
         \DB::table('academy_teacher')
               ->where('academy_id', '=', $academy->id)
               ->delete();
-        if($owners != null) {
+        if ($owners != null) {
             $ownerList = array();
-            for($i = 0; $i < count($owners); $i++) {
+            for ($i = 0; $i < count($owners); $i++) {
                 array_push($ownerList, [
                     'academy_id' => $academy->id,
                     'teacher_id' => $owners[$i],

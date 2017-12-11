@@ -63,7 +63,6 @@ class User extends Authenticatable
     // 取得該角色
     public function getRole()
     {
-
         return auth()->user()->roles()->where('user_id', auth()->user()->id)->get()->first();
     }
 
@@ -81,7 +80,6 @@ class User extends Authenticatable
     public function hasPermissions()
     {
         $permission = \DB::table('role_permission')->where('role_id', auth()->user()->getOwnRoleId())->get();
-        // dd($permission->pluck('menu_id')->toArray());
         return $permission->pluck('menu_id')->toArray();
     }
 
@@ -89,5 +87,25 @@ class User extends Authenticatable
     public function getMenus()
     {
         return Menu::getMenus();
+    }
+
+    // 取得角色權限(回傳array)
+    public function getAcademyPermission($year)
+    {
+        $academyPermission = \DB::table('academy_teacher')
+                                ->join('academies', 'academy_teacher.academy_id', '=', 'academies.id')
+                                ->select('academies.name_id')
+                                ->where([
+                                    ['academy_teacher.teacher_id', '=', $this->id],
+                                    ['academies.year', '=', $year]
+                                ])
+                                ->get()->pluck('name_id')->toArray();
+        return $academyPermission;
+    }
+
+    // 取得角色名稱
+    public function getRoleName()
+    {
+        return  $this->roles()->where('user_id', $this->id)->get()->pluck('role_name')->first();
     }
 }

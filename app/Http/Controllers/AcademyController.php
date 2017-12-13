@@ -42,10 +42,8 @@ class AcademyController extends Controller
         $teachers = User::join('role_user', 'users.id', '=', 'role_user.user_id')
                       ->join('roles', 'roles.id', '=', 'role_user.role_id')
                       ->select('users.*')
-                      ->where([
-                        ['roles.id', '=', 3],
-                        ['users.status', '=', true]
-                      ])
+                      ->where('users.status', '=', true)
+                      ->whereIn('roles.id', [2, 3])
                       ->get();
         $permissions = \DB::table('academy_teacher')
                         ->where('academy_id', '=', $academy->id)

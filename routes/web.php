@@ -45,7 +45,6 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'admin'],
     Route::get('academyPermission/edit', 'AcademyPermissionController@edit');
     Route::put('academyPermission/update', 'AcademyPermissionController@update');
 
-
     // 學生資料管理
     Route::get('applicant', function () {
         return view('admin.applicant.index');
@@ -60,7 +59,3 @@ Route::post('login', 'LoginController@authenticate');
 
 // 登出
 Route::get('logout', 'LoginController@logout');
-
-
-// ajax
-// Route::get('/ajaxQueryYears', 'AcademyController@ajaxQueryYears');

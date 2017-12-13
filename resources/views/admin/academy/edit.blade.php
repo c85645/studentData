@@ -139,7 +139,16 @@
   function checkCol() {
     var isPass = true;
     // 檢查有多少個評分標準，就幾個必填
-    // 這裡有Bug，待補強
+    // TODO 這裡有Bug，待補強
+    $('input[name="dataList\[name\]\[\]"]').each(function(index) {
+        if($(this).val() == ''){
+          // 檢查欄位是否輸入
+          alert("「評分項目」尚未全部輸入完畢哦！");
+          isPass = false;
+          return false;
+        }
+    });
+
     var sum = 0;
     var count = 0;
     $('input[name="dataList\[percent\]\[\]"]').each(function(index) {

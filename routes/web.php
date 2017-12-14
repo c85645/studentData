@@ -15,12 +15,16 @@
 Route::get('/', function(){
     return view('web.index');
 });
+// 前台首頁-先進入controller再導頁
+// TODO
+// Route::get('/' 'WebController@index');
 
+// 預設登入機制，先不使用
 // Auth::routes();
 // Route::get('/', 'HomeController@index');
 
 Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'admin'], function(){
-    // // 後台首頁
+    // 後台首頁
     Route::get('/', function () {
         return view('admin.index');
     });
@@ -45,10 +49,15 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'admin'],
     Route::get('academyPermission/edit', 'AcademyPermissionController@edit');
     Route::put('academyPermission/update', 'AcademyPermissionController@update');
 
-    // 學生資料管理
+    // 申請人資料管理
+    // TODO
     Route::get('applicant', function () {
         return view('admin.applicant.index');
     });
+
+    // 考委評分管理
+    // TODO 先進入controller再導頁，管理員與委員顯示的畫面不同
+    Route::get('gradeManagement', 'GradeMangeController@index');
 });
 
 // 登入頁GET Request

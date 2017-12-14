@@ -34,6 +34,13 @@ class MenuSeeder extends Seeder
                 'icon'      => 'fa fa-ban',
                 'url'       => '/admin/academyPermission',
             ],
+            [
+                'parent_id' => 0,
+                'order'     => 4,
+                'title'     => '考委評分管理',
+                'icon'      => 'fa fa-check-square',
+                'url'       => '/admin/gradeManagement',
+            ],
         ]);
     }
 }

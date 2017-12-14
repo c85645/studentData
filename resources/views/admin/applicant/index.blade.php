@@ -12,7 +12,7 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h2 class="page-header">申請人資料管理</h2>
+    <h1 class="page-header">申請人資料管理</h1>
   </div>
 </div>
 @endsection

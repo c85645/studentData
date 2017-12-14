@@ -10,8 +10,13 @@
   </ol>
 </div>
 
-<h1 class="page-header">帳號管理</h1>
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">帳號管理</h1>
+  </div>
+</div>
 @include('layout.common.errors')
+
 <div class="row">
   <div class="col-xs-offset-2 col-xs-8">
     <form method="post" action="/admin/user/{{$user->id}}" class="form-horizontal">

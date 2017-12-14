@@ -14,7 +14,7 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h2 class="page-header">學制管理</h2>
+    <h1 class="page-header">學制管理</h1>
   </div>
 </div>
 
@@ -35,8 +35,10 @@
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="panel panel-success">
+    <div class="col-md-6">
+      <div class="panel panel-primary">
         <div class="panel-heading">評分標準<span class="pull-right clickable panel-toggle {{-- panel-collapsed --}}"><em class="fa fa-toggle-up"></em></span></div>
         <div class="panel-body">
           <div class="canvas-wrapper main-chart">
@@ -61,7 +63,9 @@
           </div>
         </div>
       </div>
+    </div>
 
+    <div class="col-md-6">
       <div class="panel panel-warning">
         <div class="panel-heading">起迄時間<span class="pull-right clickable panel-toggle {{-- panel-collapsed --}}"><em class="fa fa-toggle-up"></em></span></div>
         <div class="panel-body">
@@ -89,7 +93,9 @@
           </div>
         </div>
       </div>
+    </div>
 
+    <div class="col-md-12">
       <div align="center">
         <input class="btn btn-primary" type="button" value="儲存" onclick="goSubmit();">
       </div>

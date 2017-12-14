@@ -12,7 +12,7 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h2 class="page-header">歡迎使用東吳大學巨量資料學院後台管理系統</h2>
+    <h1 class="page-header">歡迎使用東吳大學巨量資料學院後台管理系統</h1>
   </div>
 </div>
 @include('layout.common.errors')

@@ -13,7 +13,7 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h2 class="page-header">學制權限管理</h2>
+    <h1 class="page-header">學制權限管理</h1>
   </div>
 </div>
 @include('layout.common.errors')

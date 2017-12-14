@@ -12,7 +12,7 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h2 class="page-header">帳號設定</h2>
+    <h1 class="page-header">帳號設定</h1>
   </div>
 </div>
 

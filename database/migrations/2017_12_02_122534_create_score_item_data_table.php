@@ -15,8 +15,7 @@ class CreateScoreItemDataTable extends Migration
     {
         Schema::create('score_item_data', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('year')->index();
-            $table->integer('code')->index();
+            $table->integer('academy_id');
             $table->integer('step')->default(1);
             $table->integer('no');
             $table->string('name', 20)->nullable();

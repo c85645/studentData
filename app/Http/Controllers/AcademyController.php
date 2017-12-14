@@ -37,7 +37,7 @@ class AcademyController extends Controller
                    ->select('academies.*', 'academy_names.name')
                    ->where('academies.id', '=', $id)->get()->first();
         $score_items = \DB::table('score_item_data')
-                        ->where('code', '=', $academy->id)
+                        ->where('academy_id', '=', $academy->id)
                         ->get();
         $teachers = User::join('role_user', 'users.id', '=', 'role_user.user_id')
                       ->join('roles', 'roles.id', '=', 'role_user.role_id')
@@ -101,8 +101,7 @@ class AcademyController extends Controller
                     break;
                 } else {
                     array_push($dataList, [
-                        'year'  =>  $academy->year,
-                        'code'  =>  $academy->id,
+                        'academy_id'  =>  $academy->id,
                         'no'    =>  ($i + 1),
                         'name'  =>  $nameList[$i],
                         'percent' =>  $percentList[$i],
@@ -112,17 +111,11 @@ class AcademyController extends Controller
         }
 
         $temp = \DB::table('score_item_data')
-                    ->where([
-                      ['year', '=', $academy->year],
-                      ['code', '=', $academy->id],
-                    ])->exists();
+                    ->where('academy_id', '=', $academy->id)->exists();
         if ($temp == true) {
             // Delete 若有資料則先刪除
             \DB::table('score_item_data')
-                      ->where([
-                        ['year', '=', $academy->year],
-                        ['code', '=', $academy->id],
-                      ])->delete();
+                      ->where('academy_id', '=', $academy->id)->delete();
         }
         // Insert
         foreach ($dataList as $record) {

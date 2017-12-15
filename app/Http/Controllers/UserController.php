@@ -167,14 +167,6 @@ class UserController extends Controller
         return redirect()->to('/admin/user');
     }
 
-    // 一鍵重置密碼
-    public function resetPassword(User $user)
-    {
-        $user = User::where('id', '=', $user->id)->get();
-        dd($user);
-        // return ;
-    }
-
     public function updateAccount(User $user)
     {
         $this -> validate(request(), [
@@ -192,5 +184,22 @@ class UserController extends Controller
 
 
         return redirect()->to('/admin');
+    }
+
+    public function resetPassword()
+    {
+        if(request()->user_id != null && request()->user_id != '') {
+            $user = User::find(request()->user_id);
+            $user->password = bcrypt($user->account);
+            $user->save();
+
+            return response()->json([
+                'msg' => '密碼已重置！',
+            ]);
+        } else {
+            return response()->json([
+                'msg' => '程式發生錯誤，請聯絡系統開發者！',
+            ]);
+        }
     }
 }

@@ -85,7 +85,7 @@ function toDigitalEnglishUpper(obj) {
  */
 function ajaxRequest(url, param, callback, errorCallback) {
   $.ajax({
-    contentType : "application/x-www-form-urlencoded; charset=utf-8",
+    // contentType : "application/x-www-form-urlencoded; charset=utf-8",
     type : 'post',
     url : url,
     data : param,
@@ -114,7 +114,7 @@ function ajaxRequest(url, param, callback, errorCallback) {
  */
 function ajaxRequestBlockUI(url, param, callback, errorCallback) {
   $.ajax({
-    contentType : "application/x-www-form-urlencoded; charset=utf-8",
+    // contentType : "application/x-www-form-urlencoded; charset=utf-8",
     type : 'post',
     url : url,
     data : param,

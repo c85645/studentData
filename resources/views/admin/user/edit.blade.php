@@ -65,8 +65,29 @@
 
       <div align="center">
          <input class="btn btn-primary" type="submit" value="儲存">
+         <input class="btn btn-warning" type="button" value="重置密碼" onclick="resetPassword();">
       </div>
     </form>
   </div>
 </div>
+@endsection
+
+@section('javascript')
+<script type="text/javascript">
+  function resetPassword() {
+    var param = { 'user_id' : {{ $user->id }} };
+    var url = "{{ url('admin/resetPassword') }}";
+    ajaxRequest(url, param, resetSuccess, resetFailed);
+  }
+
+  function resetSuccess(data) {
+    if(data != undefined && data != ''){
+        alert(data.msg);
+    }
+  }
+
+  function resetFailed() {
+    alert("Call Api Failed!");
+  }
+</script>
 @endsection

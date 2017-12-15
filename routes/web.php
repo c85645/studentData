@@ -31,6 +31,8 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'admin'],
 
     // 使用者設定
     Route::resource('user', 'UserController');
+    // ajax 重置密碼
+    Route::post('resetPassword', 'UserController@resetPassword');
     // 角色設定
     Route::resource('role', 'RoleController');
     // 帳號設定

@@ -20,7 +20,7 @@
                 <div class="navbar-header">
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/studentData/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>

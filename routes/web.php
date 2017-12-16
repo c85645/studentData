@@ -47,6 +47,10 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
     Route::get('academy/{id}/edit', 'AcademyController@edit');
     Route::put('academy/{id}', 'AcademyController@update');
 
+    // 學制年度設定
+    Route::get('academyYear', 'AcademyYearController@index');
+    Route::put('academyYear/update', 'AcademyYearController@update');
+
     // 學制權限設定
     Route::get('academyPermission', 'AcademyPermissionController@index');
     Route::get('academyPermission/edit', 'AcademyPermissionController@edit');

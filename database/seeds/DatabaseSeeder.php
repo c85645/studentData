@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
           MenuSeeder::class,
           AcademiesSeeder::class,
           AcademyNameSeeder::class,
+          AcademyYearSeeder::class,
         ]);
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAcademyNamesTable extends Migration
+class CreateAcademyYearTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateAcademyNamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('academy_names', function (Blueprint $table) {
-            $table->string('id');
-            $table->string('name');
-            $table->timestamps();
+        Schema::create('academy_years', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('year')->unique();
         });
     }
 
@@ -27,6 +26,6 @@ class CreateAcademyNamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('academy_names');
+        Schema::dropIfExists('academy_years');
     }
 }

@@ -17,7 +17,7 @@
 </div>
 
 <div class="row">
-  <div class="col-xs-offset-5">
+  <div class="col-xs-offset-5 col-xs-5">
     <form class="input-group form-group" method="GET" action="/studentData/admin/academy">
       <table>
         <thead>
@@ -35,6 +35,9 @@
         </thead>
       </table>
     </form>
+  </div>
+  <div class="col-xs-2">
+    <a class="btn btn-info" href="{{ url('/studentData/admin/academyYear') }}"><i class="fa fa-pencil">學年度設定</i></a>
   </div>
 </div>
 

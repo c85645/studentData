@@ -3,7 +3,7 @@
 @section('html')
 <div class="row">
   <ol class="breadcrumb">
-    <li><a href="{{ url('/admin/') }}">
+    <li><a href="{{ url('/studentData/admin/') }}">
       <em class="fa fa-home"></em>
     </a></li>
     <li class="active">學制權限管理</li>
@@ -20,7 +20,7 @@
 
 <div class="row">
     <div class="col-xs-offset-3">
-        <form method="post" action="/admin/academyPermission/update" class="form-horizontal">
+        <form method="post" action="/studentData/admin/academyPermission/update" class="form-horizontal">
           <input type="hidden" name="year" value="{{ $year }}">
           <input type="hidden" name="user_id" value="{{ $user->id }}">
           {{ method_field('put') }}

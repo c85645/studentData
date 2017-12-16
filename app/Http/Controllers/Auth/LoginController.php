@@ -54,24 +54,24 @@ class LoginController extends Controller
     // 登入
     public function authenticate()
     {
-        $email = request()->input('email');
-        $password = request()->input('password');
-
-        // dd(request()->input());
-        if (Auth::attempt(['email' => $email, 'password' => $password, 'status' => 1])) {
-            // Authentication passed...
-            return redirect()->to('/admin.index');
-            // return 'loggin success';
-        } else {
-            // TODO 這邊要做一個錯誤頁或是改顯示方式
-            return '您輸入的資料有錯誤或帳號已被停用';
-        }
+        // $email = request()->input('email');
+        // $password = request()->input('password');
+        //
+        // // dd(request()->input());
+        // if (Auth::attempt(['email' => $email, 'password' => $password, 'status' => 1])) {
+        //     // Authentication passed...
+        //     return redirect()->to('/admin.index');
+        //     // return 'loggin success';
+        // } else {
+        //     // TODO 這邊要做一個錯誤頁或是改顯示方式
+        //     return '您輸入的資料有錯誤或帳號已被停用';
+        // }
     }
 
     // 登出並導頁
     public function logout()
     {
-        Auth::logout();
-        return redirect()->to('/');
+        // Auth::logout();
+        // return redirect()->to('/');
     }
 }

@@ -74,7 +74,7 @@ class RoleController extends Controller
 
         $role->permissions()->attach($menus);
 
-        return redirect()->to('/admin/role');
+        return redirect()->to('/studentData/admin/role');
     }
 
     /**
@@ -130,7 +130,7 @@ class RoleController extends Controller
         ]);
 
         $role->permissions()->sync($menus);
-        return redirect()->to('/admin/role');
+        return redirect()->to('/studentData/admin/role');
     }
 
     /**
@@ -142,6 +142,6 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
-        return redirect()->to('/admin/role');
+        return redirect()->to('/studentData/admin/role');
     }
 }

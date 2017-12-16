@@ -3,7 +3,7 @@
 @section('html')
 <div class="row">
   <ol class="breadcrumb">
-    <li><a href="{{ url('/admin/') }}">
+    <li><a href="{{ url('/studentData/admin/') }}">
       <em class="fa fa-home"></em>
     </a></li>
     <li class="active">學制管理</li>
@@ -18,7 +18,7 @@
   </div>
 </div>
 
-<form id="action_form" method="post" action="/admin/academy/{{ $academy->id }}">
+<form id="action_form" method="post" action="/studentData/admin/academy/{{ $academy->id }}">
   <div class="row">
     <div class="col-md-12">
       {{ method_field('put') }}

@@ -5,7 +5,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span></button>
-        <a class="navbar-brand" href="{{ url('/admin/') }}"><span>Dlab</span>Admin</a>
+        <a class="navbar-brand" href="{{ url('/studentData/studentData/admin/') }}"><span>Dlab</span>Admin</a>
     </div>
-  </div><!-- /.container-fluid -->
+  </div>
 </nav>

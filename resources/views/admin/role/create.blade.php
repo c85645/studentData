@@ -3,7 +3,7 @@
 @section('html')
 <div class="row">
   <ol class="breadcrumb">
-    <li><a href="{{ url('/admin/') }}">
+    <li><a href="{{ url('/studentData/admin/') }}">
       <em class="fa fa-home"></em>
     </a></li>
     <li class="active">角色管理</li>
@@ -12,14 +12,14 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h1 class="page-header">角色管理<</h1>
+    <h1 class="page-header">角色管理</h1>
   </div>
 </div>
 @include('layout.common.errors')
 
 <div class="row">
   <div class="col-xs-offset-2 col-xs-8">
-    <form method="post" action="/admin/role" class="form-horizontal">
+    <form method="post" action="/studentData/admin/role" class="form-horizontal">
       {{ csrf_field() }}
       <div class="form-group">
         <label class="col-sm-2 control-label" for="role_id"><span style="color: red">*</span> 角色代碼</label>

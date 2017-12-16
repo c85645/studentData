@@ -88,7 +88,7 @@ class UserController extends Controller
         //     'user_id' => $user->id,
         // ]);
 
-        return redirect()->to('/admin/user');
+        return redirect()->to('/studentData/admin/user');
     }
 
     /**
@@ -152,7 +152,7 @@ class UserController extends Controller
         //     'role_id' => $role_id,
         //     'user_id' => $user->id,
         // ]);
-        return redirect()->to('/admin/user');
+        return redirect()->to('/studentData/admin/user');
     }
 
     /**
@@ -164,7 +164,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->to('/admin/user');
+        return redirect()->to('/studentData/admin/user');
     }
 
     public function updateAccount(User $user)

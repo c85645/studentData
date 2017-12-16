@@ -18,28 +18,28 @@ class MenuSeeder extends Seeder
                 'order'     => 1,
                 'title'     => '申請人資料管理',
                 'icon'      => 'fa fa-file-text',
-                'url'       => '/admin/applicant',
+                'url'       => '/studentData/admin/applicant',
             ],
             [
                 'parent_id' => 0,
                 'order'     => 2,
                 'title'     => '學制管理',
                 'icon'      => 'fa fa-calendar',
-                'url'       => '/admin/academy',
+                'url'       => '/studentData/admin/academy',
             ],
             [
                 'parent_id' => 0,
                 'order'     => 3,
                 'title'     => '學制權限管理',
                 'icon'      => 'fa fa-ban',
-                'url'       => '/admin/academyPermission',
+                'url'       => '/studentData/admin/academyPermission',
             ],
             [
                 'parent_id' => 0,
                 'order'     => 4,
                 'title'     => '考委評分管理',
                 'icon'      => 'fa fa-check-square',
-                'url'       => '/admin/gradeManagement',
+                'url'       => '/studentData/admin/gradeManagement',
             ],
         ]);
     }

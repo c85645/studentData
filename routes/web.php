@@ -10,7 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// 預設登入機制，先不使用
+// Auth::routes();
+// Route::get('/', 'HomeController@index');
 
+// 前台
 Route::group(['prefix' => 'studentData'], function(){
     // 前台首頁-先進入controller再導頁
     // TODO
@@ -19,11 +23,8 @@ Route::group(['prefix' => 'studentData'], function(){
     Route::get('/input', 'WebController@toInput');
 });
 
-// 預設登入機制，先不使用
-// Auth::routes();
-// Route::get('/', 'HomeController@index');
-
-Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'admin'], function(){
+// 後台
+Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentData/admin'], function(){
     // 後台首頁
     Route::get('/', function () {
         return view('admin.index');

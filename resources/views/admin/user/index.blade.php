@@ -3,7 +3,7 @@
 @section('html')
 <div class="row">
   <ol class="breadcrumb">
-    <li><a href="{{ url('/admin/') }}">
+    <li><a href="{{ url('/studentData/admin/') }}">
       <em class="fa fa-home"></em>
     </a></li>
     <li class="active">帳號管理</li>
@@ -18,10 +18,10 @@
 
 <div class="row">
   <div class="col-xs-4">
-    <a class="btn btn-primary btn-lg" href="/admin/user/create" role="button"><i class="fa fa-plus"></i></a>
+    <a class="btn btn-primary btn-lg" href="/studentData/admin/user/create" role="button"><i class="fa fa-plus"></i></a>
   </div>
   <div class="col-xs-offset-4 col-xs-4">
-    <form class="input-group form-group" method="GET" action="/admin/user">
+    <form class="input-group form-group" method="GET" action="/studentData/admin/user">
       <input name="keyword" type="text" class="form-control" placeholder="請輸入帳號..." value="{{ $keyword }}" onkeyup="enterArabEng(this);">
       <span class="input-group-btn">
         <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
@@ -54,8 +54,8 @@
         @endif
       </td>
       <td>
-        <form class="form-inline" method="post" action="/admin/user/{{ $user->id }}">
-          <a class="btn btn-success" href="/admin/user/{{ $user->id }}/edit"><i class="fa fa-pencil"> </i></a>
+        <form class="form-inline" method="post" action="/studentData/admin/user/{{ $user->id }}">
+          <a class="btn btn-success" href="/studentData/admin/user/{{ $user->id }}/edit"><i class="fa fa-pencil"> </i></a>
           {{ method_field('delete') }}
           {{ csrf_field() }}
           @if($user->id != 1)

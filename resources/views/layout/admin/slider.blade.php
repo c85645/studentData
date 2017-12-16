@@ -16,17 +16,17 @@
           <li><a href="{{ $menu->url }}"><i class="{{ $menu->icon }}">&nbsp;</i> {{ $menu->title }}</a></li>
         @endif
       @endforeach
-      {{-- <li><a href="/admin/studentData"><i class="fa fa-file-text">&nbsp;</i> 學生資料管理</a></li>
-      <li><a href="/admin/academy"><i class="fa fa-calendar">&nbsp;</i> 學制管理</a></li>
-      <li><a href="/admin/academyPermission"><i class="fa fa-ban">&nbsp;</i> 學制權限管理</a></li> --}}
+      {{-- <li><a href="/studentData/admin/studentData"><i class="fa fa-file-text">&nbsp;</i> 學生資料管理</a></li>
+      <li><a href="/studentData/admin/academy"><i class="fa fa-calendar">&nbsp;</i> 學制管理</a></li>
+      <li><a href="/studentData/admin/academyPermission"><i class="fa fa-ban">&nbsp;</i> 學制權限管理</a></li> --}}
 
       {{-- 只有管理員身份有帳號管理/角色管理 --}}
       @if(auth()->user()->isAdministrator() == true)
-        <li><a href="/admin/user"><i class="fa fa-sliders">&nbsp;</i> 帳號管理</a></li>
-        <li><a href="/admin/role"><i class="fa fa-users">&nbsp;</i> 角色管理</a></li>
+        <li><a href="/studentData/admin/user"><i class="fa fa-sliders">&nbsp;</i> 帳號管理</a></li>
+        <li><a href="/studentData/admin/role"><i class="fa fa-users">&nbsp;</i> 角色管理</a></li>
       @endif
 
-      <li><a href="/admin/account"><i class="fa fa-cog">&nbsp;</i> 帳號設定</a></li>
+      <li><a href="/studentData/admin/account"><i class="fa fa-cog">&nbsp;</i> 帳號設定</a></li>
       <li><a href="{{ url('/logout') }}"><i class="fa fa-power-off">&nbsp;</i> 登出</a></li>
     </ul>
   </div>

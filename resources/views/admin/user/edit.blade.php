@@ -3,7 +3,7 @@
 @section('html')
 <div class="row">
   <ol class="breadcrumb">
-    <li><a href="{{ url('/admin/') }}">
+    <li><a href="{{ url('/studentData/admin/') }}">
       <em class="fa fa-home"></em>
     </a></li>
     <li class="active">帳號管理</li>
@@ -19,7 +19,7 @@
 
 <div class="row">
   <div class="col-xs-offset-2 col-xs-8">
-    <form method="post" action="/admin/user/{{$user->id}}" class="form-horizontal">
+    <form method="post" action="/studentData/admin/user/{{$user->id}}" class="form-horizontal">
       {{ method_field('put') }}
       {{ csrf_field() }}
       <div class="form-group">

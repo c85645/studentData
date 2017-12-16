@@ -3,7 +3,7 @@
 @section('html')
 <div class="row">
   <ol class="breadcrumb">
-    <li><a href="{{ url('/admin/') }}">
+    <li><a href="{{ url('/studentData/admin/') }}">
       <em class="fa fa-home"></em>
     </a></li>
     <li class="active">學制管理</li>
@@ -18,7 +18,7 @@
 
 <div class="row">
   <div class="col-xs-offset-5">
-    <form class="input-group form-group" method="GET" action="/admin/academy">
+    <form class="input-group form-group" method="GET" action="/studentData/admin/academy">
       <table>
         <thead>
           <tr>
@@ -49,7 +49,7 @@
     <tr>
       <td>{{ $academy->year }}</td>
       <td>{{ $academy->name }}</td>
-      <td><a class="btn btn-success" href="/admin/academy/{{ $academy->id }}/edit"><i class="fa fa-pencil"> </i></a></td>
+      <td><a class="btn btn-success" href="/studentData/admin/academy/{{ $academy->id }}/edit"><i class="fa fa-pencil"> </i></a></td>
     </tr>
     @endforeach
   </tbody>

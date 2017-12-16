@@ -742,7 +742,7 @@ h1, h2, h3, h4, h5, h6, figure {
   -moz-osx-font-smoothing: grayscale;
 }
 .gtco-contact-info ul li.address:before {
-  font-size: 30px;
+  font-size: 23px;
   content: "\e9d1";
 }
 .gtco-contact-info ul li.phone:before {

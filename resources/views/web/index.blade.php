@@ -39,15 +39,13 @@
 
 </head>
 <body>
-
   <div class="gtco-loader"></div>
-
   <div id="page">
     <nav class="gtco-nav" role="navigation">
       <div class="container">
         <div class="row">
           <div class="col-sm-4 col-xs-12">
-            <div id="gtco-logo"><a href="{{ url('/studentData/') }}"><img src="images/depart_logo.png" width="70px" height="20px"> 東吳巨資報名系統</a></div>
+            <div id="gtco-logo"><a href="{{ url('/studentData/') }}"><img src="{{ asset('images/depart_logo.png') }}" width="70px" height="20px"> 東吳巨資報名系統</a></div>
           </div>
           <div class="col-xs-6 text-right menu-1 main-nav">
             <ul>
@@ -65,7 +63,7 @@
       </div>
     </nav>
 
-    <section id="gtco-hero" class="gtco-cover" style="background-image: url(images/bg1.jpeg);"  data-section="home"  data-stellar-background-ratio="0.5">
+    <section id="gtco-hero" class="gtco-cover" style="background-image: url({{ asset('images/bg1.jpeg') }});"  data-section="home"  data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
@@ -94,7 +92,7 @@
           <div class="col-md-5">
             <div class="gtco-practice-area-item animate-box">
               <div class="gtco-icon">
-                <img src="images/png/graduate.png" width="60px">
+                <img src="{{ asset('images/png/graduate.png') }}" width="60px">
               </div>
               <div class="gtco-copy">
                 <h3>碩士甄試</h3>
@@ -117,7 +115,7 @@
             <br>
             <div class="gtco-practice-area-item animate-box">
               <div class="gtco-icon">
-                <img src="images/png/id-card.png" width="60px">
+                <img src="{{ asset('images/png/id-card.png') }}" width="60px">
               </div>
               <div class="gtco-copy">
                 <h3>碩士在職專班</h3>
@@ -140,7 +138,7 @@
             <br>
             <div class="gtco-practice-area-item animate-box">
               <div class="gtco-icon">
-                <img src="images/png/writing.png" width="60px">
+                <img src="{{ asset('images/png/writing.png') }}" width="60px">
               </div>
               <div class="gtco-copy">
                 <h3>轉系考試</h3>
@@ -163,7 +161,7 @@
             <br>
             <div class="gtco-practice-area-item animate-box">
               <div class="gtco-icon">
-                <img src="images/png/library.png" width="60px">
+                <img src="{{ asset('images/png/library.png') }}" width="60px">
               </div>
               <div class="gtco-copy">
                 <h3>雙主修</h3>
@@ -186,7 +184,7 @@
             <br>
             <div class="gtco-practice-area-item animate-box">
               <div class="gtco-icon">
-                <img src="images/png/lecture.png" width="60px">
+                <img src="{{ asset('images/png/lecture.png') }}" width="60px">
               </div>
               <div class="gtco-copy">
                 <h3>學士後</h3>
@@ -211,7 +209,7 @@
           <div class="col-md-5">
             <div class="gtco-practice-area-item animate-box">
               <div class="gtco-icon">
-                <img src="images/png/ereader-1.png" width="60px">
+                <img src="{{ asset('images/png/ereader-1.png') }}" width="60px">
               </div>
               <div class="gtco-copy">
                 <h3>碩士考試</h3>
@@ -234,7 +232,7 @@
             <br>
             <div class="gtco-practice-area-item animate-box">
               <div class="gtco-icon">
-                <img src="images/png/ereader.png" width="60px">
+                <img src="{{ asset('images/png/ereader.png') }}" width="60px">
               </div>
               <div class="gtco-copy">
                 <h3>轉學考試</h3>
@@ -257,7 +255,7 @@
             <br>
             <div class="gtco-practice-area-item animate-box">
               <div class="gtco-icon">
-                <img src="images/png/chat.png" width="60px">
+                <img src="{{ asset('images/png/chat.png') }}" width="60px">
               </div>
               <div class="gtco-copy">
                 <h3>輔系</h3>
@@ -280,7 +278,7 @@
             <br>
             <div class="gtco-practice-area-item animate-box">
               <div class="gtco-icon">
-                <img src="images/png/learning.png" width="60px">
+                <img src="{{ asset('images/png/learning.png') }}" width="60px">
               </div>
               <div class="gtco-copy">
                 <h3>學程</h3>

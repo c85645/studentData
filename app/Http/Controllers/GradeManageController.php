@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class GradeMangeController extends Controller
+class GradeManageController extends Controller
 {
     public function index()
     {

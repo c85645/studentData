@@ -5,7 +5,7 @@ init :
 		cp .env.example .env
 		composer install
 		php artisan key:generate
-		# make initdb
+		make initdb
 
 serve :
 		php artisan serve --port=8080

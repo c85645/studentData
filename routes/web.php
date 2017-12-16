@@ -11,13 +11,13 @@
 |
 */
 
-// 首頁
-Route::get('/', function(){
-    return view('web.index');
+Route::group(['prefix' => 'studentData'], function(){
+    // 前台首頁-先進入controller再導頁
+    // TODO
+    Route::get('/', 'WebController@index');
+    // 輸入資料頁
+    Route::get('/input', 'WebController@toInput');
 });
-// 前台首頁-先進入controller再導頁
-// TODO
-// Route::get('/' 'WebController@index');
 
 // 預設登入機制，先不使用
 // Auth::routes();

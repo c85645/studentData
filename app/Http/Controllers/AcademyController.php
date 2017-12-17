@@ -11,23 +11,32 @@ class AcademyController extends Controller
     public function index()
     {
         // 年度下拉選單
-        $options = \DB::table('academies')->select('year')->distinct()->get()->pluck('year')->toArray();
+        $options = \DB::table('academies')
+                    ->orderBy('year', 'desc')
+                    ->select('year')
+                    ->distinct()
+                    ->get()
+                    ->pluck('year')
+                    ->toArray();
 
         $year = request()->input('year');
 
         if ($year == '') {
             $rows = Academy::join('academy_names', 'academies.name_id', '=', 'academy_names.id')
                   ->select('academies.*', 'academy_names.name')
-                  ->paginate(15);
+                  ->where('year', 0)
+                  ->paginate(9);
         } else {
             $rows = Academy::join('academy_names', 'academies.name_id', '=', 'academy_names.id')
                   ->select('academies.*', 'academy_names.name')
-                  ->where('year', '=', $year)->paginate(15);
+                  ->where('year', $year)
+                  ->paginate(9);
         }
 
         return view('admin.academy.index')->with([
             'years' => $options,
-            'rows'  => $rows
+            'rows'  => $rows,
+            'option'  => $year,
         ]);
     }
 

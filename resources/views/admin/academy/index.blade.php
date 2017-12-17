@@ -26,7 +26,7 @@
             <th>
               <select id="year" name="year" class="form-control">
                 @foreach($years as $year)
-                  <option value="{{ $year }}">{{ $year }}</option>
+                  <option value="{{ $year }}" {{ $year == $option ? 'selected' : '' }}>{{ $year }}</option>
                 @endforeach
               </select>
             </th>

@@ -26,8 +26,8 @@ class AcademyController extends Controller
         }
 
         return view('admin.academy.index')->with([
-          'years' => $options,
-          'rows'  => $rows
+            'years' => $options,
+            'rows'  => $rows
         ]);
     }
 
@@ -49,10 +49,10 @@ class AcademyController extends Controller
                         ->where('academy_id', '=', $academy->id)
                         ->pluck('teacher_id')->toArray();
         return view('admin.academy.edit')->with([
-          'academy' => $academy,
-          'score_items' => $score_items,
-          'teachers' => $teachers,
-          'permissions' => $permissions,
+            'academy' => $academy,
+            'score_items' => $score_items,
+            'teachers' => $teachers,
+            'permissions' => $permissions,
         ]);
     }
 
@@ -131,6 +131,6 @@ class AcademyController extends Controller
                   'score_edate'  =>  $score_edate,
               ]);
 
-        return redirect()->to('admin/academy');
+        return redirect()->to('studentData/admin/academy');
     }
 }

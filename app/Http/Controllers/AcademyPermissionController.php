@@ -22,9 +22,9 @@ class AcademyPermissionController extends Controller
             $users = User::get();
         }
         return view('admin.academyPermission.index')->with([
-          'options' =>  $options,
-          'users'   =>  $users,
-          'year'    =>  $year,
+            'options' =>  $options,
+            'users'   =>  $users,
+            'year'    =>  $year,
         ]);
     }
 
@@ -40,10 +40,10 @@ class AcademyPermissionController extends Controller
         $academies = Academy::where('year', '=', $year)->get();
 
         return view('admin.academyPermission.edit')->with([
-            'user'  =>  $user,
-            'academy_permissions'   => $academy_permissions,
-            'academies' =>  $academies,
-            'year'  => $year,
+            'user' => $user,
+            'academy_permissions' => $academy_permissions,
+            'academies' => $academies,
+            'year' => $year,
         ]);
     }
 
@@ -70,6 +70,6 @@ class AcademyPermissionController extends Controller
             }
         }
 
-        return redirect()->to('admin/academyPermission');
+        return redirect()->to('studentData/admin/academyPermission');
     }
 }

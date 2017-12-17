@@ -182,8 +182,7 @@ class UserController extends Controller
             'password' => bcrypt($password),
         ]);
 
-
-        return redirect()->to('/admin');
+        return redirect()->to('studentData/admin');
     }
 
     public function resetPassword()

@@ -14,6 +14,6 @@ class WebController extends Controller
     // 輸入資料頁
     public function toInput()
     {
-      return view('web.input');
+        return view('web.input');
     }
 }

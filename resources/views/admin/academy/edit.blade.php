@@ -106,10 +106,6 @@
 
 @section("javascript")
 <script type="text/javascript">
-  $(function(){
-    // 載入評分標準
-  });
-
   function addCol() {
     var tbody = $("#tbody");
     if (tbody.length>0) {

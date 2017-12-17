@@ -19,7 +19,8 @@ class CheckPermission
         //  依照各功能去查詢帳號是否有所屬權限
         //  user/role >>> 判斷角色是否為administrator
         //  academy/academyPermission/applicant/gradeManagement >>> 判斷角色是否有權限
-        if ($request->is('studentData/admin/user') || $request->is('studentData/admin/role') || $request->is('studentData/admin/academyYear')) {
+        if ($request->is('studentData/admin/user') || $request->is('studentData/admin/role')
+              || $request->is('studentData/admin/academyYear')) {
             $roles_id = \DB::table('users')
                         ->join('role_user', 'users.id', '=', 'role_user.user_id')
                         ->join('roles', 'roles.id', '=', 'role_user.role_id')

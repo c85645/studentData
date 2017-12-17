@@ -49,6 +49,7 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
 
     // 學制年度設定
     Route::get('academyYear', 'AcademyYearController@index');
+    Route::put('academyYear/edit', 'AcademyYearController@edit');
     Route::put('academyYear/update', 'AcademyYearController@update');
 
     // 學制權限設定

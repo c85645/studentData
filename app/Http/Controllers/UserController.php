@@ -188,7 +188,7 @@ class UserController extends Controller
 
     public function resetPassword()
     {
-        if(request()->user_id != null && request()->user_id != '') {
+        if (request()->user_id != null && request()->user_id != '') {
             $user = User::find(request()->user_id);
             $user->password = bcrypt($user->account);
             $user->save();

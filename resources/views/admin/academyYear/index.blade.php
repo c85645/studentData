@@ -22,7 +22,7 @@
     <div class="panel panel-info">
       <div class="panel-heading">設定系統學年度</div>
       <div class="panel-body">
-        <form class="form-group" action="{{ url('studentData/admin/academyYear/update') }}" method="post">
+        <form class="form-group" action="{{ url('studentData/admin/academyYear/edit') }}" method="post">
           {{ csrf_field() }}
           {{ method_field('put') }}
           <table class="table table-hover table-middle">
@@ -52,9 +52,46 @@
     <div class="panel panel-info">
       <div class="panel-heading">新增/刪除學年</div>
       <div class="panel-body">
-        <p style="color:red;">*學制評分項目將自動帶原學年度設定</p>
+        <form id="submit_form" class="form-inline" action="{{ url('studentData/admin/academyYear/update') }}" method="post">
+          {{ csrf_field() }}
+          {{ method_field('put') }}
+          <input type="hidden" id="action" name="action">
+          <p style="color:red;">*學制評分項目預設帶最大學年度之設定</p>
+          <div class="form-group">
+            <div class="col-sm-4">
+               <input type="text" name="inputYear" class="form-control"  placeholder="請輸入學年度" maxlength="3" onkeyup="enterNum(this);" value="{{ old('inputYear') }}">
+            </div>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary btn-lg" type="button" onclick="doInsert();"><i class="fa fa-plus"></i></button>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-danger btn-lg" type="button" onclick="doDelete();"><i class="fa fa-trash"></i></button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </div>
+@include('layout.common.errors')
+@endsection
+@section('javascript')
+<script type="text/javascript">
+  $(document).keypress(
+    function(event){
+     if (event.which == '13') {
+        event.preventDefault();
+      }
+  });
+
+  function doInsert() {
+    $("#action").val("insert");
+    $("#submit_form").submit();
+  }
+
+  function doDelete() {
+    $("#action").val("delete");
+    $("#submit_form").submit();
+  }
+</script>
 @endsection

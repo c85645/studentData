@@ -44,19 +44,22 @@ class AcademyController extends Controller
     {
         $academy = Academy::join('academy_names', 'academies.name_id', '=', 'academy_names.id')
                    ->select('academies.*', 'academy_names.name')
-                   ->where('academies.id', '=', $id)->get()->first();
+                   ->where('academies.id', $id)
+                   ->get()
+                   ->first();
         $score_items = \DB::table('score_item_data')
-                        ->where('academy_id', '=', $academy->id)
+                        ->where('academy_id', $academy->id)
                         ->get();
         $teachers = User::join('role_user', 'users.id', '=', 'role_user.user_id')
                       ->join('roles', 'roles.id', '=', 'role_user.role_id')
                       ->select('users.*')
-                      ->where('users.status', '=', true)
+                      ->where('users.status', true)
                       ->whereIn('roles.id', [2, 3])
                       ->get();
         $permissions = \DB::table('academy_teacher')
-                        ->where('academy_id', '=', $academy->id)
-                        ->pluck('teacher_id')->toArray();
+                        ->where('academy_id', $academy->id)
+                        ->pluck('teacher_id')
+                        ->toArray();
         return view('admin.academy.edit')->with([
             'academy' => $academy,
             'score_items' => $score_items,
@@ -82,6 +85,7 @@ class AcademyController extends Controller
         $score_sdate = request()->input('score_sdate');
         $score_edate = request()->input('score_edate');
         $owners = request()->input('owners');
+        $pdf_url = request()->input('pdf_url');
 
         // 先刪除該學制的對應老師，在新增
         \DB::table('academy_teacher')
@@ -101,8 +105,6 @@ class AcademyController extends Controller
             }
         }
 
-        // dd($owners);
-
         $dataList = array();
         if ($nameList != null) {
             for ($i = 0; $i < count($nameList); $i++) {
@@ -120,11 +122,13 @@ class AcademyController extends Controller
         }
 
         $temp = \DB::table('score_item_data')
-                    ->where('academy_id', '=', $academy->id)->exists();
+                    ->where('academy_id', '=', $academy->id)
+                    ->exists();
         if ($temp == true) {
             // Delete 若有資料則先刪除
             \DB::table('score_item_data')
-                      ->where('academy_id', '=', $academy->id)->delete();
+                  ->where('academy_id', $academy->id)
+                  ->delete();
         }
         // Insert
         foreach ($dataList as $record) {
@@ -138,6 +142,7 @@ class AcademyController extends Controller
                   'fill_out_edate'  =>  $fill_out_edate,
                   'score_sdate'  =>  $score_sdate,
                   'score_edate'  =>  $score_edate,
+                  'pdf_url'      =>  $pdf_url,
               ]);
 
         return redirect()->to('studentData/admin/academy');

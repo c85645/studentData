@@ -19,10 +19,10 @@
 </div>
 
 <form id="action_form" method="post" action="/studentData/admin/academy/{{ $academy->id }}">
+  {{ method_field('put') }}
+  {{ csrf_field() }}
   <div class="row">
-    <div class="col-md-12">
-      {{ method_field('put') }}
-      {{ csrf_field() }}
+    <div class="col-md-6">
       <div class="panel panel-danger">
         <div class="panel-heading">權限設定<span class="pull-right clickable panel-toggle {{-- panel-collapsed --}}"><em class="fa fa-toggle-up"></em></span></div>
         <div class="panel-body">
@@ -38,7 +38,22 @@
     </div>
 
     <div class="col-md-6">
-      <div class="panel panel-primary">
+      <div class="panel panel-info">
+        <div class="panel-heading">簡章連結設定<span class="pull-right clickable panel-toggle {{-- panel-collapsed --}}"><em class="fa fa-toggle-up"></em></span></div>
+        <div class="panel-body">
+          <div class="canvas-wrapper main-chart">
+            <div class="form-group">
+              <input type="text" name="pdf_url" class="form-control" placeholder="請填入簡章url連結" maxlength="200" value="{{ old('pdf_url', $academy->pdf_url) }}">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-info">
         <div class="panel-heading">評分標準<span class="pull-right clickable panel-toggle {{-- panel-collapsed --}}"><em class="fa fa-toggle-up"></em></span></div>
         <div class="panel-body">
           <div class="canvas-wrapper main-chart">

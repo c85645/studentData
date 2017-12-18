@@ -1,14 +1,33 @@
-<title>東吳大學巨量資料學院報名系統</title>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" >
-<!-- table-middle的class ">" 連接下一層 直到td 給置中的css -->
-<style type="text/css">
-.table-middle > tbody > tr > td{
-  vertical-align: middle;
-}
-.table-middle > tbody > tr > td > form{
-  vertical-align: middle;
-}
-</style>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>東吳巨資報名系統</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
+<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+<meta name="author" content="FreeHTML5.co" />
+
+<!-- Facebook and Twitter integration -->
+<meta property="og:title" content=""/>
+<meta property="og:image" content=""/>
+<meta property="og:url" content=""/>
+<meta property="og:site_name" content=""/>
+<meta property="og:description" content=""/>
+<meta name="twitter:title" content="" />
+<meta name="twitter:image" content="" />
+<meta name="twitter:url" content="" />
+<meta name="twitter:card" content="" />
+
+<!-- Bootstrap  -->
+<link rel="stylesheet" href="{{ asset('css/web/bootstrap.css') }}">
+<!-- Animate.css -->
+<link rel="stylesheet" href="{{ asset('css/web/animate.css') }}">
+<!-- Icomoon Icon Fonts-->
+<link rel="stylesheet" href="{{ asset('css/web/icomoon.css') }}">
+<!-- Themify Icons-->
+<link rel="stylesheet" href="{{ asset('css/web/themify-icons.css') }}">
+<!-- Magnific Popup -->
+<link rel="stylesheet" href="{{ asset('css/web/magnific-popup.css') }}">
+<!-- Owl Carousel  -->
+<link rel="stylesheet" href="{{ asset('css/web/owl.theme.default.min.css') }}">
+<!-- Theme style  -->
+<link rel="stylesheet" href="{{ asset('css/web/style.css') }}">

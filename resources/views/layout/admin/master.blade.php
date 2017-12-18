@@ -8,7 +8,7 @@
 <body>
   @include('layout.admin.nav')
   @include('layout.admin.body')
-  @include('layout.common.script')
+  @include('layout.admin.script')
   @yield('javascript')
 </body>
 

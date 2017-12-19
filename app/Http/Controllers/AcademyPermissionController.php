@@ -11,13 +11,18 @@ class AcademyPermissionController extends Controller
     public function index()
     {
         // 下拉選項
-        $options = \DB::table('academies')->select('year')->distinct()->get()->pluck('year')->toArray();
+        $options = \DB::table('academies')
+                        ->select('year')
+                        ->distinct()
+                        ->get()
+                        ->pluck('year')
+                        ->toArray();
 
         $year = request()->input('year');
 
         if ($year == '') {
             $year = 999;
-            $users = User::where('id', '=', 0)->get();
+            $users = User::where('id', 0)->get();
         } else {
             $users = User::get();
         }
@@ -35,9 +40,11 @@ class AcademyPermissionController extends Controller
 
         $user = User::find($user_id);
         $academy_permissions = \DB::table('academy_teacher')
-                                ->where('teacher_id', '=', $user_id)
-                                ->get()->pluck('academy_id')->toArray();
-        $academies = Academy::where('year', '=', $year)->get();
+                                ->where('teacher_id', $user_id)
+                                ->get()
+                                ->pluck('academy_id')
+                                ->toArray();
+        $academies = Academy::where('year', $year)->get();
 
         return view('admin.academyPermission.edit')->with([
             'user' => $user,
@@ -54,7 +61,7 @@ class AcademyPermissionController extends Controller
         $permissions = request()->input('permissions');
 
         \DB::table('academy_teacher')
-            ->where('teacher_id', '=', $user_id)
+            ->where('teacher_id', $user_id)
             ->delete();
         if ($permissions != null) {
             $permissionsList = array();

@@ -40,8 +40,7 @@ class User extends Authenticatable
     public function getRoleId(User $user)
     {
         $role = $user->roles()->where('user_id', $user->id);
-        $isNull = $role->exists();
-        if ($isNull == true) {
+        if ($role->exists()) {
             return $role->get()->first()->id;
         } else {
             return 0;
@@ -52,8 +51,7 @@ class User extends Authenticatable
     public function getOwnRoleId()
     {
         $role = auth()->user()->roles()->where('user_id', auth()->user()->id);
-        $isNull = $role->exists();
-        if ($isNull == true) {
+        if ($role->exists()) {
             return $role->get()->first()->id;
         } else {
             return 0;
@@ -79,7 +77,9 @@ class User extends Authenticatable
     // 查權限列表
     public function hasPermissions()
     {
-        $permission = \DB::table('role_permission')->where('role_id', auth()->user()->getOwnRoleId())->get();
+        $permission = \DB::table('role_permission')
+                          ->where('role_id', auth()->user()->getOwnRoleId())
+                          ->get();
         return $permission->pluck('menu_id')->toArray();
     }
 
@@ -99,7 +99,9 @@ class User extends Authenticatable
                                     ['academy_teacher.teacher_id', '=', $this->id],
                                     ['academies.year', '=', $year]
                                 ])
-                                ->get()->pluck('name_id')->toArray();
+                                ->get()
+                                ->pluck('name_id')
+                                ->toArray();
         return $academyPermission;
     }
 

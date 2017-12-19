@@ -53,7 +53,6 @@ class AcademyYearController extends Controller
                 // 2.修改資料中的年度為輸入的新年度並儲存
                 $maxYear = Academy::max('year');
                 $records = Academy::where('year', $maxYear)->get();
-                // dd(count($records));
                 foreach ($records as $record) {
                     // 新增學制
                     $newRecord = new Academy();

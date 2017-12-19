@@ -16,7 +16,9 @@ class Academy extends Model
         $name = \DB::table('academies')
                     ->join('academy_names', 'academies.name_id', '=', 'academy_names.id')
                     ->where('academies.name_id', $this->name_id)
-                    ->get()->pluck('name')->first();
+                    ->get()
+                    ->pluck('name')
+                    ->first();
         return $name;
     }
 }

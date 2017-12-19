@@ -23,7 +23,6 @@ class UserController extends Controller
         } else {
             $user = User::where('account', 'like', '%'.request()->input('keyword').'%')->paginate(15);
         }
-        // dd(auth()->user()->roles());
 
         // 若要多回傳值的話，就要用陣列的key value方式回傳
         return view('admin.user.index')->with([
@@ -67,7 +66,7 @@ class UserController extends Controller
         $status = request()->input('status');
         $role_id = request()->input('role_id');
 
-        $tmp = User::where('account', '=', $account)->exists();
+        $tmp = User::where('account', $account)->exists();
         if ($tmp == true) {
             return back()->withInput()->withErrors([
                 'errors' => '帳號重複',

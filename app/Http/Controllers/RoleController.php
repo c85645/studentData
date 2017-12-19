@@ -20,7 +20,8 @@ class RoleController extends Controller
         if ($keyword == '') {
             $role = Role::paginate(15);
         } else {
-            $role = Role::where('role_id', 'like', '%'.request()->input('keyword').'%')->paginate(15);
+            $role = Role::where('role_id', 'like', '%'.request()->input('keyword').'%')
+                          ->paginate(15);
         }
 
         return view('admin.role.index')->with([
@@ -59,7 +60,7 @@ class RoleController extends Controller
         $role_name = request()->input('role_name');
         $menus = request()->input('menus');
 
-        $tmp = Role::where('role_id', '=', $role_id)->exists();
+        $tmp = Role::where('role_id', $role_id)->exists();
         if ($tmp == true) {
             return back()->withInput()->withErrors([
                 'errors' => '角色代碼重複',

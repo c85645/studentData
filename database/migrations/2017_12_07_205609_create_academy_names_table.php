@@ -16,7 +16,6 @@ class CreateAcademyNamesTable extends Migration
         Schema::create('academy_names', function (Blueprint $table) {
             $table->string('id');
             $table->string('name');
-            $table->timestamps();
         });
     }
 

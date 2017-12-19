@@ -11,7 +11,7 @@ class AcademyYearSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('academy_year')->insert([
+        \DB::table('academy_years')->insert([
             [
               'year'  =>  '107',
             ]

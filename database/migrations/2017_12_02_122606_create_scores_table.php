@@ -17,9 +17,10 @@ class CreateScoresTable extends Migration
             $table->integer('academy_id');
             $table->integer('student_id');
             $table->integer('teacher_id');
-            $table->integer('step');->default(1);
+            $table->integer('step')->default(1);
             $table->integer('no');
-            $table->decimal('score', 5, 0)->nullable();
+            $table->decimal('score', 5, 0)->default(0);
+            $table->timestamp('score_time')->nullable();
         });
     }
 

@@ -18,8 +18,8 @@ class CreateScoreItemDataTable extends Migration
             $table->integer('academy_id');
             $table->integer('step')->default(1);
             $table->integer('no');
-            $table->string('name', 20)->nullable();
-            $table->decimal('percent', 5, 0)->nullable();
+            $table->string('name')->nullable();
+            $table->decimal('percent', 5, 0)->default(0);
         });
     }
 

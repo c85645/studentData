@@ -10,6 +10,7 @@
       <div class="col-xs-6 text-right menu-1 main-nav">
         <ul>
           <li class="active"><a href="#" data-nav-section="home">首頁</a></li>
+          <li><a href="#" data-nav-section="about">招生資訊</a></li>
           <li><a href="#" data-nav-section="practice-areas">加入我們</a></li>
           <li><a href="#" data-nav-section="contact">聯絡我們</a></li>
         </ul>
@@ -37,6 +38,32 @@
     </div>
   </div>
 </section>
+
+<section id="gtco-about" data-section="about">
+    <div class="container">
+      <div class="row row-pb-md">
+        <div class="col-md-8 col-md-offset-2 heading animate-box" data-animate-effect="fadeIn">
+          <h1>巨量資料管理學院 熱烈招生中</h1>
+          <p class="sub">大家都在大數據，你還在等什麼？</p>
+          <p class="subtle-text animate-box" data-animate-effect="fadeIn">Welcome</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-md-pull-1 animate-box" data-animate-effect="fadeInLeft">
+          <div class="img-shadow">
+            <img src="images/img_1.jpg" class="img-responsive">
+          </div>
+        </div>
+        <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
+          <h2 class="heading-colored">關於我們</h2>
+          <p>由榮譽院長張善政領軍，搭配院裡六位不同領域的教授們，結合豐富的業界與學術資源，希望給予學員最優質的教學品質，培育出擁有數據處理力與商業洞察力的人才。
+          <br><br>
+          東吳巨量資料管理學院擁有九種不同學制，用心培養人才的地方，提供對資料科學領域有興趣或是任何想精進自己的人來就讀！</p>
+          <p><a  href="http://bigdata.scu.edu.tw" target="_blank" class="read-more">了解更多 <i class="icon-chevron-right"></i></a></p>
+        </div>
+      </div>
+    </div>
+  </section>
 
 <section id="gtco-practice-areas" data-section="practice-areas">
   <div class="container">

@@ -31,3 +31,5 @@
 <link rel="stylesheet" href="{{ asset('css/web/owl.theme.default.min.css') }}">
 <!-- Theme style  -->
 <link rel="stylesheet" href="{{ asset('css/web/style.css') }}">
+<!-- 網頁icon -->
+<link rel="icon" type="image/png" href="images/bigdata_icon.png" />

@@ -58,7 +58,11 @@
             <h3>碩士甄試H</h3>
             <br>
             <div class="col-md-12">
-              <p>報名截止日期：2018.03.25</p>
+              @if ($academyH->isOpen())
+                <p>報名截止日期：{{ $academyH->fill_out_edate }}</p>
+              @else
+                <p>尚未開放</p>
+              @endif
             </div>
             <div class="col-md-5">
               <a @if ($academyH->pdf_url != '') href="{{ $academyH->pdf_url }}" target="_blank" @else href="#" @endif>
@@ -66,7 +70,9 @@
               </a>
             </div>
             <div class="col-md-7">
-              <button class="button" onclick="goInput('H');"><span>點我報名</span></button>
+              @if ($academyH->isOpen())
+                <button class="button" onclick="goInput('H');"><span>點我報名</span></button>
+              @endif
             </div>
           </div>
         </div>
@@ -79,7 +85,11 @@
             <h3>碩士在職專班I</h3>
             <br>
             <div class="col-md-12">
-              <p>報名截止日期：2018.05.27</p>
+              @if ($academyI->isOpen())))
+                <p>報名截止日期：{{ $academyI->fill_out_edate }}</p>
+              @else
+                <p>尚未開放</p>
+              @endif
             </div>
             <div class="col-md-5">
               <a @if ($academyI->pdf_url != '') href="{{ $academyI->pdf_url }}" target="_blank" @else href="#" @endif>
@@ -87,7 +97,9 @@
               </a>
             </div>
             <div class="col-md-7">
-              <button class="button" onclick="goInput('I');"><span>點我報名</span></button>
+              @if ($academyI->isOpen())
+                <button class="button" onclick="goInput('I');"><span>點我報名</span></button>
+              @endif
             </div>
           </div>
         </div>
@@ -100,7 +112,11 @@
             <h3>轉系考試B</h3>
             <br>
             <div class="col-md-12">
-              <p>尚未開始報名</p>
+              @if ($academyB->isOpen())
+                <p>報名截止日期：{{ $academyB->fill_out_edate }}</p>
+              @else
+                <p>尚未開放</p>
+              @endif
             </div>
             <div class="col-md-5">
               <a @if ($academyB->pdf_url != '') href="{{ $academyB->pdf_url }}" target="_blank" @else href="#" @endif>
@@ -108,7 +124,9 @@
               </a>
             </div>
             <div class="col-md-7">
-              <button class="button" onclick="goInput('B');"><span>點我報名</span></button>
+              @if ($academyB->isOpen())
+                <button class="button" onclick="goInput('B');"><span>點我報名</span></button>
+              @endif
             </div>
           </div>
         </div>
@@ -121,7 +139,11 @@
             <h3>雙主修C</h3>
             <br>
             <div class="col-md-12">
-              <p>尚未開始報名</p>
+              @if ($academyC->isOpen())
+                <p>報名截止日期：{{ $academyC->fill_out_edate }}</p>
+              @else
+                <p>尚未開放</p>
+              @endif
             </div>
             <div class="col-md-5">
               <a @if ($academyC->pdf_url != '') href="{{ $academyC->pdf_url }}" target="_blank" @else href="#" @endif>
@@ -129,7 +151,9 @@
               </a>
             </div>
             <div class="col-md-7">
-              <button class="button" onclick="goInput('C');"><span>點我報名</span></button>
+              @if ($academyC->isOpen())
+                <button class="button" onclick="goInput('C');"><span>點我報名</span></button>
+              @endif
             </div>
           </div>
         </div>
@@ -142,7 +166,11 @@
             <h3>學士後E</h3>
             <br>
             <div class="col-md-12">
-              <p>尚未開始報名</p>
+              @if ($academyE->isOpen())
+                <p>報名截止日期：{{ $academyE->fill_out_edate }}</p>
+              @else
+                <p>尚未開放</p>
+              @endif
             </div>
             <div class="col-md-5">
               <a @if ($academyE->pdf_url != '') href="{{ $academyE->pdf_url }}" target="_blank" @else href="#" @endif>
@@ -150,7 +178,9 @@
               </a>
             </div>
             <div class="col-md-7">
-              <button class="button" onclick="goInput('E');"><span>點我報名</span></button>
+              @if ($academyE->isOpen())
+                <button class="button" onclick="goInput('E');"><span>點我報名</span></button>
+              @endif
             </div>
           </div>
         </div>
@@ -165,7 +195,11 @@
             <h3>碩士考試G</h3>
             <br>
             <div class="col-md-12">
-              <p>尚未開始報名</p>
+              @if ($academyG->isOpen())
+                <p>報名截止日期：{{ $academyG->fill_out_edate }}</p>
+              @else
+                <p>尚未開放</p>
+              @endif
             </div>
             <div class="col-md-5">
               <a @if ($academyG->pdf_url != '') href="{{ $academyG->pdf_url }}" target="_blank" @else href="#" @endif>
@@ -173,7 +207,9 @@
               </a>
             </div>
             <div class="col-md-7">
-              <button class="button" onclick="goInput('G');"><span>點我報名</span></button>
+              @if( $academyG->isOpen())
+                <button class="button" onclick="goInput('G');"><span>點我報名</span></button>
+              @endif
             </div>
           </div>
         </div>
@@ -186,7 +222,11 @@
             <h3>轉學考試A</h3>
             <br>
             <div class="col-md-12">
-              <p>尚未開始報名</p>
+              @if ($academyA->isOpen())
+                <p>報名截止日期：{{ $academyA->fill_out_edate }}</p>
+              @else
+                <p>尚未開放</p>
+              @endif
             </div>
             <div class="col-md-5">
               <a @if ($academyA->pdf_url != '') href="{{ $academyA->pdf_url }}" target="_blank" @else href="#" @endif>
@@ -194,7 +234,9 @@
               </a>
             </div>
             <div class="col-md-7">
-              <button class="button" onclick="goInput('A');"><span>點我報名</span></button>
+              @if ($academyA->isOpen())
+                <button class="button" onclick="goInput('A');"><span>點我報名</span></button>
+              @endif
             </div>
           </div>
         </div>
@@ -207,7 +249,11 @@
             <h3>輔系D</h3>
             <br>
             <div class="col-md-12">
-              <p>報名截止日期：2018.04.12</p>
+              @if ($academyD->isOpen())
+                <p>報名截止日期：{{ $academyD->fill_out_edate }}</p>
+              @else
+                <p>尚未開放</p>
+              @endif
             </div>
             <div class="col-md-5">
               <a @if ($academyD->pdf_url != '') href="{{ $academyD->pdf_url }}" target="_blank" @else href="#" @endif>
@@ -215,7 +261,9 @@
               </a>
             </div>
             <div class="col-md-7">
-              <button class="button" onclick="goInput('D');"><span>點我報名</span></button>
+              @if ($academyD->isOpen())
+                <button class="button" onclick="goInput('D');"><span>點我報名</span></button>
+              @endif
             </div>
           </div>
         </div>
@@ -228,7 +276,11 @@
             <h3>學程F</h3>
             <br>
             <div class="col-md-12">
-              <p>尚未開始報名</p>
+              @if ($academyF->isOpen())
+                <p>報名截止日期：{{ $academyF->fill_out_edate }}</p>
+              @else
+                <p>尚未開放</p>
+              @endif
             </div>
             <div class="col-md-5">
               <a @if ($academyF->pdf_url != '') href="{{ $academyF->pdf_url }}" target="_blank" @else href="#" @endif>
@@ -236,7 +288,9 @@
               </a>
             </div>
             <div class="col-md-7">
-              <button class="button" onclick="goInput('F');"><span>點我報名</span></button>
+              @if ($academyF->isOpen())
+                <button class="button" onclick="goInput('F');"><span>點我報名</span></button>
+              @endif
             </div>
           </div>
         </div>

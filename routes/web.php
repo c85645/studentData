@@ -19,6 +19,7 @@ Route::group(['prefix' => 'studentData'], function(){
     // 前台首頁-先進入controller再導頁
     // TODO
     Route::get('/', 'WebController@index');
+    Route::get('input', 'WebController@redirectToIndex');
     // 輸入資料頁
     Route::post('input', 'WebController@toInput');
     // 儲存

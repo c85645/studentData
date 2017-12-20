@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Academy extends Model
 {
@@ -20,5 +21,12 @@ class Academy extends Model
                     ->pluck('name')
                     ->first();
         return $name;
+    }
+
+    public function isOpen()
+    {
+        return Carbon::now()
+                ->between(Carbon::createFromFormat('Y-m-d', $this->fill_out_sdate),
+                          Carbon::createFromFormat('Y-m-d', $this->fill_out_edate));
     }
 }

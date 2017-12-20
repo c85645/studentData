@@ -78,6 +78,16 @@ class WebController extends Controller
                             ->where('name_id', $academyType)
                             ->get()
                             ->first();
+        // 檢查是否為開放填寫期間，若非填寫期間則導頁
+        // dd(Carbon::now());
+        $now = Carbon::now();
+        if (!$now->between(Carbon::createFromFormat('Y-m-d', $academy->fill_out_sdate),
+                  Carbon::createFromFormat('Y-m-d', $academy->fill_out_edate))) {
+            return redirect('studentData')->withErrors([
+                'errors' => '尚未開放填寫！',
+            ]);
+        }
+
         return view('web.input')->with([
             'academyYear' => $academyYear,
             'academyType' => $academyType,
@@ -101,6 +111,11 @@ class WebController extends Controller
         $applicant->upload_time = Carbon::now()->toDateTimeString();
         $applicant->save();
 
-        return redirect()->to('studentData');
+        return redirect('studentData');
+    }
+
+    public function redirectToIndex()
+    {
+        return redirect('studentData');
     }
 }

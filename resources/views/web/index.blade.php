@@ -55,20 +55,18 @@
             <img src="{{ asset('images/png/graduate.png') }}" width="60px">
           </div>
           <div class="gtco-copy">
-            <h3>碩士甄試</h3>
+            <h3>碩士甄試H</h3>
             <br>
             <div class="col-md-12">
               <p>報名截止日期：2018.03.25</p>
             </div>
             <div class="col-md-5">
-              <a href="http://www.scu.edu.tw/entrance/anounce/107/E/E-book/700.pdf" target="_blank">
+              <a @if ($academyH->pdf_url != '') href="{{ $academyH->pdf_url }}" target="_blank" @else href="#" @endif>
                 <button class="button2" ><span>查看簡章</span></button>
               </a>
             </div>
             <div class="col-md-7">
-              <a href="{{ url('studentData/input') }}">
-                <button class="button" ><span>點我報名</span></button>
-              </a>
+              <button class="button" onclick="goInput('H');"><span>點我報名</span></button>
             </div>
           </div>
         </div>
@@ -78,20 +76,18 @@
             <img src="{{ asset('images/png/id-card.png') }}" width="60px">
           </div>
           <div class="gtco-copy">
-            <h3>碩士在職專班</h3>
+            <h3>碩士在職專班I</h3>
             <br>
             <div class="col-md-12">
               <p>報名截止日期：2018.05.27</p>
             </div>
             <div class="col-md-5">
-              <a href="http://www.scu.edu.tw/entrance/anounce/107/E/E-book/700.pdf" target="_blank">
+              <a @if ($academyI->pdf_url != '') href="{{ $academyI->pdf_url }}" target="_blank" @else href="#" @endif>
                 <button class="button2" ><span>查看簡章</span></button>
               </a>
             </div>
             <div class="col-md-7">
-              <a href="{{ url('studentData/input') }}">
-                <button class="button" ><span>點我報名</span></button>
-              </a>
+              <button class="button" onclick="goInput('I');"><span>點我報名</span></button>
             </div>
           </div>
         </div>
@@ -101,20 +97,18 @@
             <img src="{{ asset('images/png/writing.png') }}" width="60px">
           </div>
           <div class="gtco-copy">
-            <h3>轉系考試</h3>
+            <h3>轉系考試B</h3>
             <br>
             <div class="col-md-12">
               <p>尚未開始報名</p>
             </div>
             <div class="col-md-5">
-              <a href="http://www.scu.edu.tw/entrance/anounce/107/E/E-book/700.pdf" target="_blank">
+              <a @if ($academyB->pdf_url != '') href="{{ $academyB->pdf_url }}" target="_blank" @else href="#" @endif>
                 <button class="button2" ><span>查看簡章</span></button>
               </a>
             </div>
             <div class="col-md-7">
-              <a href="{{ url('studentData/input') }}">
-                <button class="button" ><span>點我報名</span></button>
-              </a>
+              <button class="button" onclick="goInput('B');"><span>點我報名</span></button>
             </div>
           </div>
         </div>
@@ -124,20 +118,18 @@
             <img src="{{ asset('images/png/library.png') }}" width="60px">
           </div>
           <div class="gtco-copy">
-            <h3>雙主修</h3>
+            <h3>雙主修C</h3>
             <br>
             <div class="col-md-12">
               <p>尚未開始報名</p>
             </div>
             <div class="col-md-5">
-              <a href="http://www.scu.edu.tw/entrance/anounce/107/E/E-book/700.pdf" target="_blank">
+              <a @if ($academyC->pdf_url != '') href="{{ $academyC->pdf_url }}" target="_blank" @else href="#" @endif>
                 <button class="button2" ><span>查看簡章</span></button>
               </a>
             </div>
             <div class="col-md-7">
-              <a href="{{ url('studentData/input') }}">
-                <button class="button" ><span>點我報名</span></button>
-              </a>
+              <button class="button" onclick="goInput('C');"><span>點我報名</span></button>
             </div>
           </div>
         </div>
@@ -147,20 +139,18 @@
             <img src="{{ asset('images/png/lecture.png') }}" width="60px">
           </div>
           <div class="gtco-copy">
-            <h3>學士後</h3>
+            <h3>學士後E</h3>
             <br>
             <div class="col-md-12">
               <p>尚未開始報名</p>
             </div>
             <div class="col-md-5">
-              <a href="http://www.scu.edu.tw/entrance/anounce/107/E/E-book/700.pdf" target="_blank">
+              <a @if ($academyE->pdf_url != '') href="{{ $academyE->pdf_url }}" target="_blank" @else href="#" @endif>
                 <button class="button2" ><span>查看簡章</span></button>
               </a>
             </div>
             <div class="col-md-7">
-              <a href="{{ url('studentData/input') }}">
-                <button class="button" ><span>點我報名</span></button>
-              </a>
+              <button class="button" onclick="goInput('E');"><span>點我報名</span></button>
             </div>
           </div>
         </div>
@@ -172,20 +162,18 @@
             <img src="{{ asset('images/png/ereader-1.png') }}" width="60px">
           </div>
           <div class="gtco-copy">
-            <h3>碩士考試</h3>
+            <h3>碩士考試G</h3>
             <br>
             <div class="col-md-12">
               <p>尚未開始報名</p>
             </div>
             <div class="col-md-5">
-              <a href="http://www.scu.edu.tw/entrance/anounce/107/E/E-book/700.pdf" target="_blank">
+              <a @if ($academyG->pdf_url != '') href="{{ $academyG->pdf_url }}" target="_blank" @else href="#" @endif>
                 <button class="button2" ><span>查看簡章</span></button>
               </a>
             </div>
             <div class="col-md-7">
-              <a href="{{ url('studentData/input') }}">
-                <button class="button" ><span>點我報名</span></button>
-              </a>
+              <button class="button" onclick="goInput('G');"><span>點我報名</span></button>
             </div>
           </div>
         </div>
@@ -195,20 +183,18 @@
             <img src="{{ asset('images/png/ereader.png') }}" width="60px">
           </div>
           <div class="gtco-copy">
-            <h3>轉學考試</h3>
+            <h3>轉學考試A</h3>
             <br>
             <div class="col-md-12">
               <p>尚未開始報名</p>
             </div>
             <div class="col-md-5">
-              <a href="http://www.scu.edu.tw/entrance/anounce/107/E/E-book/700.pdf" target="_blank">
+              <a @if ($academyA->pdf_url != '') href="{{ $academyA->pdf_url }}" target="_blank" @else href="#" @endif>
                 <button class="button2" ><span>查看簡章</span></button>
               </a>
             </div>
             <div class="col-md-7">
-              <a href="{{ url('studentData/input') }}">
-                <button class="button" ><span>點我報名</span></button>
-              </a>
+              <button class="button" onclick="goInput('A');"><span>點我報名</span></button>
             </div>
           </div>
         </div>
@@ -218,20 +204,18 @@
             <img src="{{ asset('images/png/chat.png') }}" width="60px">
           </div>
           <div class="gtco-copy">
-            <h3>輔系</h3>
+            <h3>輔系D</h3>
             <br>
             <div class="col-md-12">
               <p>報名截止日期：2018.04.12</p>
             </div>
             <div class="col-md-5">
-              <a href="http://www.scu.edu.tw/entrance/anounce/107/E/E-book/700.pdf" target="_blank">
+              <a @if ($academyD->pdf_url != '') href="{{ $academyD->pdf_url }}" target="_blank" @else href="#" @endif>
                 <button class="button2" ><span>查看簡章</span></button>
               </a>
             </div>
             <div class="col-md-7">
-              <a href="{{ url('studentData/input') }}">
-                <button class="button" ><span>點我報名</span></button>
-              </a>
+              <button class="button" onclick="goInput('D');"><span>點我報名</span></button>
             </div>
           </div>
         </div>
@@ -241,20 +225,18 @@
             <img src="{{ asset('images/png/learning.png') }}" width="60px">
           </div>
           <div class="gtco-copy">
-            <h3>學程</h3>
+            <h3>學程F</h3>
             <br>
             <div class="col-md-12">
               <p>尚未開始報名</p>
             </div>
             <div class="col-md-5">
-              <a href="http://www.scu.edu.tw/entrance/anounce/107/E/E-book/700.pdf" target="_blank">
+              <a @if ($academyF->pdf_url != '') href="{{ $academyF->pdf_url }}" target="_blank" @else href="#" @endif>
                 <button class="button2" ><span>查看簡章</span></button>
               </a>
             </div>
             <div class="col-md-7">
-              <a href="{{ url('studentData/input') }}">
-                <button class="button" ><span>點我報名</span></button>
-              </a>
+              <button class="button" onclick="goInput('F');"><span>點我報名</span></button>
             </div>
           </div>
         </div>
@@ -294,4 +276,18 @@
     </div>
   </div>
 </section>
+
+<form id="action_form" action="{{ url('studentData/input') }}" method="post">
+    {{ csrf_field() }}
+    <input id="academyType" type="hidden" name="academyType">
+</form>
+@endsection
+
+@section('javascript')
+<script type="text/javascript">
+  function goInput(type) {
+    $("#academyType").val(type);
+    $("#action_form").submit();
+  }
+</script>
 @endsection

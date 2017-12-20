@@ -23,6 +23,7 @@ class CreateApplicantsTable extends Migration
             $table->string('pdf_path')->nullable();
             $table->string('transfer_grade')->nullable();
             $table->timestamp('upload_time')->nullable();
+            $table->timestamps();
         });
     }
 

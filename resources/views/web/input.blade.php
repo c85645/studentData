@@ -19,34 +19,34 @@
 
 <section id="gtco-practice-areas" data-section="practice-areas">
   <div class="container">
-
     <div class="col-md-8 col-md-offset-2 heading animate-box" data-animate-effect="fadeIn">
-      <h1>碩士甄試報名</h1>
+      <h1>{{ $academyName }}報名</h1>
       <p class="sub">報名截止時間：2017.12.31</p>
     </div>
-
     <div class="row" align="center">
       <div class="col-md-6 col-md-push-3 animate-box">
-        <form action="#" method="post">
+        <form action="{{ url('studentData/save') }}" method="post" enctype="multipart/form-data">
+          {{ csrf_field() }}
+          <input type="hidden" name="academy_id" value="{{ $academy->id }}">
           <div class="form-group">
             <label class="sr-only">姓名</label>
-            <input type="text" class="form-control" placeholder="姓名" minlength="2" maxlength="10" required>
+            <input name="name" type="text" class="form-control" placeholder="姓名" minlength="2" maxlength="10" required value="傑夫">
           </div>
           <div class="form-group">
             <label class="sr-only">手機</label>
-            <input type="text" class="form-control" placeholder="手機" maxlength="10" required onkeyup="enterNum(this);">
+            <input name="mobile" type="text" class="form-control" placeholder="手機" maxlength="10" required onkeyup="enterNum(this);" value="0987654321">
           </div>
           <div class="form-group">
             <label class="sr-only">信箱</label>
-            <input type="email" class="form-control" placeholder="信箱" maxlength="30" required>
+            <input name="email" type="email" class="form-control" placeholder="信箱" maxlength="30" required value="c85645@gmail.com">
           </div>
           <div class="form-group">
             <label class="sr-only">身分證後六碼</label>
-            <input type="text" class="form-control" placeholder="身分證後六碼" maxlength="6" required onkeyup="enterNum(this);">
+            <input name="personal_id" type="text" class="form-control" placeholder="身分證後六碼" maxlength="6" required onkeyup="enterNum(this);" value="123456">
           </div>
           <div class="form-group">
             <label class="sr-only">上傳資料</label>
-            <input type="file" class="form-control" placeholder="PDF上傳" accept=".pdf,application/pdf" required>
+            <input name="file" type="file" class="form-control" placeholder="PDF上傳" accept=".pdf,application/pdf" required>
           </div>
           <div class="form-group">
             <input type="submit" value="確認送出" class="btn btn-primary">

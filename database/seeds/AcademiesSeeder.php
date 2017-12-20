@@ -14,40 +14,49 @@ class AcademiesSeeder extends Seeder
     {
         Academy::insert([
           [
-            'year'  =>  107,
-            'name_id'  =>  'A',
+            'year' => 107,
+            'name_id' => 'A',
+            'pdf_url' => 'http://www.scu.edu.tw/entrance/anounce/107/E/E-book/700.pdf',
           ],
           [
-            'year'  =>  107,
-            'name_id'  =>  'B',
+            'year' => 107,
+            'name_id' => 'B',
+            'pdf_url' => 'http://www.scu.edu.tw/entrance/anounce/107/E/E-book/700.pdf',
           ],
           [
-            'year'  =>  107,
-            'name_id'  =>  'C',
+            'year' => 107,
+            'name_id' => 'C',
+            'pdf_url' => 'http://www.scu.edu.tw/entrance/anounce/107/E/E-book/700.pdf',
            ],
           [
-            'year'  =>  107,
-            'name_id'  =>  'D',
+            'year' => 107,
+            'name_id' => 'D',
+            'pdf_url' => 'http://www.scu.edu.tw/entrance/anounce/107/E/E-book/700.pdf',
           ],
           [
-            'year'  =>  107,
-            'name_id'  =>  'E',
+            'year' => 107,
+            'name_id' => 'E',
+            'pdf_url' => 'http://www.scu.edu.tw/entrance/anounce/107/E/E-book/700.pdf',
            ],
           [
-            'year'  =>  107,
-            'name_id'  =>  'F',
+            'year' => 107,
+            'name_id' => 'F',
+            'pdf_url' => 'http://www.scu.edu.tw/entrance/anounce/107/E/E-book/700.pdf',
           ],
           [
-            'year'  =>  107,
-            'name_id'  =>  'G',
+            'year' => 107,
+            'name_id' => 'G',
+            'pdf_url' => 'http://www.scu.edu.tw/entrance/anounce/107/E/E-book/700.pdf',
           ],
           [
-            'year'  =>  107,
-            'name_id'  =>  'H',
+            'year' => 107,
+            'name_id' => 'H',
+            'pdf_url' => 'http://www.scu.edu.tw/entrance/anounce/107/E/E-book/700.pdf',
           ],
           [
-            'year'  =>  107,
-            'name_id'  =>  'I',
+            'year' => 107,
+            'name_id' => 'I',
+            'pdf_url' => 'http://www.scu.edu.tw/entrance/anounce/107/E/E-book/700.pdf',
           ],
         ]);
     }

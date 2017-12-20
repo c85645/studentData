@@ -15,11 +15,11 @@ class AcademyNameSeeder extends Seeder
         AcademyName::insert([
           [
             'id'    =>  'A',
-            'name'  =>  '轉學',
+            'name'  =>  '轉學考試',
           ],
           [
             'id'    =>  'B',
-            'name'  =>  '轉系',
+            'name'  =>  '轉系考試',
           ],
           [
             'id'    =>  'C',
@@ -39,15 +39,15 @@ class AcademyNameSeeder extends Seeder
           ],
           [
             'id'    =>  'G',
-            'name'  =>  '碩士（考試）',
+            'name'  =>  '碩士考試',
           ],
           [
             'id'    =>  'H',
-            'name'  =>  '碩士（甄試）',
+            'name'  =>  '碩士甄試',
           ],
           [
             'id'    =>  'I',
-            'name'  =>  '碩專',
+            'name'  =>  '碩士在職專班',
           ],
       ]);
     }

@@ -129,7 +129,7 @@
         return;
       } else {
         var rowNum = trs.length;
-        var inertTr = '<tr><td><input type="text" name="dataList[name][]" maxlength="10" class="form-control" /></td><td><input type="text" name="dataList[percent][]" maxlength="3" class="form-control" onkeyup="enterDigital(this);"/></td></tr>';
+        var inertTr = '<tr><td><input type="text" name="dataList[name][]" maxlength="30" class="form-control" /></td><td><input type="text" name="dataList[percent][]" maxlength="3" class="form-control" onkeyup="enterDigital(this);"/></td></tr>';
         if (trs.length == 0) {
           tbody.append(inertTr);
         } else {

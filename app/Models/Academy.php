@@ -25,8 +25,12 @@ class Academy extends Model
 
     public function isOpen()
     {
-        return Carbon::now()
-                ->between(Carbon::createFromFormat('Y-m-d', $this->fill_out_sdate),
-                          Carbon::createFromFormat('Y-m-d', $this->fill_out_edate));
+        if($this->fill_out_sdate == '' || $this->fill_out_edate == '') {
+            return false;
+        } else {
+            return Carbon::now()
+                    ->between(Carbon::createFromFormat('Y-m-d', $this->fill_out_sdate),
+                              Carbon::createFromFormat('Y-m-d', $this->fill_out_edate));
+        }
     }
 }

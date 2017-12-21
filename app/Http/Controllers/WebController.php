@@ -79,7 +79,6 @@ class WebController extends Controller
                             ->get()
                             ->first();
         // 檢查是否為開放填寫期間，若非填寫期間則導頁
-        // dd(Carbon::now());
         $now = Carbon::now();
         if (!$now->between(Carbon::createFromFormat('Y-m-d', $academy->fill_out_sdate),
                   Carbon::createFromFormat('Y-m-d', $academy->fill_out_edate))) {

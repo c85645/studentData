@@ -21,7 +21,7 @@
   <div class="container">
     <div class="col-md-8 col-md-offset-2 heading animate-box" data-animate-effect="fadeIn">
       <h1>{{ $academyName }}報名</h1>
-      <p class="sub">報名截止時間：2017.12.31</p>
+      <p class="sub">報名截止時間：{{ $academy->fill_out_edate }}</p>
     </div>
     <div class="row" align="center">
       <div class="col-md-6 col-md-push-3 animate-box">

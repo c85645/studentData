@@ -22,32 +22,32 @@ class WebController extends Controller
         foreach ($academyList as $academy) {
             switch ($academy->name_id) {
                 case 'A':
-                  $academyA = $academy;
-                break;
+                    $academyA = $academy;
+                    break;
                 case 'B':
-                  $academyB = $academy;
-                break;
+                    $academyB = $academy;
+                    break;
                 case 'C':
-                  $academyC = $academy;
-                break;
+                    $academyC = $academy;
+                    break;
                 case 'D':
-                  $academyD = $academy;
-                break;
+                    $academyD = $academy;
+                    break;
                 case 'E':
-                  $academyE = $academy;
-                break;
+                    $academyE = $academy;
+                    break;
                 case 'F':
-                  $academyF = $academy;
-                break;
+                    $academyF = $academy;
+                    break;
                 case 'G':
-                  $academyG = $academy;
-                break;
+                    $academyG = $academy;
+                    break;
                 case 'H':
-                  $academyH = $academy;
-                break;
+                    $academyH = $academy;
+                    break;
                 case 'I':
-                  $academyI = $academy;
-                break;
+                    $academyI = $academy;
+                    break;
             }
         }
 
@@ -80,8 +80,9 @@ class WebController extends Controller
                             ->first();
         // 檢查是否為開放填寫期間，若非填寫期間則導頁
         $now = Carbon::now();
-        if (!$now->between(Carbon::createFromFormat('Y-m-d', $academy->fill_out_sdate),
-                  Carbon::createFromFormat('Y-m-d', $academy->fill_out_edate))) {
+        $fill_out_sdate = Carbon::createFromFormat('Y-m-d', $academy->fill_out_sdate);
+        $fill_out_edate = Carbon::createFromFormat('Y-m-d', $academy->fill_out_edate);
+        if (!$now->between($fill_out_sdate, $fill_out_edate)) {
             return redirect('studentData')->withErrors([
                 'errors' => '尚未開放填寫！',
             ]);

@@ -13,12 +13,13 @@ class Academy extends Model
     // 學制是否在開放區間內
     public function isOpen()
     {
-        if($this->fill_out_sdate == '' || $this->fill_out_edate == '') {
+        if ($this->fill_out_sdate == '' || $this->fill_out_edate == '') {
             return false;
         } else {
+            $fill_out_sdate = Carbon::createFromFormat('Y-m-d', $this->fill_out_sdate);
+            $fill_out_edate = Carbon::createFromFormat('Y-m-d', $this->fill_out_edate);
             return Carbon::now()
-                    ->between(Carbon::createFromFormat('Y-m-d', $this->fill_out_sdate),
-                              Carbon::createFromFormat('Y-m-d', $this->fill_out_edate));
+            ->between($fill_out_sdate, $fill_out_edate);
         }
     }
 
@@ -34,7 +35,7 @@ class Academy extends Model
         return $this->belongsTo(AcademyName::class);
     }
 
-    // 老師負責哪些學制
+    // 老師負責哪些學制（一對多）
     public function teachers()
     {
         return $this->belongsToMany(User::class, 'academy_teacher', 'academy_id', 'teacher_id');

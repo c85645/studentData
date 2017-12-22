@@ -31,6 +31,7 @@ class CreateImportApplicantsTable extends Migration
             $table->string('email')->nullable();
             $table->string('is_pass')->default('N');
             $table->timestamp('import_time')->nullable();
+            $table->timestamps();
         });
     }
 

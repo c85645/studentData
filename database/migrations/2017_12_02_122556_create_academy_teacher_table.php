@@ -20,6 +20,7 @@ class CreateAcademyTeacherTable extends Migration
             $table->foreign('academy_id')
                     ->references('id')->on('academies')
                     ->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

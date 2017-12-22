@@ -44,7 +44,7 @@
         <div class="col-sm-8">
           @foreach($roles as $role)
             <label class="radio-inline">
-              <input type="radio" name="role_id" value="{{ $role->id }}" {{ $user->getRoleId($user) == $role->id ? 'checked' : ''}}> {{ $role->role_name }}
+              <input type="radio" name="role_id" value="{{ $role->id }}" {{ $user->getRoleId() == $role->id ? 'checked' : ''}}> {{ $role->role_name }}
             </label>
           @endforeach
         </div>

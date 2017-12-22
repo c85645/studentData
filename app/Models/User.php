@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\Role;
-use App\Models\Menu;
 
 class User extends Authenticatable
 {
@@ -16,30 +14,24 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'account', 'name', 'password', 'status',
-    ];
+    protected $fillable = ['account', 'name', 'password', 'status'];
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    protected $guarded = [];
+    protected $hidden = ['password', 'remember_token'];
 
     public function roles()
     {
-        return $this->belongsToMany('App\Models\Role');
+        return $this->belongsToMany(Role::class);
     }
 
     // 查該角色代碼
-    public function getRoleId(User $user)
+    public function getRoleId()
     {
-        $role = $user->roles()->where('user_id', $user->id);
+        $role = $this->roles()->where('user_id', $this->id);
         if ($role->exists()) {
             return $role->get()->first()->id;
         } else {
@@ -50,7 +42,7 @@ class User extends Authenticatable
     // 查該帳號自己的角色代碼
     public function getOwnRoleId()
     {
-        $role = auth()->user()->roles()->where('user_id', auth()->user()->id);
+        $role = $this->roles()->where('user_id', $this->id);
         if ($role->exists()) {
             return $role->get()->first()->id;
         } else {
@@ -58,16 +50,10 @@ class User extends Authenticatable
         }
     }
 
-    // 取得該角色
-    public function getRole()
-    {
-        return auth()->user()->roles()->where('user_id', auth()->user()->id)->get()->first();
-    }
-
     // 判斷是不是最高管理員
     public function isAdministrator()
     {
-        if (auth()->user()->getOwnRoleId() == 1) {
+        if ($this->getOwnRoleId() == 1) {
             return true;
         } else {
             return false;
@@ -86,7 +72,7 @@ class User extends Authenticatable
     // 取得清單
     public function getMenus()
     {
-        return Menu::getMenus();
+        return Menu::get();
     }
 
     // 取得角色權限(回傳array)

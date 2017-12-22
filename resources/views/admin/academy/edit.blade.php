@@ -8,7 +8,7 @@
     </a></li>
     <li class="active">學制管理</li>
     <li class="active">{{ $academy->year }} 學年度</li>
-    <li class="active">{{ $academy->name }}</li>
+    <li class="active">{{ $academy->name->name }}</li>
   </ol>
 </div>
 
@@ -29,7 +29,8 @@
           <div class="canvas-wrapper main-chart">
             @foreach ($teachers as $teacher)
               <label class="checkbox-inline">
-                <input type="checkbox" name="owners[]" value="{{ $teacher->id }}" @if(in_array($teacher->id,$permissions)) checked @endif> {{ $teacher->name }}
+                <input type="checkbox" name="owners[]" value="{{ $teacher->id }}" @if(in_array($teacher->id,$available_teachers)) checked @endif> {{ $teacher->name }}
+                  {{-- 可以用這個方式，把php判斷式寫到model內判斷是否有並回傳boolean @if($teacher->canEditAcademy($academy->id)) --}}
               </label>
             @endforeach
           </div>
@@ -67,7 +68,7 @@
                 <th width="40%">比重(%)</th>
               </thead>
               <tbody id="tbody">
-                @foreach($score_items as $item)
+                @foreach($academy->scoreItems as $item)
                   <tr>
                     <td><input type="text" name="dataList[name][]" maxlength="10" class="form-control" value="{{ $item->name }}"/></td>
                     <td><input type="text" name="dataList[percent][]" maxlength="3" class="form-control" value="{{ $item->percent }}" onkeyup="enterDigital(this);"/></td>

@@ -21,6 +21,7 @@ class CreateScoresTable extends Migration
             $table->integer('no');
             $table->decimal('score', 5, 0)->default(0);
             $table->timestamp('score_time')->nullable();
+            $table->timestamps();
         });
     }
 

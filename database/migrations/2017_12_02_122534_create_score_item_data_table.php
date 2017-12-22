@@ -20,6 +20,7 @@ class CreateScoreItemDataTable extends Migration
             $table->integer('no');
             $table->string('name')->nullable();
             $table->decimal('percent', 5, 0)->default(0);
+            $table->timestamps();
         });
     }
 

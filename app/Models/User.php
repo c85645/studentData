@@ -60,6 +60,16 @@ class User extends Authenticatable
         }
     }
 
+    // 判斷是否為管理員，否為評審委員
+    public function isManager()
+    {
+        if ($this->getOwnRoleId() == 1 || $this->getOwnRoleId() == 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // 查權限列表
     public function hasPermissions()
     {

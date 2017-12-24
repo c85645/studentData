@@ -181,6 +181,8 @@ class UserController extends Controller
             'password' => bcrypt($password),
         ]);
 
+        Auth::logout();
+
         return redirect()->to('studentData/admin');
     }
 

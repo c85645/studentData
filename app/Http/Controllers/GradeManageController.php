@@ -25,6 +25,8 @@ class GradeManageController extends Controller
             ->where('teacher_id', auth()->user()->id)
             ->get();
 
+            // 設定語系
+            CarbonInterval::setLocale('zh_tw');
             // 這裡要判斷，1.時間未到/超過則回傳 未開放評分 2.在評分期間則回傳 還有多少天數與小時
             foreach ($academies as $key => $academy) {
                 $score_sdate = Carbon::createFromFormat('Y-m-d', $academy->score_sdate)->startOfDay();

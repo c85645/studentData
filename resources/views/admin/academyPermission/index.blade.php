@@ -44,15 +44,9 @@
       <th colspan="10">學制</th>
     </tr>
     <tr>
-      <th width="5%">轉學</th>
-      <th width="5%">轉系</th>
-      <th width="5%">雙主修</th>
-      <th width="5%">輔系</th>
-      <th width="5%">學士後</th>
-      <th width="5%">學程</th>
-      <th width="5%">碩士（考試）</th>
-      <th width="5%">碩士（甄試）</th>
-      <th width="5%">碩專</th>
+      @foreach ($academy_names as $academy_name)
+        <th width="5%">{{ $academy_name->name }}</th>
+      @endforeach
       <th width="5%">功能</th>
     </tr>
   </thead>

@@ -40,7 +40,7 @@
 
       {{-- 修改密碼 --}}
       <div class="form-group">
-        <label class="col-sm-2 control-label" for="password"><span style="color: red">*</span> 密碼</label>
+        <label class="col-sm-2 control-label" for="password"><span style="color: red">*</span> 新密碼</label>
         <div class="col-sm-8">
           <input type="password" name="password" class="form-control" placeholder="密碼最大長度不超過20" value="{{ old('password') }}" maxlength="20" onkeyup="enterArabEng(this);">
         </div>

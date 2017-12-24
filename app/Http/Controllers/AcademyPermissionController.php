@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Academy;
+use App\Models\AcademyName;
 
 class AcademyPermissionController extends Controller
 {
@@ -19,6 +20,7 @@ class AcademyPermissionController extends Controller
                         ->toArray();
 
         $year = request()->input('year');
+        $academy_names = AcademyName::get();
 
         if ($year == '') {
             $year = 999;
@@ -30,6 +32,7 @@ class AcademyPermissionController extends Controller
             'options' =>  $options,
             'users'   =>  $users,
             'year'    =>  $year,
+            'academy_names' => $academy_names,
         ]);
     }
 

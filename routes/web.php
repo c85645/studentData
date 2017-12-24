@@ -67,8 +67,9 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
     });
 
     // 考委評分管理
-    // TODO 先進入controller再導頁，管理員與委員顯示的畫面不同
+    // 先進入controller再導頁，管理員與委員顯示的畫面不同
     Route::get('gradeManagement', 'GradeManageController@index');
+    Route::post('gradeManagement/list', 'GradeManageController@list');
 });
 
 // 登入頁GET Request

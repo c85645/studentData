@@ -43,7 +43,7 @@
             <div class="col-sm-8">
               @foreach($academies as $academy)
                 <label class="checkbox-inline">
-                  <input type="checkbox" name="permissions[]" value="{{ $academy->id }}" @if(in_array($academy->id, $academy_permissions)) checked @endif> {{ $academy->getAcademyName() }}
+                  <input type="checkbox" name="permissions[]" value="{{ $academy->id }}" @if(in_array($academy->id, $academy_permissions)) checked @endif> {{ $academy->name->name }}
                 </label>
               @endforeach
             </div>

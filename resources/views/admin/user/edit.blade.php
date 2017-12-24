@@ -76,7 +76,7 @@
 <script type="text/javascript">
   function resetPassword() {
     var param = { 'user_id' : {{ $user->id }} };
-    var url = "{{ url('admin/resetPassword') }}";
+    var url = "{{ url('studentData/admin/resetPassword') }}";
     ajaxRequest(url, param, resetSuccess, resetFailed);
   }
 

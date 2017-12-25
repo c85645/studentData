@@ -17,7 +17,6 @@
 // 前台
 Route::group(['prefix' => 'studentData'], function(){
     // 前台首頁-先進入controller再導頁
-    // TODO
     Route::get('/', 'WebController@index');
     Route::get('input', 'WebController@redirectToIndex');
     // 輸入資料頁
@@ -70,9 +69,12 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
     Route::group(['prefix' => 'applicant'], function(){
         Route::get('/', 'ApplicantController@index')->name('applicant.index');
         Route::get('search', 'ApplicantController@search')->name('applicant.search');
-        // Route::post('frontData', 'ApplicantController@frontData')->name('applicant.frontData');
-        // Route::post('importData', 'ApplicantController@importData')->name('applicant.importData');
-        // Route::post('signUpSuccess', 'ApplicantController@signUpSuccess')->name('applicant.signUpSuccess');
+
+        Route::get('create', 'ApplicantController@create')->name('applicant.create');
+        Route::post('store', 'ApplicantController@store')->name('applicant.store');
+        Route::get('edit', 'ApplicantController@edit')->name('applicant.edit');
+        Route::put('update', 'ApplicantController@update')->name('applicant.update');
+        Route::delete('delete', 'ApplicantController@delete')->name('applicant.delete');
     });
 
     // 考委評分管理

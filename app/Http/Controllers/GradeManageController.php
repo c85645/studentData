@@ -76,10 +76,9 @@ class GradeManageController extends Controller
             if ($radio_button != null) {
                 request()->session()->put('radio_button', $radio_button);
             } else {
-                if (request()->session()->get('radio_button') != null) {
-                    $radio_button = request()->session()->get('radio_button');
-                } else {
-                    return redirect()->route('applicant.index');
+                $radio_button = request()->session()->get('radio_button');
+                if ($radio_button == null) {
+                    return redirect()->route('gradeManagement.index');
                 }
             }
             // 這邊以import_applicants為主表，串applicants表找到id
@@ -154,6 +153,6 @@ class GradeManageController extends Controller
             $record->save();
         }
 
-        return redirect()->route('applicant.list')->with('status', '資料已儲存!');
+        return redirect()->route('teacher.list')->with('status', '資料已儲存!');
     }
 }

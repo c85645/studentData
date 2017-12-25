@@ -30,16 +30,24 @@
     <th>姓名</th>
     <th>准考證號碼</th>
     <th>查看個資評分</th>
+    @foreach ($academy->scoreItems as $item)
+      <th>{{ $item->name }}</th>
+    @endforeach
   </thead>
   <tbody>
     @foreach ($applicants as $applicant)
-      <form action="{{ url('studentData/admin/gradeManagement/score') }}" method="post">
+      <form action="{{ route('applicant.score') }}" method="post">
         {{ csrf_field() }}
         <input type="hidden" name="applicant_id" value="{{ $applicant->id }}">
         <tr>
           <td>{{ $applicant->name }}</td>
           <td>{{ $applicant->exam_number }}</td>
           <td><button class="btn btn-default" type="submit">查看備審資料＆評分</button></td>
+          @foreach ($applicant->scores as $score)
+            @if ($score->score != null)
+              <td>{{ $score->score }}</td>
+            @endif
+          @endforeach
         </tr>
       </form>
     @endforeach

@@ -25,7 +25,6 @@
     <div class="col-sm-12">
       <label class="col-sm-2">評分項目</label>
       <div class="pull-right">
-        {{-- <input class="btn btn-dark btn-sm" type="button" value="回上一頁"> --}}
         <button class="btn btn-dark btn-sm"><a href="{{ route('applicant.list') }}">回上一頁</a></button>
         <input class="btn btn-primary btn-sm" type="submit" value="送出">
       </div>

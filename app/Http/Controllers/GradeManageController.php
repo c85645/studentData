@@ -65,15 +65,28 @@ class GradeManageController extends Controller
         } else {
             // 先判斷輸入有沒有值，若有值代表由前台傳，若沒有值代表由後台回前頁
             // 有值時存入session中，沒有值時從session中取出來
-            if (request('radio_button') == null) {
-                $radio_button = request()->session()->get('radio_button');
-            } else {
-                $radio_button = request('radio_button');
+            $radio_button = request('radio_button');
+            if ($radio_button != null) {
                 request()->session()->put('radio_button', $radio_button);
+            } else {
+                if (request()->session()->get('radio_button') != null) {
+                    $radio_button = request()->session()->get('radio_button');
+                } else {
+                    return redirect()->route('applicant.index');
+                }
             }
             // 這邊以import_applicants為主表，串applicants表找到id
             $academy = Academy::find($radio_button);
-            $applicants = DB::table('import_applicants')->where('is_Pass', true)->get();
+            $applicants = DB::table('import_applicants')->get();
+
+            foreach ($applicants as $key => $applicant) {
+                $scores =  Score::where([
+                    ['academy_id', $academy->id],
+                    ['student_id', $applicant->id],
+                    ['teacher_id', auth()->user()->id]
+                ])->get();
+                $applicant->scores = $scores;
+            }
 
             return view('admin.gradeManagement.teacher.list')->with([
                 'academy' => $academy,
@@ -122,6 +135,7 @@ class GradeManageController extends Controller
         if ($query->exists()) {
             $query->delete();
         }
+
         foreach ($score_list as $key => $score) {
             $record = new Score;
             $record->academy_id = $applicant->academy_id;

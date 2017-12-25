@@ -38,12 +38,19 @@ class GradeManageController extends Controller
                 $score_edate = Carbon::createFromFormat('Y-m-d', $academy->score_edate)->endOfDay();
                 $now = Carbon::now();
 
+                // dd($now, $score_sdate, $score_edate);
+
                 if ($now->between($score_sdate, $score_edate)) {
                     // 在評分開放時間內，回傳倒數時間
                     $nowDiffInDays = $now->diffInDays($score_edate);
-                    $nowDiffInHours = $now->diffInDays($score_edate);
-                    $diffInHours = CarbonInterval::days($nowDiffInDays)->hours($nowDiffInHours)->forHumans();
-                    $academy->leftTime = $diffInHours;
+                    $nowDiffInHours = $now->diffInHours($score_edate);
+                    if ($nowDiffInDays == 0 && $nowDiffInHours > 0) {
+                        $leftTime = CarbonInterval::days($nowDiffInDays)->hours($nowDiffInHours)->forHumans();
+                    } else {
+                        $leftTime = CarbonInterval::days($nowDiffInDays)->hours($nowDiffInDays)->forHumans();
+                    }
+                    // dd($nowDiffInDays, $nowDiffInHours, $leftTime);
+                    $academy->leftTime = $leftTime;
                     $academy->status = true;
                 } else {
                     // 不再評分時間內，回傳「未開放評分」
@@ -77,7 +84,7 @@ class GradeManageController extends Controller
             }
             // 這邊以import_applicants為主表，串applicants表找到id
             $academy = Academy::find($radio_button);
-            $applicants = DB::table('import_applicants')->get();
+            $applicants = ImportApplicant::where('academy_id', $academy->id)->get();
 
             foreach ($applicants as $key => $applicant) {
                 $scores =  Score::where([

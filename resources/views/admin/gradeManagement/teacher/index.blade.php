@@ -22,7 +22,7 @@
   @if (count($academies) != 0)
     @foreach ($academies as $academy)
     <div class="col-sm-12">
-      <h4>距離 {{ $academy->year }} 學年，{{ $academy->name }} 的評分截止時間還有 {{ $academy->leftTime }}</h4>
+      <h4>距離 {{ $academy->year }} 學年，{{ $academy->name }} 的評分截止時間： {{ $academy->leftTime }}</h4>
     </div>
     @endforeach
   @else
@@ -58,7 +58,7 @@
 
   function checkCol() {
     var isPass = true;
-    if($('input[name="radio_button"]').prop('checked') == false) {
+    if($('input:radio:checked[name="radio_button"]').val() == undefined) {
       alert("請選擇要評分的學制！")
       isPass = false;
       return isPass;

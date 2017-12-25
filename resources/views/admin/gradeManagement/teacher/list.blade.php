@@ -18,13 +18,13 @@
 @include('layout.common.errors')
 <div class="row">
   <div class="col-lg-12">
-    <div class="page-header">
+    <div class="pull-right">
       <input class="btn btn-info" type="button" value="匯出Excel">
-      <label class="pull-right">評分截止日期：{{ $academy->score_edate }}</label>
+      <label>評分截止日期：{{ $academy->score_edate }}</label>
     </div>
   </div>
 </div>
-
+<br>
 <table class="table table-bordered table-hover table-middle">
   <thead>
     <th>姓名</th>

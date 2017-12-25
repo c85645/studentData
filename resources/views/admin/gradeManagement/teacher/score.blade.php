@@ -11,14 +11,6 @@
   </ol>
 </div>
 <div class="row">
-  <div class="col-sm-12">
-    <label class="col-sm-2">姓名：</label>
-    <label class="col-sm-2">{{ $applicant->name }}</label>
-    <label class="col-sm-2">准考證號碼：</label>
-    <label class="col-sm-2">{{ $applicant->exam_number }}</label>
-  </div>
-</div>
-<div class="row">
   <form id="action_form" action="{{ route('applicant.store') }}" method="post">
     {{ csrf_field() }}
     <input type="hidden" name="applicant_id" value="{{ $applicant->id }}">
@@ -32,7 +24,7 @@
     <div class="col-sm-12">
       @foreach ($score_items as $item)
         <div class="form-group">
-          <label class="col-sm-3">{{ $item->name .'('.$item->percent.'%)'}}</label>
+          <label class="col-sm-3">{{ $item->name .' ('.$item->percent.'%)'}}</label>
           <div class="col-sm-9">
             <input name="score[]" type="number" max="{{ $item->percent }}" required>
           </div>
@@ -41,6 +33,12 @@
       <div class="col-sm-12">
         <p style="color:red;">請按比例評分，四項加總，滿分 100</p>
       </div>
+    </div>
+    <div class="col-sm-12">
+      <label class="col-sm-2">姓名：</label>
+      <label class="col-sm-2">{{ $applicant->name }}</label>
+      <label class="col-sm-2">准考證號碼：</label>
+      <label class="col-sm-2">{{ $applicant->exam_number }}</label>
     </div>
   </form>
   <div class="col-sm-12">

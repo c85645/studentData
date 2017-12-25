@@ -96,7 +96,7 @@ class AcademyYearController extends Controller
         } elseif ($action == 'delete') {
             // 直接刪除 academies 的該學年資料（但不刪除評分項目）
             $academyYear = AcademyYear::where('year', $inputYear)->exists();
-            if($academyYear) {
+            if ($academyYear) {
                 return back()->withInput()->withErrors([
                     'errors' => '無法刪除當前年度！',
                 ]);

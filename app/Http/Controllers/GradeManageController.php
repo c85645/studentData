@@ -87,10 +87,7 @@ class GradeManageController extends Controller
     {
         $rawSql = DB::raw('substring(import_applicants.personal_id,5,9)');
         $applicant = ImportApplicant::leftJoin('applicants', 'applicants.personal_id', '=', $rawSql)
-        ->where([
-            ['import_applicants.id', request('applicant_id')],
-            ['import_applicants.is_pass', true]
-        ])
+        ->where('import_applicants.id', request('applicant_id'))
         ->select('import_applicants.*', 'applicants.pdf_path')
         ->orderBy('applicants.created_at', 'desc')
         ->first();

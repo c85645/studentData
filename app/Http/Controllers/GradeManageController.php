@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
+use App\Models\Academy;
+use Illuminate\Support\Facades\Storage;
 
 class GradeManageController extends Controller
 {
@@ -38,10 +40,12 @@ class GradeManageController extends Controller
                     $nowDiffInDays = $now->diffInDays($score_edate);
                     $nowDiffInHours = $now->diffInDays($score_edate);
                     $diffInHours = CarbonInterval::days($nowDiffInDays)->hours($nowDiffInHours)->forHumans();
-                    $academy->pdf_url = $diffInHours;
+                    $academy->leftTime = $diffInHours;
+                    $academy->status = true;
                 } else {
                     // 不再評分時間內，回傳「未開放評分」
-                    $academy->pdf_url = '尚未開放評分！';
+                    $academy->leftTime = '尚未開放評分！';
+                    $academy->status = false;
                 }
             }
             return view('admin.gradeManagement.teacher.index')->with([
@@ -50,12 +54,32 @@ class GradeManageController extends Controller
         }
     }
 
+    // 評審委員視角 學生清單
     public function list()
     {
         if (auth()->user()->isManager()) {
             return view('admin.gradeManagement.manager.list');
         } else {
-            return view('admin.gradeManagement.teacher.list');
+            // 這邊以import_applicants為主表，串applicants表找到id
+            $academy = Academy::find(request('radioButton'));
+            $applicants = DB::table('import_applicants')
+            ->where('is_Pass', true)
+            ->get();
+
+            return view('admin.gradeManagement.teacher.list')->with([
+                'academy' => $academy,
+                'applicants' => $applicants,
+            ]);
         }
+    }
+
+    // 評審委員視角 評分
+    public function score()
+    {
+        $filePath = Storage::url('public/oxYjnPfT60eVh4qleLkF0KZZhb87PPvFDJPmF6UU.pdf');
+
+        return view('admin.gradeManagement.teacher.score')->with([
+            'filePath' => $filePath,
+        ]);
     }
 }

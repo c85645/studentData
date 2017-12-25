@@ -19,20 +19,52 @@
   </div>
 </div>
 <div class="row">
-  @foreach ($academies as $academy)
-  <div class="col-sm-12">
-    <h4>距離 {{ $academy->year }} 學年，{{ $academy->name }} 的評分截止時間還有 {{ $academy->pdf_url }}</h4>
-  </div>
-  @endforeach
+  @if (count($academies) != 0)
+    @foreach ($academies as $academy)
+    <div class="col-sm-12">
+      <h4>距離 {{ $academy->year }} 學年，{{ $academy->name }} 的評分截止時間還有 {{ $academy->leftTime }}</h4>
+    </div>
+    @endforeach
+  @else
+    <div class="col-sm-12">尚未負責學制</div>
+  @endif
 </div>
 <div class="form-group">
-  @foreach ($academies as $academy)
-  <div class="form-check form-check-inline">
-    <label class="form-check-label">
-      <input class="form-check-input" type="radio" name="redioOption[]" value="{{ $academy->id }}"> {{ $academy->name }}
-    </label>
+  <form id="action_form" action="{{ url('studentData/admin/gradeManagement/list') }}" method="post">
+    {{ csrf_field() }}
+    @foreach ($academies as $academy)
+      @if ($academy->status)
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input class="form-check-input" type="radio" name="radioButton" value="{{ $academy->id }}"> {{ $academy->name }}
+          </label>
+        </div>
+      @endif
+    @endforeach
+  </form>
+  <div>
+    @if (count($academies) != 0)
+      <input class="btn btn-info" type="button" value="開始評分GO" onclick="goSubmit();">
+    @endif
   </div>
-  @endforeach
 </div>
-<button class="btn btn-info" type="button">開始評分GO</button>
+@endsection
+@section('javascript')
+<script type="text/javascript">
+  function goSubmit() {
+    if(checkCol()){
+      $("#action_form").submit();
+    }
+  }
+
+  function checkCol() {
+    var isPass = true;
+    if($('input[name="radioButton"]').prop('checked') == false) {
+      alert("請選擇要評分的學制！")
+      isPass = false;
+      return isPass;
+    }
+    return isPass;
+  }
+</script>
 @endsection

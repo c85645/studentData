@@ -70,6 +70,7 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
     // 先進入controller再導頁，管理員與委員顯示的畫面不同
     Route::get('gradeManagement', 'GradeManageController@index');
     Route::post('gradeManagement/list', 'GradeManageController@list');
+    Route::post('gradeManagement/score', 'GradeManageController@score');
 });
 
 // 登入頁GET Request

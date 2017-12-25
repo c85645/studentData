@@ -99,7 +99,7 @@ class WebController extends Controller
     // 儲存資料
     public function save()
     {
-        $path = Storage::putFile('pdfs', request()->file('file'));
+        $path = Storage::putFile('public', request()->file('file'));
         $applicant = new Applicant;
         $applicant->academy_id = request()->input('academy_id');
         $applicant->name = request()->input('name');

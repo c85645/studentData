@@ -11,13 +11,13 @@
   </ol>
 </div>
 <div class="row">
-  <form id="action_form" action="{{ route('applicant.store') }}" method="post">
+  <form id="action_form" action="{{ route('teacher.store') }}" method="post">
     {{ csrf_field() }}
     <input type="hidden" name="applicant_id" value="{{ $applicant->id }}">
     <div class="col-sm-12">
       <label class="col-sm-2">評分項目</label>
       <div class="pull-right">
-        <button class="btn btn-dark btn-sm"><a href="{{ route('applicant.list') }}">回上一頁</a></button>
+        <button class="btn btn-dark btn-sm"><a href="{{ route('teacher.list') }}">回上一頁</a></button>
         <input class="btn btn-primary btn-sm" type="submit" value="送出">
       </div>
     </div>

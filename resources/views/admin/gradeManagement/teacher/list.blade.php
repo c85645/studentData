@@ -36,7 +36,7 @@
   </thead>
   <tbody>
     @foreach ($applicants as $applicant)
-      <form action="{{ route('applicant.score') }}" method="post">
+      <form action="{{ route('teacher.score') }}" method="post">
         {{ csrf_field() }}
         <input type="hidden" name="applicant_id" value="{{ $applicant->id }}">
         <tr>

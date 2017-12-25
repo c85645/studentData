@@ -46,32 +46,43 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
     Route::put('account/{id}', 'UserController@updateAccount');
 
     // 學制管理
-    Route::get('academy', 'AcademyController@index');
-    Route::get('academy/{id}/edit', 'AcademyController@edit');
-    Route::put('academy/{id}', 'AcademyController@update');
+    Route::group(['prefix' => 'academy'], function(){
+        Route::get('/', 'AcademyController@index');
+        Route::get('/{id}/edit', 'AcademyController@edit');
+        Route::put('/{id}', 'AcademyController@update');
+    });
 
     // 學制年度設定
-    Route::get('academyYear', 'AcademyYearController@index');
-    Route::put('academyYear/edit', 'AcademyYearController@edit');
-    Route::put('academyYear/update', 'AcademyYearController@update');
+    Route::group(['prefix' => 'academyYear'], function(){
+        Route::get('/', 'AcademyYearController@index');
+        Route::put('edit', 'AcademyYearController@edit');
+        Route::put('update', 'AcademyYearController@update');
+    });
 
     // 學制權限設定
-    Route::get('academyPermission', 'AcademyPermissionController@index');
-    Route::get('academyPermission/edit', 'AcademyPermissionController@edit');
-    Route::put('academyPermission/update', 'AcademyPermissionController@update');
+    Route::group(['prefix' => 'academyPermission'], function(){
+        Route::get('/', 'AcademyPermissionController@index');
+        Route::get('edit', 'AcademyPermissionController@edit');
+        Route::put('update', 'AcademyPermissionController@update');
+    });
 
     // 申請人資料管理
-    // TODO
-    Route::get('applicant', function () {
-        return view('admin.applicant.index');
+    Route::group(['prefix' => 'applicant'], function(){
+        Route::get('/', 'ApplicantController@index')->name('applicant.index');
+        Route::get('search', 'ApplicantController@search')->name('applicant.search');
+        // Route::post('frontData', 'ApplicantController@frontData')->name('applicant.frontData');
+        // Route::post('importData', 'ApplicantController@importData')->name('applicant.importData');
+        // Route::post('signUpSuccess', 'ApplicantController@signUpSuccess')->name('applicant.signUpSuccess');
     });
 
     // 考委評分管理
     // 先進入controller再導頁，管理員與委員顯示的畫面不同
-    Route::get('gradeManagement', 'GradeManageController@index')->name('applicant.index');
-    Route::get('gradeManagement/list', 'GradeManageController@list')->name('applicant.list');
-    Route::post('gradeManagement/score', 'GradeManageController@score')->name('applicant.score');
-    Route::post('gradeManagement/store', 'GradeManageController@store')->name('applicant.store');
+    Route::group(['prefix' => 'gradeManagement'], function(){
+        Route::get('/', 'GradeManageController@index')->name('gradeManagement.index');
+        Route::get('list', 'GradeManageController@list')->name('teacher.list');
+        Route::post('score', 'GradeManageController@score')->name('teacher.score');
+        Route::post('store', 'GradeManageController@store')->name('teacher.store');
+    });
 });
 
 // 登入頁GET Request

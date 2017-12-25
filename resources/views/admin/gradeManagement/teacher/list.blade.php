@@ -15,7 +15,7 @@
     <h1 class="page-header">考委評分管理</h1>
   </div>
 </div>
-
+@include('layout.common.errors')
 <div class="row">
   <div class="col-lg-12">
     <div class="page-header">
@@ -35,10 +35,11 @@
     @foreach ($applicants as $applicant)
       <form action="{{ url('studentData/admin/gradeManagement/score') }}" method="post">
         {{ csrf_field() }}
+        <input type="hidden" name="applicant_id" value="{{ $applicant->id }}">
         <tr>
           <td>{{ $applicant->name }}</td>
           <td>{{ $applicant->exam_number }}</td>
-          <td><input class="btn btn-default" type="submit" value="查看備審資料＆評分"></td>
+          <td><input name="score" class="btn btn-default" type="submit" value="查看備審資料＆評分"></td>
         </tr>
       </form>
     @endforeach

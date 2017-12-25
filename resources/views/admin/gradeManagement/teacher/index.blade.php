@@ -30,8 +30,7 @@
   @endif
 </div>
 <div class="form-group">
-  <form id="action_form" action="{{ url('studentData/admin/gradeManagement/list') }}" method="post">
-    {{ csrf_field() }}
+  <form id="action_form" action="{{ url('studentData/admin/gradeManagement/list') }}" method="get">
     @foreach ($academies as $academy)
       @if ($academy->status)
         <div class="form-check form-check-inline">

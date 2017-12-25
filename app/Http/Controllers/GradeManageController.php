@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use DB;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use App\Models\Academy;
-use Illuminate\Support\Facades\Storage;
+use App\Models\ScoreItem;
 
 class GradeManageController extends Controller
 {
@@ -60,8 +61,16 @@ class GradeManageController extends Controller
         if (auth()->user()->isManager()) {
             return view('admin.gradeManagement.manager.list');
         } else {
+            // 先判斷輸入有沒有值，若有值代表由前台傳，若沒有值代表由後台回前頁
+            // 有值時存入session中，沒有值時從session中取出來
+            if (request('radioButton') == null) {
+                $radioButton = request()->session()->get('radioButton');
+            } else {
+                $radioButton = request('radioButton');
+                request()->session()->put('radioButton', $radioButton);
+            }
             // 這邊以import_applicants為主表，串applicants表找到id
-            $academy = Academy::find(request('radioButton'));
+            $academy = Academy::find($radioButton);
             $applicants = DB::table('import_applicants')
             ->where('is_Pass', true)
             ->get();
@@ -76,10 +85,28 @@ class GradeManageController extends Controller
     // 評審委員視角 評分
     public function score()
     {
-        $filePath = Storage::url('public/oxYjnPfT60eVh4qleLkF0KZZhb87PPvFDJPmF6UU.pdf');
+        $applicant = DB::table('import_applicants')
+        ->where('id', request('applicant_id'))
+        ->first();
 
+        $academy = Academy::find($applicant->academy_id);
+        $score_items = ScoreItem::where('academy_id', $applicant->academy_id)->get();
+
+        // For Test
+        $filePath = Storage::url('public/oxYjnPfT60eVh4qleLkF0KZZhb87PPvFDJPmF6UU.pdf');
         return view('admin.gradeManagement.teacher.score')->with([
+            'applicant' => $applicant,
+            'academy' => $academy,
+            'score_items' => $score_items,
             'filePath' => $filePath,
         ]);
+    }
+
+    public function store()
+    {
+        // dd(request('score'));
+        // $score = request('score');
+
+        return redirect()->route('applicant.list')->with('status', '資料已儲存!');
     }
 }

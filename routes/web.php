@@ -69,8 +69,9 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
     // 考委評分管理
     // 先進入controller再導頁，管理員與委員顯示的畫面不同
     Route::get('gradeManagement', 'GradeManageController@index');
-    Route::post('gradeManagement/list', 'GradeManageController@list');
+    Route::get('gradeManagement/list', 'GradeManageController@list')->name('applicant.list');
     Route::post('gradeManagement/score', 'GradeManageController@score');
+    Route::post('gradeManagement/store', 'GradeManageController@store');
 });
 
 // 登入頁GET Request

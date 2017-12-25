@@ -39,7 +39,7 @@
         <tr>
           <td>{{ $applicant->name }}</td>
           <td>{{ $applicant->exam_number }}</td>
-          <td><input name="score" class="btn btn-default" type="submit" value="查看備審資料＆評分"></td>
+          <td><button class="btn btn-default" type="submit">查看備審資料＆評分</button></td>
         </tr>
       </form>
     @endforeach

@@ -44,6 +44,18 @@
             <label class="sr-only">身分證後六碼</label>
             <input name="personal_id" type="text" class="form-control" placeholder="身分證後六碼" maxlength="6" required onkeyup="enterNum(this);" value="123456">
           </div>
+          @if ($academy->name_id == 'A')
+          <div class="form-group">
+            <label class="sr-only">年級</label>
+            <select class="form-control" name="transfer_grade" required>
+              <option value="">請選擇年級</option>
+              <option value="1">一</option>
+              <option value="2">二</option>
+              <option value="3">三</option>
+              <option value="4">四</option>
+            </select>
+          </div>
+          @endif
           <div class="form-group">
             <label class="sr-only">上傳資料</label>
             <input name="file" type="file" class="form-control" placeholder="PDF上傳" accept=".pdf,application/pdf" required>

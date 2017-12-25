@@ -3,7 +3,7 @@
 @section('html')
 <div class="row">
   <ol class="breadcrumb">
-    <li><a href="{{ url('/studentData/admin/') }}">
+    <li><a href="{{ route('main') }}">
       <em class="fa fa-home"></em>
     </a></li>
     <li class="active">帳號管理</li>

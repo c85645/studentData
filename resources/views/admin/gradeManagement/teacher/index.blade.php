@@ -2,7 +2,7 @@
 @section('html')
 <div class="row">
   <ol class="breadcrumb">
-    <li><a href="{{ url('/studentData/admin/') }}">
+    <li><a href="{{ route('main') }}">
       <em class="fa fa-home"></em>
     </a></li>
     <li class="active">考委評分管理</li>
@@ -35,7 +35,7 @@
       @if ($academy->status)
         <div class="form-check form-check-inline">
           <label class="form-check-label">
-            <input class="form-check-input" type="radio" name="radioButton" value="{{ $academy->id }}"> {{ $academy->name }}
+            <input class="form-check-input" type="radio" name="radio_button" value="{{ $academy->id }}"> {{ $academy->name }}
           </label>
         </div>
       @endif
@@ -58,7 +58,7 @@
 
   function checkCol() {
     var isPass = true;
-    if($('input[name="radioButton"]').prop('checked') == false) {
+    if($('input[name="radio_button"]').prop('checked') == false) {
       alert("請選擇要評分的學制！")
       isPass = false;
       return isPass;

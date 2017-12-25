@@ -2,7 +2,7 @@
 @section('html')
 <div class="row">
   <ol class="breadcrumb">
-    <li><a href="{{ url('/studentData/admin/') }}">
+    <li><a href="{{ route('main') }}">
       <em class="fa fa-home"></em>
     </a></li>
     <li class="active">考委評分管理</li>
@@ -19,12 +19,14 @@
   </div>
 </div>
 <div class="row">
-  <form id="action_form" action="{{ url('studentData/admin/gradeManagement/store') }}" method="post">
+  <form id="action_form" action="{{ route('applicant.store') }}" method="post">
     {{ csrf_field() }}
+    <input type="hidden" name="applicant_id" value="{{ $applicant->id }}">
     <div class="col-sm-12">
       <label class="col-sm-2">評分項目</label>
       <div class="pull-right">
-        <input class="btn btn-dark btn-sm" type="button" value="回上一頁" onclick="goBack();">
+        {{-- <input class="btn btn-dark btn-sm" type="button" value="回上一頁"> --}}
+        <button class="btn btn-dark btn-sm"><a href="{{ route('applicant.list') }}">回上一頁</a></button>
         <input class="btn btn-primary btn-sm" type="submit" value="送出">
       </div>
     </div>
@@ -43,12 +45,17 @@
     </div>
   </form>
   <div class="col-sm-12">
-    <object class="col-sm-12" id="pdfObject" data="{{ $filePath }}" type="application/pdf"></object>
+    @if ($filePath != null || $filePath != '')
+      <object class="col-sm-12" id="pdfObject" data="{{ $filePath }}" type="application/pdf"></object>
+    @else
+    <div align="center">
+      <h3>查無該應徵者的pdf，請確認是否有填錯以下兩張表的身分證欄位</h3>
+      <h3>1.前台輸入資料</h3>
+      <h3>2.後台匯入資料</h3>
+    </div>
+    @endif
   </div>
 </div>
-<form id="go_back_form" action="{{ url('studentData/admin/gradeManagement/list') }}" method="post">
-  {{ csrf_field() }}
-</form>
 @endsection
 @section('javascript')
 <script type="text/javascript">
@@ -59,9 +66,5 @@
       $("#pdfObject").width(width - $("#sidebar-collapse").width() - 60).height(width/2.5);
     }).trigger('resize');
   });
-
-  function goBack(){
-    $("#go_back_form").submit();
-  }
 </script>
 @endsection

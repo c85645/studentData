@@ -2,7 +2,7 @@
 @section('html')
 <div class="row">
   <ol class="breadcrumb">
-    <li><a href="{{ url('/studentData/admin/') }}">
+    <li><a href="{{ route('main') }}">
       <em class="fa fa-home"></em>
     </a></li>
     <li class="active">考委評分管理</li>

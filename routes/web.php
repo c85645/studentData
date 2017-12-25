@@ -31,7 +31,7 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
     // 後台首頁
     Route::get('/', function () {
         return view('admin.index');
-    });
+    })->name('main');
 
     // 使用者設定
     Route::resource('user', 'UserController');
@@ -70,8 +70,8 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
     // 先進入controller再導頁，管理員與委員顯示的畫面不同
     Route::get('gradeManagement', 'GradeManageController@index');
     Route::get('gradeManagement/list', 'GradeManageController@list')->name('applicant.list');
-    Route::post('gradeManagement/score', 'GradeManageController@score');
-    Route::post('gradeManagement/store', 'GradeManageController@store');
+    Route::post('gradeManagement/score', 'GradeManageController@score')->name('applicant.score');
+    Route::post('gradeManagement/store', 'GradeManageController@store')->name('applicant.store');
 });
 
 // 登入頁GET Request

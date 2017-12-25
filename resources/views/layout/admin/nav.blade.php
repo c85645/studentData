@@ -5,7 +5,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span></button>
-        <a class="navbar-brand" href="{{ url('/studentData/admin/') }}"><span>Dlab</span>Admin</a>
+        <a class="navbar-brand" href="{{ route('main') }}"><span>Dlab</span>Admin</a>
     </div>
   </div>
 </nav>

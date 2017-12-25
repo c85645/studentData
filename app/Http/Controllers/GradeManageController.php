@@ -9,6 +9,8 @@ use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use App\Models\Academy;
 use App\Models\ScoreItem;
+use App\Models\Score;
+use App\Models\ImportApplicant;
 
 class GradeManageController extends Controller
 {
@@ -63,17 +65,15 @@ class GradeManageController extends Controller
         } else {
             // 先判斷輸入有沒有值，若有值代表由前台傳，若沒有值代表由後台回前頁
             // 有值時存入session中，沒有值時從session中取出來
-            if (request('radioButton') == null) {
-                $radioButton = request()->session()->get('radioButton');
+            if (request('radio_button') == null) {
+                $radio_button = request()->session()->get('radio_button');
             } else {
-                $radioButton = request('radioButton');
-                request()->session()->put('radioButton', $radioButton);
+                $radio_button = request('radio_button');
+                request()->session()->put('radio_button', $radio_button);
             }
             // 這邊以import_applicants為主表，串applicants表找到id
-            $academy = Academy::find($radioButton);
-            $applicants = DB::table('import_applicants')
-            ->where('is_Pass', true)
-            ->get();
+            $academy = Academy::find($radio_button);
+            $applicants = DB::table('import_applicants')->where('is_Pass', true)->get();
 
             return view('admin.gradeManagement.teacher.list')->with([
                 'academy' => $academy,
@@ -82,18 +82,26 @@ class GradeManageController extends Controller
         }
     }
 
-    // 評審委員視角 評分
+    // 評審委員視角 評分頁面
     public function score()
     {
-        $applicant = DB::table('import_applicants')
-        ->where('id', request('applicant_id'))
+        $rawSql = DB::raw('substring(import_applicants.personal_id,5,9)');
+        $applicant = ImportApplicant::join('applicants', 'applicants.personal_id', '=', $rawSql)
+        ->where([
+            ['import_applicants.id', request('applicant_id')],
+            ['import_applicants.is_pass', true]
+        ])
+        ->orderBy('applicants.created_at', 'desc')
         ->first();
 
         $academy = Academy::find($applicant->academy_id);
         $score_items = ScoreItem::where('academy_id', $applicant->academy_id)->get();
 
-        // For Test
-        $filePath = Storage::url('public/oxYjnPfT60eVh4qleLkF0KZZhb87PPvFDJPmF6UU.pdf');
+        if ($applicant->pdf_path != null || $applicant->pdf_path != '') {
+            $filePath = Storage::url($applicant->pdf_path);
+        } else {
+            $filePath = null;
+        }
         return view('admin.gradeManagement.teacher.score')->with([
             'applicant' => $applicant,
             'academy' => $academy,
@@ -104,8 +112,28 @@ class GradeManageController extends Controller
 
     public function store()
     {
-        // dd(request('score'));
-        // $score = request('score');
+        $applicant = ImportApplicant::where('id', request('applicant_id'))->first();
+        $score_list = request('score');
+
+        $query = Score::where([
+            ['academy_id', $applicant->academy_id],
+            ['student_id', $applicant->id],
+            ['teacher_id', auth()->user()->id]
+        ]);
+
+        if ($query->exists()) {
+            $query->delete();
+        }
+        foreach ($score_list as $key => $score) {
+            $record = new Score;
+            $record->academy_id = $applicant->academy_id;
+            $record->student_id = $applicant->id;
+            $record->teacher_id = auth()->user()->id;
+            $record->no = $key + 1;
+            $record->score = $score;
+            $record->score_time = Carbon::now()->toDateTimeString();
+            $record->save();
+        }
 
         return redirect()->route('applicant.list')->with('status', '資料已儲存!');
     }

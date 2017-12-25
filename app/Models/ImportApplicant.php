@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class ImportApplicant extends Model
 {
-    //
+    protected $guarded = [];
 }

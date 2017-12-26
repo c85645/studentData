@@ -111,7 +111,7 @@ class WebController extends Controller
         $applicant->upload_time = Carbon::now()->toDateTimeString();
         $applicant->save();
 
-        return redirect('studentData');
+        return view('web.success');
     }
 
     public function redirectToIndex()

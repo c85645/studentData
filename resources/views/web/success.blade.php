@@ -19,16 +19,16 @@
 
 <section id="gtco-practice-areas" data-section="practice-areas">
     <div class="container">
-      
+
       <div class="col-md-8 col-md-offset-2 heading animate-box" data-animate-effect="fadeIn">
         <br><br><br>
         <h1>感謝您的報名</h1>
         <p class="sub">再次提醒您，記得完成紙本的繳交才算完成報名手續呦</p>
       </div>
-      
+
     </div>
     <div align="center">
-      <a href="index.html">
+      <a href="{{ url('studentData') }}">
         <button class="button3">回首頁</button>
       </a>
     </div>

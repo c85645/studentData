@@ -21,8 +21,8 @@
     <a class="btn btn-primary btn-lg" href="{{ route('applicant.create') }}" role="button"><i class="fa fa-plus"></i></a>
   </div>
   <div class="col-xs-offset-4 col-xs-4">
-    <form class="input-group form-group" method="GET" action="/studentData/admin/user">
-      <input name="keyword" type="text" class="form-control" placeholder="請輸入姓名..." {{-- value="{{ $keyword }}" --}}>
+    <form class="input-group form-group" method="GET" action="{{ route('applicant.search') }}">
+      <input name="keyword" type="text" class="form-control" placeholder="請輸入姓名" value="{{ $keyword }}">
       <span class="input-group-btn">
         <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
       </span>

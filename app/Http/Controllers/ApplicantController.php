@@ -67,13 +67,20 @@ class ApplicantController extends Controller
                 ['name_id', $academy_type]
             ])->first();
 
-
-            $applicants = Applicant::where('academy_id', $academy->id)->paginate(10);
-            // dd($applicants);
+            $keyword = request('keyword');
+            if ($keyword == '') {
+                $applicants = Applicant::where('academy_id', $academy->id)->paginate(10);
+            } else {
+                $applicants = Applicant::where([
+                    ['name', 'like', '%'.$keyword.'%'],
+                    ['academy_id', $academy->id],
+                ])->paginate(10);
+            }
 
             return view('admin.applicant.frontData')->with([
                 'academy' => $academy,
                 'applicants' => $applicants,
+                'keyword' => $keyword,
             ]);
         } elseif ($data_type == 2) {
             return view('admin.applicant.importData');
@@ -107,6 +114,7 @@ class ApplicantController extends Controller
             ['year', $year],
             ['name_id', $academy_type]
         ])->first();
+
         return view('admin.applicant.create')->with([
             'academy' => $academy,
         ]);
@@ -138,6 +146,7 @@ class ApplicantController extends Controller
     {
         $applicant = Applicant::find($id);
         $academy = Academy::find($applicant->academy_id);
+
         return view('admin.applicant.edit')->with([
             'applicant' => $applicant,
             'academy' => $academy,
@@ -170,6 +179,7 @@ class ApplicantController extends Controller
     public function destroy($id)
     {
         Applicant::find($id)->delete();
+
         return redirect()->route('applicant.search');
     }
 }

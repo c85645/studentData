@@ -48,13 +48,13 @@ class ApplicantController extends Controller
         $year = request('year');
 
         if ($data_type != null && $academy_type != null && $year != null) {
-            request()->session()->put('data_type', $data_type);
-            request()->session()->put('academy_type', $academy_type);
-            request()->session()->put('year', $year);
+            session()->put('data_type', $data_type);
+            session()->put('academy_type', $academy_type);
+            session()->put('year', $year);
         } else {
-            $data_type = request()->session()->get('data_type');
-            $academy_type = request()->session()->get('academy_type');
-            $year = request()->session()->get('year');
+            $data_type = session()->get('data_type');
+            $academy_type = session()->get('academy_type');
+            $year = session()->get('year');
             if ($data_type == null || $academy_type == null || $year == null) {
                 return redirect()->route('gradeManagement.index');
             }
@@ -100,11 +100,11 @@ class ApplicantController extends Controller
         $year = request('year');
 
         if ($academy_type != null && $year != null) {
-            request()->session()->put('academy_type', $academy_type);
-            request()->session()->put('year', $year);
+            session()->put('academy_type', $academy_type);
+            session()->put('year', $year);
         } else {
-            $academy_type = request()->session()->get('academy_type');
-            $year = request()->session()->get('year');
+            $academy_type = session()->get('academy_type');
+            $year = session()->get('year');
             if ($academy_type == null || $year == null) {
                 return redirect()->route('gradeManagement.index');
             }

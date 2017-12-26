@@ -51,11 +51,10 @@
       </td>
       <td>{{ $applicant->created_at }}</td>
       <td>
-        <form class="form-inline" method="post" action="{{ route('applicant.delete') }}">
-          <a class="btn btn-success" href="{{ route('applicant.edit') }}"><i class="fa fa-pencil"> </i></a>
+        <form class="form-inline" method="post" action="/studentData/admin/applicant/{{ $applicant->id }}">
+          <a class="btn btn-success" href="{{ $applicant->id }}/edit"><i class="fa fa-pencil"> </i></a>
           {{ method_field('delete') }}
           {{ csrf_field() }}
-          <input type="hidden" name="applicant_id" value="{{ $applicant->id }}">
           <button class="btn btn-danger" type="submit" name=""><i class="fa fa-trash"></i></button>
         </form>
       </td>

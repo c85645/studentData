@@ -72,9 +72,9 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
 
         Route::get('create', 'ApplicantController@create')->name('applicant.create');
         Route::put('store', 'ApplicantController@store')->name('applicant.store');
-        Route::get('edit', 'ApplicantController@edit')->name('applicant.edit');
-        Route::put('update', 'ApplicantController@update')->name('applicant.update');
-        Route::delete('delete', 'ApplicantController@delete')->name('applicant.delete');
+        Route::get('{id}/edit', 'ApplicantController@edit');
+        Route::put('{id}/update', 'ApplicantController@update');
+        Route::delete('{id}', 'ApplicantController@destroy');
     });
 
     // 考委評分管理

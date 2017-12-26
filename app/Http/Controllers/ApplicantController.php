@@ -134,25 +134,42 @@ class ApplicantController extends Controller
     /**
      * 編輯
      */
-    public function edit()
+    public function edit($id)
     {
-        return view('admin.applicant.edit');
+        $applicant = Applicant::find($id);
+        $academy = Academy::find($applicant->academy_id);
+        return view('admin.applicant.edit')->with([
+            'applicant' => $applicant,
+            'academy' => $academy,
+        ]);
     }
 
     /**
      * 更新
      */
-    public function update()
+    public function update($id)
     {
+        $applicant = Applicant::find($id);
+        $applicant->name = request('name');
+        $applicant->personal_id = request('personal_id');
+        $applicant->mobile = request('mobile');
+        $applicant->email = request('email');
+        if (request('file') != null && request('file') != '') {
+            $applicant->pdf_path = Storage::putFile('public', request()->file('file'));
+        }
+        $applicant->transfer_grade = request('transfer_grade');
+        $applicant->upload_time = Carbon::now()->toDateTimeString();
+        $applicant->save();
+
         return redirect()->route('applicant.search');
     }
 
     /**
      * 刪除
      */
-    public function delete()
+    public function destroy($id)
     {
-        Applicant::find(request('applicant_id'))->delete();
+        Applicant::find($id)->delete();
         return redirect()->route('applicant.search');
     }
 }

@@ -92,6 +92,7 @@
                 </script>
               @else
                 <p>尚未開放</p>
+                <p style="line-height: 34px">comming soon</p>
               @endif
             </div>
             <div class="col-md-5">
@@ -122,6 +123,7 @@
                 </script>
               @else
                 <p>尚未開放</p>
+                <p style="line-height: 34px">comming soon</p>
               @endif
             </div>
             <div class="col-md-5">
@@ -152,6 +154,7 @@
                 </script>
               @else
                 <p>尚未開放</p>
+                <p style="line-height: 34px">comming soon</p>
               @endif
             </div>
             <div class="col-md-5">
@@ -182,6 +185,7 @@
                 </script>
               @else
                 <p>尚未開放</p>
+                <p style="line-height: 34px">comming soon</p>
               @endif
             </div>
             <div class="col-md-5">
@@ -212,6 +216,7 @@
                 </script>
               @else
                 <p>尚未開放</p>
+                <p style="line-height: 34px">comming soon</p>
               @endif
             </div>
             <div class="col-md-5">
@@ -244,6 +249,7 @@
                 </script>
               @else
                 <p>尚未開放</p>
+                <p style="line-height: 34px">comming soon</p>
               @endif
             </div>
             <div class="col-md-5">
@@ -274,6 +280,7 @@
                 </script>
               @else
                 <p>尚未開放</p>
+                <p style="line-height: 34px">comming soon</p>
               @endif
             </div>
             <div class="col-md-5">
@@ -304,6 +311,7 @@
                 </script>
               @else
                 <p>尚未開放</p>
+                <p style="line-height: 34px">comming soon</p>
               @endif
             </div>
             <div class="col-md-5">
@@ -334,6 +342,7 @@
                 </script>
               @else
                 <p>尚未開放</p>
+                <p style="line-height: 34px">comming soon</p>
               @endif
             </div>
             <div class="col-md-5">

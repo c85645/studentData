@@ -51,7 +51,7 @@
       <div class="row">
         <div class="col-md-6 col-md-pull-1 animate-box" data-animate-effect="fadeInLeft">
           <div class="img-shadow">
-            <img src="{{ asset('images/img_1.jpg') }}" class="img-responsive">
+            <img src="{{ asset('images/p2.png') }}" class="img-responsive">
           </div>
         </div>
         <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">

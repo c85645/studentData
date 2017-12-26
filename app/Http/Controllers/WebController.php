@@ -99,14 +99,13 @@ class WebController extends Controller
     // 儲存資料
     public function save()
     {
-        $path = Storage::putFile('public', request()->file('file'));
         $applicant = new Applicant;
         $applicant->academy_id = request()->input('academy_id');
         $applicant->name = request()->input('name');
         $applicant->personal_id = request()->input('personal_id');
         $applicant->mobile = request()->input('mobile');
         $applicant->email = request()->input('email');
-        $applicant->pdf_path = $path;
+        $applicant->pdf_path = Storage::putFile('public', request()->file('file'));
         $applicant->transfer_grade = request()->input('transfer_grade');
         $applicant->upload_time = Carbon::now()->toDateTimeString();
         $applicant->save();

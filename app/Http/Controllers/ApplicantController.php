@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Applicant;
 use App\Models\Academy;
+use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 use DB;
 
 class ApplicantController extends Controller
 {
+    /**
+     * 申請人資料管理
+     */
     public function index()
     {
         // 年度下拉選單
@@ -33,6 +38,9 @@ class ApplicantController extends Controller
         ]);
     }
 
+    /**
+     * 搜尋
+     */
     public function search()
     {
         $data_type = request('data_type');
@@ -60,7 +68,7 @@ class ApplicantController extends Controller
             ])->first();
 
 
-            $applicants = Applicant::where('academy_id', $academy->id)->get();
+            $applicants = Applicant::where('academy_id', $academy->id)->paginate(10);
             // dd($applicants);
 
             return view('admin.applicant.frontData')->with([
@@ -76,6 +84,9 @@ class ApplicantController extends Controller
         }
     }
 
+    /**
+     * 後台上傳申請人資料
+     */
     public function create()
     {
         $academy_type = request('academy_type');
@@ -101,16 +112,44 @@ class ApplicantController extends Controller
         ]);
     }
 
+    /**
+     * 儲存
+     */
+    public function store()
+    {
+        $applicant = new Applicant;
+        $applicant->academy_id = request('academy_id');
+        $applicant->name = request('name');
+        $applicant->personal_id = request('personal_id');
+        $applicant->mobile = request('mobile');
+        $applicant->email = request('email');
+        $applicant->pdf_path = Storage::putFile('public', request()->file('file'));
+        $applicant->transfer_grade = request('transfer_grade');
+        $applicant->upload_time = Carbon::now()->toDateTimeString();
+        $applicant->save();
+
+        return redirect()->route('applicant.search');
+    }
+
+    /**
+     * 編輯
+     */
     public function edit()
     {
         return view('admin.applicant.edit');
     }
 
+    /**
+     * 更新
+     */
     public function update()
     {
         return redirect()->route('applicant.search');
     }
 
+    /**
+     * 刪除
+     */
     public function delete()
     {
         Applicant::find(request('applicant_id'))->delete();

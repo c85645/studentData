@@ -71,7 +71,7 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
         Route::get('search', 'ApplicantController@search')->name('applicant.search');
 
         Route::get('create', 'ApplicantController@create')->name('applicant.create');
-        Route::post('store', 'ApplicantController@store')->name('applicant.store');
+        Route::put('store', 'ApplicantController@store')->name('applicant.store');
         Route::get('edit', 'ApplicantController@edit')->name('applicant.edit');
         Route::put('update', 'ApplicantController@update')->name('applicant.update');
         Route::delete('delete', 'ApplicantController@delete')->name('applicant.delete');

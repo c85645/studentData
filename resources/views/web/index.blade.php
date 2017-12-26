@@ -90,6 +90,9 @@
               @else
                 <p>尚未開放</p>
               @endif
+              <script type="text/javascript">
+                  counter();
+              </script>
             </div>
             <div class="col-md-5">
               <a @if ($academyH->pdf_url != '') href="{{ $academyH->pdf_url }}" target="_blank" @else href="#" @endif>

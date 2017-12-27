@@ -8,17 +8,16 @@
     <li class="active">申請人資料管理</li>
     <li class="active">{{ $academy->year }} 學年度</li>
     <li class="active">{{ $academy->name->name }}</li>
-    <li class="active">前台表單</li>
+    <li class="active">報名完成</li>
   </ol>
 </div>
 <div class="row">
   <div class="col-lg-12">
-    <h1 class="page-header">前台表單</h1>
+    <h1 class="page-header">報名完成</h1>
   </div>
 </div>
 <div class="row">
   <div class="col-xs-4">
-    <a class="btn btn-primary btn-lg" href="{{ route('frontData.create') }}" role="button"><i class="fa fa-plus"></i></a>
     <a class="btn btn-warning btn-lg" href="{{ route('applicant.index') }}" role="button"><i class="fa fa-arrow-left"></i></a>
   </div>
   <div class="col-xs-offset-4 col-xs-4">
@@ -32,36 +31,41 @@
 </div>
 <table class="table table-hover table-middle">
   <thead>
-    <th width="20%">姓名</th>
-    <th width="20%">手機</th>
-    <th width="20%">是否繳交pdf檔</th>
-    <th width="20%">上傳時間</th>
-    <th width="20%">操作</th>
+    <th>准考證號碼</th>
+    <th>姓名</th>
+    <th>性別</th>
+    <th>畢業學校</th>
+    <th>畢業學系</th>
+    <th>同等學歷與否</th>
+    <th>身份別</th>
+    <th>畢業學校類別</th>
+    <th>生日</th>
+    <th>身分證字號</th>
+    <th>地址</th>
+    <th>手機</th>
+    <th>信箱</th>
+    <th>匯入時間</th>
   </thead>
   <tbody>
-    @foreach($applicants as $applicant)
+    @foreach($sign_up_finish_applicants as $applicant)
     <tr>
+      <td>{{ $applicant->exam_number }}</td>
       <td>{{ $applicant->name }}</td>
+      <td>{{ $applicant->gender }}</td>
+      <td>{{ $applicant->graduated_school }}</td>
+      <td>{{ $applicant->graduated_department }}</td>
+      <td>{{ $applicant->equivalent_qualifications }}</td>
+      <td>{{ $applicant->identity }}</td>
+      <td>{{ $applicant->graduated_school_classification }}</td>
+      <td>{{ $applicant->birth }}</td>
+      <td>{{ $applicant->personal_id }}</td>
+      <td>{{ $applicant->address }}</td>
       <td>{{ $applicant->mobile }}</td>
-      <td>
-        @if ($applicant->pdf_path != null)
-          是
-        @else
-          否
-        @endif
-      </td>
-      <td>{{ $applicant->created_at }}</td>
-      <td>
-        <form class="form-inline" method="post" action="/studentData/admin/applicant/frontData/{{ $applicant->id }}">
-          <a class="btn btn-success" href="/studentData/admin/applicant/frontData/{{ $applicant->id }}/edit"><i class="fa fa-pencil"> </i></a>
-          {{ method_field('delete') }}
-          {{ csrf_field() }}
-          <button class="btn btn-danger" type="submit" name=""><i class="fa fa-trash"></i></button>
-        </form>
-      </td>
+      <td>{{ $applicant->email }}</td>
+      <td>{{ $applicant->import_time }}</td>
     </tr>
     @endforeach
   </tbody>
 </table>
-{!! $applicants->render() !!}
+{!! $sign_up_finish_applicants->render() !!}
 @endsection

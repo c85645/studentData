@@ -81,12 +81,11 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
 
         // 後台匯入
         Route::group(['prefix' => 'importData'], function(){
-
-        });
-
-        // 報名完成
-        Route::group(['prefix' => 'signUpSuccess'], function(){
-
+            Route::get('create', 'ImportDataController@create')->name('importData.create');
+            Route::put('store', 'ImportDataController@store')->name('importData.store');
+            Route::get('{id}/edit', 'ImportDataController@edit');
+            Route::put('{id}/update', 'ImportDataController@update');
+            Route::delete('{id}', 'ImportDataController@destroy');
         });
     });
 

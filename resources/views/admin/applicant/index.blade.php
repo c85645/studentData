@@ -32,7 +32,7 @@
           <th>
             <select name="academy_type" class="form-control">
               @foreach ($academies as $academy)
-                <option value="{{ $academy->id }}">{{ $academy->name }}</option>
+                <option value="{{ $academy->id }}" @if($academy->id == $academy_type) selected @endif>{{ $academy->name }}</option>
               @endforeach
             </select>
           </th>
@@ -41,9 +41,10 @@
           <th>資料：</th>
           <th>
             <select name="data_type" class="form-control">
-              <option value="1">前台表單</option>
-              <option value="2">繳交紙本</option>
-              <option value="3">報名完成</option>
+              <option value="1" @if($data_type == 1) selected @endif>前台表單</option>
+              <option value="2" @if($data_type == 2) selected @endif>繳交紙本</option>
+              <option value="3" @if($data_type == 3) selected @endif>報名完成</option>
+              <option value="4" @if($data_type == 4) selected @endif>報名尚未完成</option>
             </select>
           </th>
         </tr>

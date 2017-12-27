@@ -83,9 +83,9 @@ class ApplicantController extends Controller
                 'keyword' => $keyword,
             ]);
         } elseif ($data_type == 2) {
-            return view('admin.applicant.importData');
+            return view('admin.applicant.importData.index');
         } elseif ($data_type == 3) {
-            return view('admin.applicant.signUpSuccess');
+            return view('admin.applicant.signUpSuccess.index');
         } else {
             return redirect()->route('gradeManagement.index');
         }

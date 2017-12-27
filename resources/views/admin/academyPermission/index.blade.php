@@ -1,5 +1,4 @@
 @extends('layout.admin.master')
-
 @section('html')
 <div class="row">
   <ol class="breadcrumb">
@@ -9,13 +8,11 @@
     <li class="active">學制權限管理</li>
   </ol>
 </div>
-
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">學制權限管理</h1>
   </div>
 </div>
-
 <div class="row">
   <div class="col-xs-offset-5">
     <form class="input-group form-group" method="GET" action="/studentData/admin/academyPermission">
@@ -25,7 +22,7 @@
           <th>
             <select id="year" name="year" class="form-control">
               @foreach($options as $option)
-                <option value="{{ $option }}" @if($year == $option) selected @endif>{{ $option }}</option>
+              <option value="{{ $option }}" @if($year == $option) selected @endif>{{ $option }}</option>
               @endforeach
             </select>
           </th>
@@ -35,7 +32,6 @@
     </form>
   </div>
 </div>
-
 <table class="table table-striped table-middle">
   <thead>
     <tr>
@@ -45,14 +41,14 @@
     </tr>
     <tr>
       @foreach ($academy_names as $academy_name)
-        <th width="5%">{{ $academy_name->name }}</th>
+      <th width="5%">{{ $academy_name->name }}</th>
       @endforeach
       <th width="5%">功能</th>
     </tr>
   </thead>
   <tbody>
     @foreach ($users as $user)
-      <form action="/studentData/admin/academyPermission/edit" method="get">
+    <form action="/studentData/admin/academyPermission/edit" method="get">
       <input type="hidden" name="year" value="{{ $year }}">
       <input type="hidden" name="user_id" value="{{ $user->id }}">
       <tr>
@@ -69,7 +65,7 @@
         <td>@if(in_array('I', $user->getAcademyPermission($year))) V @endif</td>
         <td><button class="btn btn-success" type="submit"><i class="fa fa-pencil"></i></button></td>
       </tr>
-      </form>
+    </form>
     @endforeach
   </tbody>
 </table>

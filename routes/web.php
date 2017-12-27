@@ -46,7 +46,7 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
 
     // 學制管理
     Route::group(['prefix' => 'academy'], function(){
-        Route::get('/', 'AcademyController@index');
+        Route::get('/', 'AcademyController@index')->name('academy.index');
         Route::get('/{id}/edit', 'AcademyController@edit');
         Route::put('/{id}', 'AcademyController@update');
     });
@@ -60,7 +60,7 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
 
     // 學制權限設定
     Route::group(['prefix' => 'academyPermission'], function(){
-        Route::get('/', 'AcademyPermissionController@index');
+        Route::get('/', 'AcademyPermissionController@index')->name('academyPermission.index');
         Route::get('edit', 'AcademyPermissionController@edit');
         Route::put('update', 'AcademyPermissionController@update');
     });

@@ -68,9 +68,9 @@
           <input type="file" name="file" class="form-control" accept=".pdf,application/pdf">
         </div>
       </div>
-
       <div align="center">
-         <input class="btn btn-primary" type="submit" value="儲存">
+        <input class="btn btn-primary" type="submit" value="儲存">
+        <a class="btn btn-warning" href="{{ route('applicant.search') }}" role="button">取消</a>
       </div>
     </form>
   </div>

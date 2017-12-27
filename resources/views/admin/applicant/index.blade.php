@@ -22,7 +22,7 @@
           <th>
             <select id="year" name="year" class="form-control">
               @foreach($years as $year)
-                <option value="{{ $year }}" @if($year == $option) selected @endif>{{ $year }}</option>
+              <option value="{{ $year }}" @if($year == $option) selected @endif>{{ $year }}</option>
               @endforeach
             </select>
           </th>
@@ -32,7 +32,7 @@
           <th>
             <select name="academy_type" class="form-control">
               @foreach ($academies as $academy)
-                <option value="{{ $academy->id }}" @if($academy->id == $academy_type) selected @endif>{{ $academy->name }}</option>
+              <option value="{{ $academy->id }}" @if($academy->id == $academy_type) selected @endif>{{ $academy->name }}</option>
               @endforeach
             </select>
           </th>

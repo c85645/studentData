@@ -1,5 +1,4 @@
 @extends('layout.admin.master')
-
 @section('html')
 <div class="row">
   <ol class="breadcrumb">
@@ -9,13 +8,11 @@
     <li class="active">角色管理</li>
   </ol>
 </div>
-
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">角色管理</h1>
   </div>
 </div>
-
 <div class="row">
   <div class="col-xs-4">
     <a class="btn btn-primary btn-lg" href="/studentData/admin/role/create" role="button"><i class="fa fa-plus"></i></a>
@@ -30,7 +27,6 @@
     </form>
   </div>
 </div>
-
 <table class="table table-bordered table-hover table-middle">
   <thead>
     <th width="20%">代碼</th>
@@ -50,7 +46,7 @@
           {{ method_field('delete') }}
           {{ csrf_field() }}
           @if($role->role_id != 'administrator' && $role->role_id != 'manager' && $role->role_id != 'teacher')
-            <button class="btn btn-danger" type="submit" name=""><i class="fa fa-trash"></i></button>
+          <button class="btn btn-danger" type="submit" name=""><i class="fa fa-trash"></i></button>
           @endif
         </form>
       </td>

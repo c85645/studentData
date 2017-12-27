@@ -45,9 +45,9 @@
       <td>{{ $applicant->mobile }}</td>
       <td>
         @if ($applicant->pdf_path != null)
-          是
+        是
         @else
-          否
+        否
         @endif
       </td>
       <td>{{ $applicant->created_at }}</td>

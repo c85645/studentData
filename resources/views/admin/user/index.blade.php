@@ -1,5 +1,4 @@
 @extends('layout.admin.master')
-
 @section('html')
 <div class="row">
   <ol class="breadcrumb">
@@ -9,13 +8,11 @@
     <li class="active">帳號管理</li>
   </ol>
 </div>
-
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">帳號管理</h1>
   </div>
 </div>
-
 <div class="row">
   <div class="col-xs-4">
     <a class="btn btn-primary btn-lg" href="/studentData/admin/user/create" role="button"><i class="fa fa-plus"></i></a>
@@ -29,7 +26,6 @@
     </form>
   </div>
 </div>
-
 <table class="table table-bordered table-hover table-middle">
   <thead>
     <th width="20%">帳號</th>
@@ -48,9 +44,9 @@
       </td>
       <td>
         @if($user->status == 1)
-          啟用
+        啟用
         @else
-          停用
+        停用
         @endif
       </td>
       <td>
@@ -59,7 +55,7 @@
           {{ method_field('delete') }}
           {{ csrf_field() }}
           @if($user->id != 1)
-            <button class="btn btn-danger" type="submit" name=""><i class="fa fa-trash"></i></button>
+          <button class="btn btn-danger" type="submit" name=""><i class="fa fa-trash"></i></button>
           @endif
         </form>
       </td>

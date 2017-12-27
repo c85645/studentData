@@ -130,7 +130,7 @@ class ApplicantController extends Controller
                 'sign_up_finish_applicants' => $sign_up_finish_applicants,
                 'keyword' => $keyword,
             ]);
-        } elseif ($data_type == 4){
+        } elseif ($data_type == 4) {
             if ($keyword == '') {
                 $sign_up_unfinish_applicants = ImportApplicant::where([
                     ['academy_id', $academy->id],

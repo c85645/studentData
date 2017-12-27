@@ -20,10 +20,16 @@ class AcademyController extends Controller
         $query = Academy::join('academy_names', 'academies.name_id', '=', 'academy_names.id')
         ->select('academies.*', 'academy_names.name');
 
-        $year = request()->input('year');
-
-        if ($year == '') {
-            $year = 0;
+        $year = request('year');
+        $session_year = session('year');
+        if ($year != '') {
+            session(['year', $year]);
+        } else {
+            if ($session_year != null) {
+                $year = $session_year;
+            } elseif ($session_year == null) {
+                $year = 0;
+            }
         }
 
         $rows = $query->where('year', $year)->paginate(9);

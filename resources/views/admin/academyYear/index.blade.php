@@ -1,5 +1,4 @@
 @extends('layout.admin.master')
-
 @section('html')
 <div class="row">
   <ol class="breadcrumb">
@@ -10,13 +9,11 @@
     <li class="active">學年度設定</li>
   </ol>
 </div>
-
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">學年度設定</h1>
   </div>
 </div>
-
 <div class="row">
   <div class="col-xs-6">
     <div class="panel panel-info">
@@ -32,22 +29,21 @@
             </thead>
             <tbody>
               @foreach ($rows as $row)
-                <tr>
-                  <td>{{ $row->year }}</td>
-                  <td><input type="radio" name="thisYear" value="{{ $row->year }}" @if ($row->year == $now->year) checked @endif></td>
-                </tr>
+              <tr>
+                <td>{{ $row->year }}</td>
+                <td><input type="radio" name="thisYear" value="{{ $row->year }}" @if ($row->year == $now->year) checked @endif></td>
+              </tr>
               @endforeach
             </tbody>
           </table>
-
           <div align="center">
-             <input class="btn btn-primary" type="submit" value="儲存">
+            <input class="btn btn-primary" type="submit" value="儲存">
+            <a class="btn btn-warning" href="{{ route('academy.index') }}" role="button">取消</a>
           </div>
         </form>
       </div>
     </div>
   </div>
-
   <div class="col-xs-6">
     <div class="panel panel-info">
       <div class="panel-heading">新增/刪除學年</div>
@@ -59,7 +55,7 @@
           <p style="color:red;">*學制評分項目預設帶最大學年度之設定</p>
           <div class="form-group">
             <div class="col-sm-4">
-               <input type="text" name="inputYear" class="form-control"  placeholder="請輸入學年度" maxlength="3" onkeyup="enterNum(this);" value="{{ old('inputYear') }}">
+              <input type="text" name="inputYear" class="form-control"  placeholder="請輸入學年度" maxlength="3" onkeyup="enterNum(this);" value="{{ old('inputYear') }}">
             </div>
           </div>
           <div class="form-group">
@@ -77,21 +73,19 @@
 @endsection
 @section('javascript')
 <script type="text/javascript">
-  $(document).keypress(
-    function(event){
-     if (event.which == '13') {
-        event.preventDefault();
-      }
-  });
-
-  function doInsert() {
-    $("#action").val("insert");
-    $("#submit_form").submit();
-  }
-
-  function doDelete() {
-    $("#action").val("delete");
-    $("#submit_form").submit();
-  }
+$(document).keypress(
+function(event){
+if (event.which == '13') {
+event.preventDefault();
+}
+});
+function doInsert() {
+$("#action").val("insert");
+$("#submit_form").submit();
+}
+function doDelete() {
+$("#action").val("delete");
+$("#submit_form").submit();
+}
 </script>
 @endsection

@@ -56,11 +56,11 @@
       <td>{{ $applicant->name }}</td>
       <td>
         @if ($applicant->gender == 1)
-          男
+        男
         @elseif ($applicant->gender == 2)
-          女
+        女
         @else
-          資料有誤
+        資料有誤
         @endif
       </td>
       <td>{{ $applicant->graduated_school }}</td>
@@ -76,9 +76,9 @@
       <td>{{ $applicant->import_time }}</td>
       <td>
         @if ($applicant->is_pass == 1)
-          通過
+        通過
         @else
-          不通過
+        不通過
         @endif
       </td>
       <td>

@@ -70,11 +70,24 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
         Route::get('/', 'ApplicantController@index')->name('applicant.index');
         Route::get('search', 'ApplicantController@search')->name('applicant.search');
 
-        Route::get('create', 'ApplicantController@create')->name('applicant.create');
-        Route::put('store', 'ApplicantController@store')->name('applicant.store');
-        Route::get('{id}/edit', 'ApplicantController@edit');
-        Route::put('{id}/update', 'ApplicantController@update');
-        Route::delete('{id}', 'ApplicantController@destroy');
+        // 前台表單
+        Route::group(['prefix' => 'frontData'], function(){
+            Route::get('create', 'FrontDataController@create')->name('frontData.create');
+            Route::put('store', 'FrontDataController@store')->name('frontData.store');
+            Route::get('{id}/edit', 'FrontDataController@edit');
+            Route::put('{id}/update', 'FrontDataController@update');
+            Route::delete('{id}', 'FrontDataController@destroy');
+        });
+
+        // 後台匯入
+        Route::group(['prefix' => 'importData'], function(){
+
+        });
+
+        // 報名完成
+        Route::group(['prefix' => 'signUpSuccess'], function(){
+
+        });
     });
 
     // 考委評分管理

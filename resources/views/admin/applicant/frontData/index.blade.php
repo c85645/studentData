@@ -18,7 +18,7 @@
 </div>
 <div class="row">
   <div class="col-xs-4">
-    <a class="btn btn-primary btn-lg" href="{{ route('applicant.create') }}" role="button"><i class="fa fa-plus"></i></a>
+    <a class="btn btn-primary btn-lg" href="{{ route('frontData.create') }}" role="button"><i class="fa fa-plus"></i></a>
   </div>
   <div class="col-xs-offset-4 col-xs-4">
     <form class="input-group form-group" method="GET" action="{{ route('applicant.search') }}">
@@ -51,8 +51,8 @@
       </td>
       <td>{{ $applicant->created_at }}</td>
       <td>
-        <form class="form-inline" method="post" action="/studentData/admin/applicant/{{ $applicant->id }}">
-          <a class="btn btn-success" href="{{ $applicant->id }}/edit"><i class="fa fa-pencil"> </i></a>
+        <form class="form-inline" method="post" action="/studentData/admin/applicant/frontData/{{ $applicant->id }}">
+          <a class="btn btn-success" href="/studentData/admin/applicant/frontData/{{ $applicant->id }}/edit"><i class="fa fa-pencil"> </i></a>
           {{ method_field('delete') }}
           {{ csrf_field() }}
           <button class="btn btn-danger" type="submit" name=""><i class="fa fa-trash"></i></button>

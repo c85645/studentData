@@ -202,7 +202,8 @@ class ImportDataController extends Controller
 
         if (request()->file('file')) {
             $path = request()->file('file')->getRealPath();
-            $data = Excel::load($path, function($reader){}, 'UTF-8')->get();
+            $data = Excel::load($path, function ($reader) {
+            }, 'UTF-8')->get();
 
             if (!empty($data) && $data->count()) {
                 foreach ($data->toArray() as $row) {
@@ -220,7 +221,7 @@ class ImportDataController extends Controller
                             'birth' => date_format($row['生日'], 'Y-m-d'),
                             'personal_id' => $row['身分證字號'],
                             'address' => $row['地址'],
-                            'mobile' => str_pad($row['電話'], 10,'0', STR_PAD_LEFT),
+                            'mobile' => str_pad($row['電話'], 10, '0', STR_PAD_LEFT),
                             'email' => $row['email'],
                             'import_time' => Carbon::now()->toDateTimeString(),
                             'created_at' => Carbon::now()->toDateTimeString(),
@@ -234,11 +235,10 @@ class ImportDataController extends Controller
                     return redirect()->route('applicant.search');
                 }
             } else {
-                return "發生錯誤";
+                return "上傳發生錯誤，請確認檔案";
             }
         } else {
-            return 403;
+            return "上傳發生錯誤，請確認檔案";
         }
-        // return redirect()->route('applicant.search');
     }
 }

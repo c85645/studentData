@@ -36,18 +36,10 @@
     <th>性別</th>
     <th>畢業學校</th>
     <th>畢業學系</th>
-    <th>同等學歷與否</th>
-    <th>身份別</th>
-    <th>畢業學校類別</th>
-    <th>生日</th>
-    <th>身分證字號</th>
-    <th>地址</th>
-    <th>手機</th>
-    <th>信箱</th>
-    <th>匯入時間</th>
+    <th>pdf檔名</th>
   </thead>
   <tbody>
-    @foreach($sign_up_finish_applicants as $applicant)
+    @foreach($results as $applicant)
     <tr>
       <td>{{ $applicant->exam_number }}</td>
       <td>{{ $applicant->name }}</td>
@@ -62,18 +54,10 @@
       </td>
       <td>{{ $applicant->graduated_school }}</td>
       <td>{{ $applicant->graduated_department }}</td>
-      <td>{{ $applicant->equivalent_qualifications }}</td>
-      <td>{{ $applicant->identity }}</td>
-      <td>{{ $applicant->graduated_school_classification }}</td>
-      <td>{{ $applicant->birth }}</td>
-      <td>{{ $applicant->personal_id }}</td>
-      <td>{{ $applicant->address }}</td>
-      <td>{{ $applicant->mobile }}</td>
-      <td>{{ $applicant->email }}</td>
-      <td>{{ $applicant->import_time }}</td>
+      <td>{{ $applicant->pdf_path }}</td>
     </tr>
     @endforeach
   </tbody>
 </table>
-<div align="center">{!! $sign_up_finish_applicants->render() !!}</div>
+{{-- <div align="center">{!! $results->render() !!}</div> --}}
 @endsection

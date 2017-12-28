@@ -107,7 +107,7 @@
           <input type="text" name="email" class="form-control" maxlength="30">
         </div>
       </div>
-      <div class="form-group">
+      {{-- <div class="form-group">
         <label class="col-sm-2 control-label" for="email"> 是否通過第一階段</label>
         <div class="col-sm-8">
           <label class="radio-inline">
@@ -117,7 +117,7 @@
             <input type="radio" name="is_pass" value="0" checked> 不通過
           </label>
         </div>
-      </div>
+      </div> --}}
       <div align="center">
         <input class="btn btn-primary" type="submit" value="儲存">
         <a class="btn btn-warning" href="{{ route('applicant.search') }}" role="button">取消</a>

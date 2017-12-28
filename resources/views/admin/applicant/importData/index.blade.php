@@ -47,7 +47,7 @@
     <th>手機</th>
     <th>信箱</th>
     <th>匯入時間</th>
-    <th>是否通過第一階段</th>
+    {{-- <th>是否通過第一階段</th> --}}
     <th>功能</th>
   </thead>
   <tbody>
@@ -75,13 +75,13 @@
       <td>{{ $applicant->mobile }}</td>
       <td>{{ $applicant->email }}</td>
       <td>{{ $applicant->import_time }}</td>
-      <td>
+      {{-- <td>
         @if ($applicant->is_pass == 1)
         <span style="color:blue;">通過</span>
         @else
         <span style="color:red;">不通過</span>
         @endif
-      </td>
+      </td> --}}
       <td>
         <form class="form-inline" method="post" action="/studentData/admin/applicant/importData/{{ $applicant->id }}">
           <a class="btn btn-success" href="/studentData/admin/applicant/importData/{{ $applicant->id }}/edit"><i class="fa fa-pencil"> </i></a>

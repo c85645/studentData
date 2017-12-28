@@ -231,6 +231,7 @@ class ImportDataController extends Controller
                 }
 
                 if (!empty($dataArray)) {
+                    ImportApplicant::where('academy_id', $academy->id)->delete();
                     ImportApplicant::insert($dataArray);
                     return redirect()->route('applicant.search');
                 }

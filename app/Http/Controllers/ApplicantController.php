@@ -121,30 +121,71 @@ class ApplicantController extends Controller
                 ])->paginate(10);
             }
 
+            $results = collect([]);
+            $import_applicants = ImportApplicant::where('academy_id', $academy->id)->get();
+
+            foreach ($import_applicants as $apts) {
+                // 擷取匯入人的身分證後六碼
+                $substr_id = substr($apts->personal_id, 4, 9);
+                $rawSql = DB::raw('substring(import_applicants.personal_id,5,9)');
+
+                // 用身分證後六碼去找前台是否有資料
+                $applicant_query = Applicant::where([
+                    ['personal_id', $substr_id],
+                    ['academy_id', $academy->id],
+                ])->orderBy('created_at', 'desc');
+
+                // 若有資料則由匯入資料為主串前台資料
+                if ($applicant_query->exists()) {
+                    // 若有資料則由匯入資料為主串前台資料
+                    if ($keyword != '') {
+                        $list = ImportApplicant::join('applicants', 'applicants.personal_id', '=', $rawSql)
+                        ->where([
+                            ['import_applicants.academy_id', $academy->id],
+                            ['import_applicants.personal_id', $apts->personal_id],
+                            ['import_applicants.name', 'like', '%'.$keyword.'%'],
+                        ])
+                        ->select('import_applicants.exam_number', 'import_applicants.name', 'import_applicants.gender', 'import_applicants.graduated_school', 'import_applicants.graduated_department', 'applicants.pdf_path')
+                        ->orderBy('applicants.created_at', 'desc')
+                        ->first();
+                    } else {
+                        $list = ImportApplicant::join('applicants', 'applicants.personal_id', '=', $rawSql)
+                        ->where([
+                            ['import_applicants.academy_id', $academy->id],
+                            ['import_applicants.personal_id', $apts->personal_id]
+                        ])
+                        ->select('import_applicants.exam_number', 'import_applicants.name', 'import_applicants.gender', 'import_applicants.graduated_school', 'import_applicants.graduated_department', 'applicants.pdf_path')
+                        ->orderBy('applicants.created_at', 'desc')
+                        ->first();
+                    }
+                    $results->push($list);
+                }
+            }
+
             return view('admin.applicant.signUpFinish.index')->with([
                 'academy' => $academy,
-                'sign_up_finish_applicants' => $sign_up_finish_applicants,
+                'results' => $results,
                 'keyword' => $keyword,
             ]);
         } elseif ($data_type == 4) {
-            if ($keyword == '') {
-                $sign_up_unfinish_applicants = ImportApplicant::where([
-                    ['academy_id', $academy->id],
-                    ['is_pass', false],
-                ])->paginate(10);
-            } else {
-                $sign_up_unfinish_applicants = ImportApplicant::where([
-                    ['academy_id', $academy->id],
-                    ['is_pass', false],
-                    ['name', 'like', '%'.$keyword.'%'],
-                ])->paginate(10);
-            }
+            // if ($keyword == '') {
+            //     $sign_up_unfinish_applicants = ImportApplicant::where([
+            //         ['academy_id', $academy->id],
+            //         ['is_pass', false],
+            //     ])->paginate(10);
+            // } else {
+            //     $sign_up_unfinish_applicants = ImportApplicant::where([
+            //         ['academy_id', $academy->id],
+            //         ['is_pass', false],
+            //         ['name', 'like', '%'.$keyword.'%'],
+            //     ])->paginate(10);
+            // }
 
-            return view('admin.applicant.signUpUnFinish.index')->with([
-                'academy' => $academy,
-                'sign_up_unfinish_applicants' => $sign_up_unfinish_applicants,
-                'keyword' => $keyword,
-            ]);
+            // return view('admin.applicant.signUpUnFinish.index')->with([
+            //     'academy' => $academy,
+            //     'sign_up_unfinish_applicants' => $sign_up_unfinish_applicants,
+            //     'keyword' => $keyword,
+            // ]);
         } else {
             return redirect()->route('gradeManagement.index');
         }

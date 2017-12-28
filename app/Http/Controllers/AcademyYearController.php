@@ -11,13 +11,9 @@ class AcademyYearController extends Controller
 {
     public function index()
     {
-        $rows = DB::table('academies')
-                    ->select('year')
-                    ->distinct()
-                    ->get()
-                    ->toArray();
+        $rows = DB::table('academies')->select('year')->distinct()->get()->toArray();
 
-        $now = AcademyYear::get()->first();
+        $now = AcademyYear::first();
         return view('admin.academyYear.index')->with([
             'rows' => $rows,
             'now' => $now,
@@ -26,8 +22,8 @@ class AcademyYearController extends Controller
 
     public function edit()
     {
-        $thisYear = request()->input('thisYear');
-        $now = AcademyYear::get()->first();
+        $thisYear = request('thisYear');
+        $now = AcademyYear::first();
         $now->year = $thisYear;
         $now->save();
 
@@ -36,14 +32,11 @@ class AcademyYearController extends Controller
 
     public function update()
     {
-        $action = request()->input('action');
-        $inputYear = request()->input('inputYear');
+        $action = request('action');
+        $inputYear = request('inputYear');
         if ($action == 'insert') {
             // 先查詢 academies 存不存在，若存在則回傳錯誤訊息，若不存在則複製最大學年新增（academies ）
-            $temp = Academy::where('year', $inputYear)
-                      ->select('year')
-                      ->distinct()
-                      ->exists();
+            $temp = Academy::where('year', $inputYear)->select('year')->distinct()->exists();
             if ($temp) {
                 return back()->withInput()->withErrors([
                     'errors' => '已存在該學年度！',
@@ -66,11 +59,9 @@ class AcademyYearController extends Controller
                     $newRecord->save();
 
                     // 取出原學制id 查評分項目 再寫新物件
-                    $originItems = DB::table('score_item_data')
-                                        ->where('academy_id', $record->id);
+                    $originItems = DB::table('score_item_data')->where('academy_id', $record->id);
                     if ($originItems->exists()) {
-                        $tempQuery = DB::table('score_item_data')
-                                    ->where('academy_id', $newRecord->id);
+                        $tempQuery = DB::table('score_item_data')->where('academy_id', $newRecord->id);
                         if ($tempQuery->exists()) {
                             // Delete 若有資料則先刪除
                             $tempQuery->delete();

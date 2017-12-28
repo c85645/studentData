@@ -15,12 +15,12 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $keyword = request()->input('keyword');
+        $keyword = request('keyword');
 
         if ($keyword == '') {
             $role = Role::paginate(15);
         } else {
-            $role = Role::where('role_id', 'like', '%'.request()->input('keyword').'%')
+            $role = Role::where('role_id', 'like', '%'.request('keyword').'%')
                           ->paginate(15);
         }
 
@@ -56,7 +56,7 @@ class RoleController extends Controller
             'role_name' => 'required',
         ]);
 
-        $role_id = request()->input('role_id');
+        $role_id = request('role_id');
         $role_name = request()->input('role_name');
         $menus = request()->input('menus');
 

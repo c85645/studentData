@@ -12,16 +12,11 @@ class AcademyPermissionController extends Controller
     public function index()
     {
         // 下拉選項
-        $options = \DB::table('academies')
-                        ->select('year')
-                        ->distinct()
-                        ->get()
-                        ->pluck('year')
-                        ->toArray();
+        $options = \DB::table('academies')->select('year')->distinct()->get()->pluck('year')->toArray();
 
         $year = request('year');
         $session_year = session('year');
-        if ($year != '') {
+        if ($year != null && $year != '') {
             session(['year', $year]);
         } else {
             if ($session_year != null) {
@@ -33,7 +28,7 @@ class AcademyPermissionController extends Controller
 
         $academy_names = AcademyName::get();
 
-        if ($year == '') {
+        if ($year == null || $year == '') {
             $year = 999;
             $users = User::where('id', 0)->get();
         } else {
@@ -49,15 +44,12 @@ class AcademyPermissionController extends Controller
 
     public function edit()
     {
-        $year = request()->input('year');
-        $user_id = request()->input('user_id');
+        $year = request('year');
+        $user_id = request('user_id');
 
         $user = User::find($user_id);
         $academy_permissions = \DB::table('academy_teacher')
-                                ->where('teacher_id', $user_id)
-                                ->get()
-                                ->pluck('academy_id')
-                                ->toArray();
+        ->where('teacher_id', $user_id)->get()->pluck('academy_id')->toArray();
         $academies = Academy::where('year', $year)->get();
 
         return view('admin.academyPermission.edit')->with([
@@ -70,13 +62,11 @@ class AcademyPermissionController extends Controller
 
     public function update()
     {
-        $year = request()->input('year');
-        $user_id = request()->input('user_id');
-        $permissions = request()->input('permissions');
+        $year = request('year');
+        $user_id = request('user_id');
+        $permissions = request('permissions');
 
-        \DB::table('academy_teacher')
-            ->where('teacher_id', $user_id)
-            ->delete();
+        \DB::table('academy_teacher')->where('teacher_id', $user_id)->delete();
         if ($permissions != null) {
             $permissionsList = array();
             for ($i = 0; $i < count($permissions); $i++) {

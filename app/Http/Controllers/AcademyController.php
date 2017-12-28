@@ -11,23 +11,19 @@ class AcademyController extends Controller
     public function index()
     {
         // 年度下拉選單
-        $options = Academy::orderBy('year', 'desc')
-        ->get()
-        ->pluck('year')
-        ->unique()
-        ->toArray();
+        $options = Academy::orderBy('year', 'desc')->get()->pluck('year')->unique()->toArray();
 
         $query = Academy::join('academy_names', 'academies.name_id', '=', 'academy_names.id')
         ->select('academies.*', 'academy_names.name');
 
         $year = request('year');
         $session_year = session('year');
-        if ($year != '') {
+        if ($year != null && $year != '') {
             session(['year', $year]);
         } else {
             if ($session_year != null) {
                 $year = $session_year;
-            } elseif ($session_year == null) {
+            } else {
                 $year = 0;
             }
         }
@@ -66,7 +62,7 @@ class AcademyController extends Controller
         $academy->update(request()->only(['fill_out_sdate', 'fill_out_edate',
             'score_sdate', 'score_edate', 'pdf_url']));
         // 更新負責的老師
-        $academy->teachers()->sync(request()->input('owners'));
+        $academy->teachers()->sync(request('owners'));
 
         // 處理評分項目
         $data = request()->all();

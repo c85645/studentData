@@ -16,12 +16,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $keyword = request()->input('keyword');
+        $keyword = request('keyword');
 
         if ($keyword == '') {
             $user = User::paginate(15);
         } else {
-            $user = User::where('account', 'like', '%'.request()->input('keyword').'%')->paginate(15);
+            $user = User::where('account', 'like', '%'.request('keyword').'%')->paginate(15);
         }
 
         // 若要多回傳值的話，就要用陣列的key value方式回傳
@@ -60,11 +60,11 @@ class UserController extends Controller
             'status' => 'required',
         ]);
 
-        $account = request()->input('account');
-        $name = request()->input('name');
-        // $password = request()->input('password');
-        $status = request()->input('status');
-        $role_id = request()->input('role_id');
+        $account = request('account');
+        $name = request('name');
+        // $password = request('password');
+        $status = request('status');
+        $role_id = request('role_id');
 
         $tmp = User::where('account', $account)->exists();
         if ($tmp == true) {
@@ -134,10 +134,10 @@ class UserController extends Controller
             'status' => 'required',
         ]);
 
-        $name = request()->input('name');
-        // $password = request()->input('password');
-        $status = request()->input('status');
-        $role_id = request()->input('role_id');
+        $name = request('name');
+        // $password = request('password');
+        $status = request('status');
+        $role_id = request('role_id');
 
         $user->update([
             'name' => $name,
@@ -173,8 +173,8 @@ class UserController extends Controller
             'password' => 'required',
         ]);
 
-        $name = request()->input('name');
-        $password = request()->input('password');
+        $name = request('name');
+        $password = request('password');
 
         auth()->user()->update([
             'name' => $name,

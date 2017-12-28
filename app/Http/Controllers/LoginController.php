@@ -18,8 +18,8 @@ class LoginController extends Controller
     // 登入
     public function authenticate()
     {
-        $account = request()->input('account');
-        $password = request()->input('password');
+        $account = request('account');
+        $password = request('password');
 
         // dd(request()->input());
         if (Auth::attempt(['account' => $account, 'password' => $password, 'status' => 1])) {

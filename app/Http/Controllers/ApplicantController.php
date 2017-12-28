@@ -18,11 +18,7 @@ class ApplicantController extends Controller
     public function index()
     {
         // 年度下拉選單
-        $options = Academy::orderBy('year', 'desc')
-        ->get()
-        ->pluck('year')
-        ->unique()
-        ->toArray();
+        $options = Academy::orderBy('year', 'desc')->get()->pluck('year')->unique()->toArray();
 
         $year = request('year');
         $session_year = session('year');

@@ -17,11 +17,12 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-4">
+  <div class="col-xs-8">
     <a class="btn btn-primary btn-lg" href="{{ route('importData.create') }}" role="button"><i class="fa fa-plus"></i></a>
+    <a class="btn btn-primary btn-lg" href="{{ route('importData.toImport') }}" role="button"><i class="fa fa-upload"></i></a>
     <a class="btn btn-warning btn-lg" href="{{ route('applicant.index') }}" role="button"><i class="fa fa-arrow-left"></i></a>
   </div>
-  <div class="col-xs-offset-4 col-xs-4">
+  <div class="col-xs-4">
     <form class="input-group form-group" method="GET" action="{{ route('applicant.search') }}">
       <input name="keyword" type="text" class="form-control" placeholder="請輸入姓名" value="{{ $keyword }}">
       <span class="input-group-btn">
@@ -76,9 +77,9 @@
       <td>{{ $applicant->import_time }}</td>
       <td>
         @if ($applicant->is_pass == 1)
-        通過
+        <span style="color:blue;">通過</span>
         @else
-        不通過
+        <span style="color:red;">不通過</span>
         @endif
       </td>
       <td>
@@ -93,5 +94,5 @@
     @endforeach
   </tbody>
 </table>
-{!! $import_applicants->render() !!}
+<div align="center">{!! $import_applicants->render() !!}</div>
 @endsection

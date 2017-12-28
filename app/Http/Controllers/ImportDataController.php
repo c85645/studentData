@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Academy;
 use App\Models\ImportApplicant;
 use Carbon\Carbon;
+use Excel;
 
 class ImportDataController extends Controller
 {
@@ -150,5 +151,94 @@ class ImportDataController extends Controller
         ImportApplicant::find($id)->delete();
 
         return redirect()->route('applicant.search');
+    }
+
+    public function toImport()
+    {
+        $academy_type = request('academy_type');
+        $year = request('year');
+
+        if ($academy_type != null && $year != null) {
+            session()->put('academy_type', $academy_type);
+            session()->put('year', $year);
+        } else {
+            $academy_type = session()->get('academy_type');
+            $year = session()->get('year');
+            if ($academy_type == null || $year == null) {
+                return redirect()->route('gradeManagement.index');
+            }
+        }
+
+        $academy = Academy::where([
+            ['year', $year],
+            ['name_id', $academy_type]
+        ])->first();
+
+        return view('admin.applicant.importData.toImport')->with([
+            'academy' => $academy,
+        ]);
+    }
+
+    public function import()
+    {
+        $academy_type = request('academy_type');
+        $year = request('year');
+
+        if ($academy_type != null && $year != null) {
+            session()->put('academy_type', $academy_type);
+            session()->put('year', $year);
+        } else {
+            $academy_type = session()->get('academy_type');
+            $year = session()->get('year');
+            if ($academy_type == null || $year == null) {
+                return redirect()->route('gradeManagement.index');
+            }
+        }
+
+        $academy = Academy::where([
+            ['year', $year],
+            ['name_id', $academy_type]
+        ])->first();
+
+        if (request()->file('file')) {
+            $path = request()->file('file')->getRealPath();
+            $data = Excel::load($path, function($reader){}, 'UTF-8')->get();
+
+            if (!empty($data) && $data->count()) {
+                foreach ($data->toArray() as $row) {
+                    if (!empty($row)) {
+                        $dataArray[] = [
+                            'academy_id' => $academy->id,
+                            'exam_number' => $row['報考序號'],
+                            'name' => $row['姓名'],
+                            'gender' => $row['性別'],
+                            'graduated_school' => $row['畢業學校'],
+                            'graduated_department' => $row['畢業學系'],
+                            'equivalent_qualifications' => $row['同等學歷與否'],
+                            'identity' => $row['身份別'],
+                            'graduated_school_classification' => $row['畢業學校類別'],
+                            'birth' => $row['生日'],
+                            'personal_id' => $row['身分證字號'],
+                            'address' => $row['地址'],
+                            'mobile' => $row['電話'],
+                            'email' => $row['email'],
+                            'import_time' => Carbon::now()->toDateTimeString(),
+                            'created_at' => Carbon::now()->toDateTimeString(),
+                            'updated_at' => Carbon::now()->toDateTimeString(),
+                        ];
+                    }
+                }
+
+                if (!empty($dataArray)) {
+                    ImportApplicant::insert($dataArray);
+                    return redirect()->route('applicant.search');
+                }
+            } else {
+                return "發生錯誤";
+            }
+        } else {
+            return 403;
+        }
+        // return redirect()->route('applicant.search');
     }
 }

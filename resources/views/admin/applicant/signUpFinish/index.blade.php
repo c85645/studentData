@@ -51,7 +51,15 @@
     <tr>
       <td>{{ $applicant->exam_number }}</td>
       <td>{{ $applicant->name }}</td>
-      <td>{{ $applicant->gender }}</td>
+      <td>
+        @if ($applicant->gender == 1)
+        男
+        @elseif ($applicant->gender == 2)
+        女
+        @else
+        資料有誤
+        @endif
+      </td>
       <td>{{ $applicant->graduated_school }}</td>
       <td>{{ $applicant->graduated_department }}</td>
       <td>{{ $applicant->equivalent_qualifications }}</td>
@@ -67,5 +75,5 @@
     @endforeach
   </tbody>
 </table>
-{!! $sign_up_finish_applicants->render() !!}
+<div align="center">{!! $sign_up_finish_applicants->render() !!}</div>
 @endsection

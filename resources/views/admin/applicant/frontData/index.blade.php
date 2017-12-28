@@ -63,5 +63,5 @@
     @endforeach
   </tbody>
 </table>
-{!! $applicants->render() !!}
+<div align="center">{!! $applicants->render() !!}</div>
 @endsection

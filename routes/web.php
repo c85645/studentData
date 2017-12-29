@@ -88,6 +88,7 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
             Route::delete('{id}', 'ImportDataController@destroy');
             Route::get('toImport', 'ImportDataController@toImport')->name('importData.toImport');
             Route::post('import', 'ImportDataController@import')->name('importData.import');
+            Route::get('excelDownload', 'ImportDataController@excelDownload')->name('importData.excelDownload');
         });
     });
 

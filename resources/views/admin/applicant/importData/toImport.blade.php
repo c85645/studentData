@@ -28,6 +28,7 @@
       <div align="center">
         <input class="btn btn-primary" type="submit" value="匯入">
         <a class="btn btn-warning" href="{{ route('applicant.search') }}" role="button">取消</a>
+        <a class="btn btn-info" href="{{ route('importData.excelDownload') }}" role="button">下載範例檔</a>
       </div>
     </form>
   </div>

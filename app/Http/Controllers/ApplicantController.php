@@ -145,7 +145,7 @@ class ApplicantController extends Controller
                             ['import_applicants.personal_id', $apts->personal_id],
                             ['import_applicants.name', 'like', '%'.$keyword.'%'],
                         ])
-                        ->select('import_applicants.exam_number', 'import_applicants.name', 'import_applicants.gender', 'import_applicants.graduated_school', 'import_applicants.graduated_department', 'applicants.pdf_path')
+                        ->select('import_applicants.*', 'applicants.pdf_path')
                         ->orderBy('applicants.created_at', 'desc')
                         ->first();
                     } else {
@@ -154,7 +154,7 @@ class ApplicantController extends Controller
                             ['import_applicants.academy_id', $academy->id],
                             ['import_applicants.personal_id', $apts->personal_id]
                         ])
-                        ->select('import_applicants.exam_number', 'import_applicants.name', 'import_applicants.gender', 'import_applicants.graduated_school', 'import_applicants.graduated_department', 'applicants.pdf_path')
+                        ->select('import_applicants.*', 'applicants.pdf_path')
                         ->orderBy('applicants.created_at', 'desc')
                         ->first();
                     }

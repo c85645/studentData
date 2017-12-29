@@ -242,4 +242,14 @@ class ImportDataController extends Controller
             return "上傳發生錯誤，請確認檔案";
         }
     }
+
+    public function excelDownload()
+    {
+        $pathToFile = public_path("download/匯入申請人標準格式.xlsx");
+        // dd($pathToFile);
+        $name = "匯入申請人標準格式.xlsx";
+        $headers = ['Content-Type: application/vnd.ms-excel'];
+
+        return response()->download($pathToFile, $name, $headers);
+    }
 }

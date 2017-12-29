@@ -30,19 +30,19 @@
           <input type="hidden" name="academy_id" value="{{ $academy->id }}">
           <div class="form-group">
             <label class="sr-only">姓名</label>
-            <input name="name" type="text" class="form-control" placeholder="姓名" minlength="2" maxlength="10" required value="傑夫">
+            <input name="name" type="text" class="form-control" placeholder="姓名" minlength="2" maxlength="10" required>
           </div>
           <div class="form-group">
             <label class="sr-only">手機</label>
-            <input name="mobile" type="text" class="form-control" placeholder="手機" maxlength="10" required onkeyup="enterNum(this);" value="0987654321">
+            <input name="mobile" type="text" class="form-control" placeholder="手機" maxlength="10" required onkeyup="enterNum(this);">
           </div>
           <div class="form-group">
             <label class="sr-only">信箱</label>
-            <input name="email" type="email" class="form-control" placeholder="信箱" maxlength="30" required value="c85645@gmail.com">
+            <input name="email" type="email" class="form-control" placeholder="信箱" maxlength="30" required>
           </div>
           <div class="form-group">
             <label class="sr-only">身分證後六碼</label>
-            <input name="personal_id" type="text" class="form-control" placeholder="身分證後六碼" maxlength="6" required onkeyup="enterNum(this);" value="123456">
+            <input name="personal_id" type="text" class="form-control" placeholder="身分證後六碼" maxlength="6" required onkeyup="enterNum(this);">
           </div>
           @if ($academy->name_id == 'A')
           <div class="form-group">

@@ -17,9 +17,12 @@
 </div>
 @include('layout.common.errors')
 <div class="row">
-  <div class="col-lg-12">
+  <div class="col-xs-12">
+    <div class="pull-left">
+      <a class="btn btn-warning btn-lg" href="{{ route('gradeManagement.index') }}" role="button"><i class="fa fa-arrow-left"></i></a>
+    </div>
     <div class="pull-right">
-      <input class="btn btn-info" type="button" value="匯出Excel">
+      <input class="btn btn-info btn-lg" type="button" value="匯出Excel">
       <label>評分截止日期：{{ $academy->score_edate }}</label>
     </div>
   </div>

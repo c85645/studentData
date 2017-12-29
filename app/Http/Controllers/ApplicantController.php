@@ -158,7 +158,10 @@ class ApplicantController extends Controller
                         ->orderBy('applicants.created_at', 'desc')
                         ->first();
                     }
-                    $results->push($list);
+
+                    if ($list != null) {
+                        $results->push($list);
+                    }
                 }
             }
 

@@ -17,7 +17,7 @@
     <div class="col-sm-12">
       <label class="col-sm-2">評分項目</label>
       <div class="pull-right">
-        <button class="btn btn-dark btn-sm"><a href="{{ route('teacher.list') }}">回上一頁</a></button>
+        <a class="btn btn-warning btn-sm" href="{{ route('teacher.list') }}" role="button"><i class="fa fa-arrow-left"></i></a>
         <input class="btn btn-primary btn-sm" type="submit" value="送出">
       </div>
     </div>

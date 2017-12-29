@@ -116,7 +116,7 @@
             <h3>碩士在職專班I</h3>
             <br>
             <div class="col-md-12">
-              @if ($academyI->isOpen())))
+              @if ($academyI->isOpen())
                 <p>報名截止日期：{{ $academyI->fill_out_edate }}</p>
                 <script type="text/javascript">
                   counterI();

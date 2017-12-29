@@ -43,11 +43,17 @@
           <td>{{ $applicant->name }}</td>
           <td>{{ $applicant->exam_number }}</td>
           <td><button class="btn btn-default" type="submit">查看備審資料＆評分</button></td>
-          @foreach ($applicant->scores as $score)
-            @if ($score->score != null)
-              <td>{{ $score->score }}</td>
-            @endif
-          @endforeach
+          @if (count($applicant->scores) > 0)
+            @foreach ($applicant->scores as $score)
+              @if ($score->score != null)
+                <td>{{ $score->score }}</td>
+              @endif
+            @endforeach
+          @else
+            @for ($i = 0; $i < 4; $i++)
+              <td></td>
+            @endfor
+          @endif
         </tr>
       </form>
     @endforeach

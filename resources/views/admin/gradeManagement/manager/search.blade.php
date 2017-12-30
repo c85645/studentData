@@ -6,6 +6,8 @@
       <em class="fa fa-home"></em>
     </a></li>
     <li class="active">考委評分管理</li>
+    <li class="active">{{ $academy->year }} 學年度</li>
+    <li class="active">{{ $academy->name->name }}</li>
   </ol>
 </div>
 <div class="row">
@@ -14,26 +16,22 @@
   </div>
 </div>
 <div class="row">
+  <div class="col-xs-12">
+    <a class="btn btn-warning btn-lg" href="{{ route('gradeManagement.index') }}" role="button"><i class="fa fa-arrow-left"></i></a>
+  </div>
+</div>
+<div class="row">
   <div class="col-xs-offset-4">
     <form class="form-horizontal" method="post" action="{{ route('manager.search') }}">
       {{ csrf_field() }}
       <table>
         <tr>
-          <th>年度：</th>
+          <th>資料：</th>
           <th>
             <select id="year" name="year" class="form-control">
-              @foreach($years as $year)
-              <option value="{{ $year }}" @if($year == $option) selected @endif>{{ $year }}</option>
-              @endforeach
-            </select>
-          </th>
-        </tr>
-        <tr>
-          <th>學制：</th>
-          <th>
-            <select name="academy_type" class="form-control">
-              @foreach ($academies as $academy)
-              <option value="{{ $academy->id }}" @if($academy->id == $academy_type) selected @endif>{{ $academy->name }}</option>
+              <option value="total">總成績</option>
+              @foreach($academy->teachers as $teacher)
+                <option value="{{ $teacher->id }}" {{-- @if($year == $option) selected @endif --}}>{{ $teacher->name }}</option>
               @endforeach
             </select>
           </th>

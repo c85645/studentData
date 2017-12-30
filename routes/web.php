@@ -96,9 +96,20 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
     // 先進入controller再導頁，管理員與委員顯示的畫面不同
     Route::group(['prefix' => 'gradeManagement'], function(){
         Route::get('/', 'GradeManageController@index')->name('gradeManagement.index');
-        Route::get('list', 'GradeManageController@list')->name('teacher.list');
-        Route::post('score', 'GradeManageController@score')->name('teacher.score');
-        Route::post('store', 'GradeManageController@store')->name('teacher.store');
+
+        // 管理員視角
+        Route::group(['prefix' => 'manager'], function(){
+            Route::post('search', 'GradeManageController@search')->name('manager.search');
+            Route::get('teacher/{id}', 'GradeManageController@teacherPersonal');
+            Route::post('result', 'GradeManageController@result');
+        });
+
+        // 評審委員視角
+        Route::group(['prefix' => 'teacher'], function(){
+            Route::get('list', 'GradeManageController@list')->name('teacher.list');
+            Route::post('score', 'GradeManageController@score')->name('teacher.score');
+            Route::post('store', 'GradeManageController@store')->name('teacher.store');
+        });
     });
 });
 

@@ -1,4 +1,4 @@
-@extends('layout.web.master')
+@extends('layout.admin.master')
 @section('html')
 <div class="row">
   <ol class="breadcrumb">
@@ -14,6 +14,6 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-sm-12">學生清單頁（管理員以上看到的畫面）</div>
+  <div class="col-sm-12">評分頁（管理員以上看到的畫面）</div>
 </div>
 @endsection

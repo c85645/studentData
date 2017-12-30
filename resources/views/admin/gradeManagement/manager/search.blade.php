@@ -22,16 +22,16 @@
 </div>
 <div class="row">
   <div class="col-xs-offset-4">
-    <form class="form-horizontal" method="post" action="{{ route('manager.search') }}">
+    <form class="form-horizontal" method="post" action="{{ route('manager.personal') }}">
       {{ csrf_field() }}
       <table>
         <tr>
           <th>資料：</th>
           <th>
-            <select id="year" name="year" class="form-control">
+            <select id="teacher_id" name="teacher_id" class="form-control">
               <option value="total">總成績</option>
               @foreach($academy->teachers as $teacher)
-                <option value="{{ $teacher->id }}" {{-- @if($year == $option) selected @endif --}}>{{ $teacher->name }}</option>
+                <option value="{{ $teacher->id }}" @if($teacher->id == session('teacher_id')) selected @endif>{{ $teacher->name }}</option>
               @endforeach
             </select>
           </th>

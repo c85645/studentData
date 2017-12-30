@@ -11,6 +11,7 @@ use App\Models\Academy;
 use App\Models\ScoreItem;
 use App\Models\Score;
 use App\Models\ImportApplicant;
+use App\Models\User;
 
 class GradeManageController extends Controller
 {
@@ -24,7 +25,7 @@ class GradeManageController extends Controller
             $year = request('year');
             $session_year = session('year');
             if ($year != '') {
-                session(['year', $year]);
+                session(['year' => $year]);
             } else {
                 if ($session_year != null) {
                     $year = $session_year;
@@ -229,7 +230,53 @@ class GradeManageController extends Controller
     public function teacherPersonal()
     {
         if (auth()->user()->isManager()) {
-            return view('admin.gradeManagement.manager.personal');
+            // 查學制有哪些老師負責，組成下拉選單
+            $academy_type = request('academy_type');
+            $year = request('year');
+            $teacher_id = request('teacher_id');
+
+            if ($academy_type != null && $year != null) {
+                session()->put('academy_type', $academy_type);
+                session()->put('year', $year);
+            } else {
+                $academy_type = session()->get('academy_type');
+                $year = session()->get('year');
+                if ($academy_type == null || $year == null) {
+                    return redirect()->route('gradeManagement.index');
+                }
+            }
+
+            if ($teacher_id != null) {
+                session(['teacher_id' => $teacher_id]);
+            } else {
+                $teacher_id = session('teacher_id');
+                if ($teacher_id == null) {
+                    return redirect()->route('manager.search');
+                }
+            }
+
+            $academy = Academy::where([
+                ['year', $year],
+                ['name_id', $academy_type]
+            ])->first();
+
+            // 老師個別成績
+            // 顯示老師針對該學制考生的評分
+            if ($teacher_id != 'total') {
+                $teacher = User::where([
+                    ['status', true],
+                    ['id', $teacher_id]
+                ])->first();
+
+                return view('admin.gradeManagement.manager.personal')->with([
+                    'academy' => $academy,
+                    'teacher' => $teacher,
+                ]);
+            } else {
+                // 總成績
+                // 顯示該學制考生的一二階與總成績
+                return "總成績畫面";
+            }
         } else {
             return redirect()->route('gradeManagement.index')->withErrors([
                 'errors' => "權限不足",

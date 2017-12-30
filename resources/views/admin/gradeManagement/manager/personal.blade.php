@@ -6,6 +6,9 @@
       <em class="fa fa-home"></em>
     </a></li>
     <li class="active">考委評分管理</li>
+    <li class="active">{{ $academy->year }} 學年度</li>
+    <li class="active">{{ $academy->name->name }}</li>
+    <li class="active">{{ $teacher->name }}</li>
   </ol>
 </div>
 <div class="row">
@@ -14,6 +17,8 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-sm-12">評分頁（管理員以上看到的畫面）</div>
+  <div class="col-xs-12">
+    <button class="btn btn-warning btn-lg" onclick="history.back();"><i class="fa fa-arrow-left"></i></button>
+  </div>
 </div>
 @endsection

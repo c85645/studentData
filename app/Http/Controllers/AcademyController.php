@@ -19,7 +19,7 @@ class AcademyController extends Controller
         $year = request('year');
         $session_year = session('year');
         if ($year != null && $year != '') {
-            session(['year', $year]);
+            session(['year' => $year]);
         } else {
             if ($session_year != null) {
                 $year = $session_year;

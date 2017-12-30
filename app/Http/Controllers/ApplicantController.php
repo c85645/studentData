@@ -23,7 +23,7 @@ class ApplicantController extends Controller
         $year = request('year');
         $session_year = session('year');
         if ($year != '') {
-            session(['year', $year]);
+            session(['year' => $year]);
         } else {
             if ($session_year != null) {
                 $year = $session_year;

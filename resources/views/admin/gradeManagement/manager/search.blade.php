@@ -22,7 +22,7 @@
 </div>
 <div class="row">
   <div class="col-xs-offset-4">
-    <form class="form-horizontal" method="post" action="{{ route('manager.personal') }}">
+    <form class="form-horizontal" method="post" action="{{ route('manager.result') }}">
       {{ csrf_field() }}
       <table>
         <tr>

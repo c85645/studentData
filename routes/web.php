@@ -100,8 +100,7 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
         // 管理員視角
         Route::group(['prefix' => 'manager'], function(){
             Route::post('search', 'GradeManageController@search')->name('manager.search');
-            Route::post('teacher', 'GradeManageController@teacherPersonal')->name('manager.personal');
-            Route::post('result', 'GradeManageController@result');
+            Route::post('result', 'GradeManageController@result')->name('manager.result');
         });
 
         // 評審委員視角

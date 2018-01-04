@@ -216,6 +216,7 @@ class GradeManageController extends Controller
                 ['year', $year],
                 ['name_id', $academy_type]
             ])->first();
+            session(['academy_id' => $academy->id]);
 
             return view('admin.gradeManagement.manager.search')->with([
                 'academy' => $academy,
@@ -227,25 +228,19 @@ class GradeManageController extends Controller
         }
     }
 
-    public function teacherPersonal()
+    /**
+     * 先判斷是看 1.老師個人評分 2.總成績 來決定導頁
+     * 再判斷是否為碩專/碩甄
+     */
+    public function result()
     {
         if (auth()->user()->isManager()) {
-            // 查學制有哪些老師負責，組成下拉選單
-            $academy_type = request('academy_type');
-            $year = request('year');
-            $teacher_id = request('teacher_id');
-
-            if ($academy_type != null && $year != null) {
-                session()->put('academy_type', $academy_type);
-                session()->put('year', $year);
-            } else {
-                $academy_type = session()->get('academy_type');
-                $year = session()->get('year');
-                if ($academy_type == null || $year == null) {
-                    return redirect()->route('gradeManagement.index');
-                }
+            if (session()->has('academy_id')) {
+                $academy_id = session('academy_id');
             }
+            $academy = Academy::find($academy_id);
 
+            $teacher_id = request('teacher_id');
             if ($teacher_id != null) {
                 session(['teacher_id' => $teacher_id]);
             } else {
@@ -255,39 +250,43 @@ class GradeManageController extends Controller
                 }
             }
 
-            $academy = Academy::where([
-                ['year', $year],
-                ['name_id', $academy_type]
-            ])->first();
-
-            // 老師個別成績
-            // 顯示老師針對該學制考生的評分
             if ($teacher_id != 'total') {
-                $teacher = User::where([
-                    ['status', true],
-                    ['id', $teacher_id]
-                ])->first();
+                if ($academy->name_id == 'H' || $academy->name_id == 'I') {
+                    // 二階
+                    $teacher = User::where([
+                        ['status', true],
+                        ['id', $teacher_id]
+                    ])->first();
 
-                return view('admin.gradeManagement.manager.personal')->with([
-                    'academy' => $academy,
-                    'teacher' => $teacher,
-                ]);
+                    return view('admin.gradeManagement.manager.seperate.result2')->with([
+                        'academy' => $academy,
+                        'teacher' => $teacher,
+                    ]);
+                } else {
+                    // 一階
+                    $teacher = User::where([
+                        ['status', true],
+                        ['id', $teacher_id]
+                    ])->first();
+
+                    return view('admin.gradeManagement.manager.seperate.result1')->with([
+                        'academy' => $academy,
+                        'teacher' => $teacher,
+                    ]);
+                }
             } else {
                 // 總成績
                 // 顯示該學制考生的一二階與總成績
-                return "總成績畫面";
+                if ($academy->name_id == 'H' || $academy->name_id == 'I') {
+                    return view('admin.gradeManagement.manager.total.result2')->with([
+                        'academy' => $academy,
+                    ]);
+                } else {
+                    return view('admin.gradeManagement.manager.total.result1')->with([
+                        'academy' => $academy,
+                    ]);
+                }
             }
-        } else {
-            return redirect()->route('gradeManagement.index')->withErrors([
-                'errors' => "權限不足",
-            ]);;
-        }
-    }
-
-    public function result()
-    {
-        if (auth()->user()->isManager()) {
-            return view('admin.gradeManagement.manager.result1');
         } else {
             return redirect()->route('gradeManagement.index')->withErrors([
                 'errors' => "權限不足",

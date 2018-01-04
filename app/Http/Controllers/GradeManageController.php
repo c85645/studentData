@@ -56,7 +56,7 @@ class GradeManageController extends Controller
             // 設定語系
             CarbonInterval::setLocale('zh_tw');
             // 這裡要判斷，1.時間未到/超過則回傳 未開放評分 2.在評分期間則回傳 還有多少天數與小時
-            foreach ($academies as $key => $academy) {
+            foreach ($academies as $academy) {
                 $score_sdate = Carbon::createFromFormat('Y-m-d', $academy->score_sdate)->startOfDay();
                 $score_edate = Carbon::createFromFormat('Y-m-d', $academy->score_edate)->endOfDay();
                 $now = Carbon::now();
@@ -93,7 +93,7 @@ class GradeManageController extends Controller
         if (auth()->user()->isManager()) {
             return redirect()->route('gradeManagement.index')->withErrors([
                 'errors' => "權限不足",
-            ]);;
+            ]);
         } else {
             // 先判斷輸入有沒有值，若有值代表由前台傳，若沒有值代表由後台回前頁
             // 有值時存入session中，沒有值時從session中取出來
@@ -110,7 +110,7 @@ class GradeManageController extends Controller
             $academy = Academy::find($radio_button);
             $applicants = ImportApplicant::where('academy_id', $academy->id)->get();
 
-            foreach ($applicants as $key => $applicant) {
+            foreach ($applicants as $applicant) {
                 $scores =  Score::where([
                     ['academy_id', $academy->id],
                     ['student_id', $applicant->id],
@@ -129,103 +129,85 @@ class GradeManageController extends Controller
     // 評審委員視角 評分頁面
     public function score()
     {
-        if (auth()->user()->isManager()) {
-            return redirect()->route('gradeManagement.index')->withErrors([
-                'errors' => "權限不足",
-            ]);;
+        $rawSql = DB::raw('substring(import_applicants.personal_id,5,9)');
+        $applicant = ImportApplicant::leftJoin('applicants', 'applicants.personal_id', '=', $rawSql)
+        ->where('import_applicants.id', request('applicant_id'))
+        ->select('import_applicants.*', 'applicants.pdf_path')
+        ->orderBy('applicants.created_at', 'desc')
+        ->first();
+
+        $academy = Academy::find($applicant->academy_id);
+        $score_items = ScoreItem::where('academy_id', $applicant->academy_id)->get();
+
+        if ($applicant->pdf_path != null || $applicant->pdf_path != '') {
+            $filePath = Storage::url($applicant->pdf_path);
         } else {
-            $rawSql = DB::raw('substring(import_applicants.personal_id,5,9)');
-            $applicant = ImportApplicant::leftJoin('applicants', 'applicants.personal_id', '=', $rawSql)
-            ->where('import_applicants.id', request('applicant_id'))
-            ->select('import_applicants.*', 'applicants.pdf_path')
-            ->orderBy('applicants.created_at', 'desc')
-            ->first();
-
-            $academy = Academy::find($applicant->academy_id);
-            $score_items = ScoreItem::where('academy_id', $applicant->academy_id)->get();
-
-            if ($applicant->pdf_path != null || $applicant->pdf_path != '') {
-                $filePath = Storage::url($applicant->pdf_path);
-            } else {
-                $filePath = null;
-            }
-            return view('admin.gradeManagement.teacher.score')->with([
-                'applicant' => $applicant,
-                'academy' => $academy,
-                'score_items' => $score_items,
-                'filePath' => $filePath,
-          ]);
+            $filePath = null;
         }
+        return view('admin.gradeManagement.teacher.score')->with([
+            'applicant' => $applicant,
+            'academy' => $academy,
+            'score_items' => $score_items,
+            'filePath' => $filePath,
+        ]);
     }
 
     public function store()
     {
-        if (auth()->user()->isManager()) {
-            return redirect()->route('gradeManagement.index')->withErrors([
-                'errors' => "權限不足",
-            ]);;
-        } else {
-            $applicant = ImportApplicant::where('id', request('applicant_id'))->first();
-            $score_list = request('score');
+        $applicant = ImportApplicant::where('id', request('applicant_id'))->first();
+        $score_list = request('score');
 
-            $query = Score::where([
-                ['academy_id', $applicant->academy_id],
-                ['student_id', $applicant->id],
-                ['teacher_id', auth()->user()->id]
-            ]);
+        $query = Score::where([
+            ['academy_id', $applicant->academy_id],
+            ['student_id', $applicant->id],
+            ['teacher_id', auth()->user()->id]
+        ]);
 
-            if ($query->exists()) {
-                $query->delete();
-            }
-
-            foreach ($score_list as $key => $score) {
-                $record = new Score;
-                $record->academy_id = $applicant->academy_id;
-                $record->student_id = $applicant->id;
-                $record->teacher_id = auth()->user()->id;
-                $record->no = $key + 1;
-                $record->score = $score;
-                $record->score_time = Carbon::now()->toDateTimeString();
-                $record->save();
-            }
-
-            return redirect()->route('teacher.list')->with('status', '資料已儲存!');
+        if ($query->exists()) {
+            $query->delete();
         }
+
+        foreach ($score_list as $key => $score) {
+            $record = new Score;
+            $record->academy_id = $applicant->academy_id;
+            $record->student_id = $applicant->id;
+            $record->teacher_id = auth()->user()->id;
+            $record->no = $key + 1;
+            $record->score = $score;
+            $record->score_time = Carbon::now()->toDateTimeString();
+            $record->save();
+        }
+
+        return redirect()->route('teacher.list')->with('status', '資料已儲存!');
     }
 
     // 管理員視角
     public function search()
     {
-        if (auth()->user()->isManager()) {
-            // 查學制有哪些老師負責，組成下拉選單
-            $academy_type = request('academy_type');
-            $year = request('year');
+        // 查學制有哪些老師負責，組成下拉選單
+        $academy_type = request('academy_type');
+        $year = request('year');
 
-             if ($academy_type != null && $year != null) {
-                session()->put('academy_type', $academy_type);
-                session()->put('year', $year);
-            } else {
-                $academy_type = session()->get('academy_type');
-                $year = session()->get('year');
-                if ($academy_type == null || $year == null) {
-                    return redirect()->route('gradeManagement.index');
-                }
-            }
-
-            $academy = Academy::where([
-                ['year', $year],
-                ['name_id', $academy_type]
-            ])->first();
-            session(['academy_id' => $academy->id]);
-
-            return view('admin.gradeManagement.manager.search')->with([
-                'academy' => $academy,
-            ]);
+        if ($academy_type != null && $year != null) {
+            session()->put('academy_type', $academy_type);
+            session()->put('year', $year);
         } else {
-            return redirect()->route('gradeManagement.index')->withErrors([
-                'errors' => "權限不足",
-            ]);;
+            $academy_type = session()->get('academy_type');
+            $year = session()->get('year');
+            if ($academy_type == null || $year == null) {
+                return redirect()->route('gradeManagement.index');
+            }
         }
+
+        $academy = Academy::where([
+            ['year', $year],
+            ['name_id', $academy_type]
+        ])->first();
+        session(['academy_id' => $academy->id]);
+
+        return view('admin.gradeManagement.manager.search')->with([
+            'academy' => $academy,
+        ]);
     }
 
     /**
@@ -234,63 +216,69 @@ class GradeManageController extends Controller
      */
     public function result()
     {
-        if (auth()->user()->isManager()) {
-            if (session()->has('academy_id')) {
-                $academy_id = session('academy_id');
+        if (session()->has('academy_id')) {
+            $academy_id = session('academy_id');
+        }
+        $academy = Academy::find($academy_id);
+
+        $teacher_id = request('teacher_id');
+        if ($teacher_id != null) {
+            session(['teacher_id' => $teacher_id]);
+        } else {
+            $teacher_id = session('teacher_id');
+            if ($teacher_id == null) {
+                return redirect()->route('manager.search');
             }
-            $academy = Academy::find($academy_id);
+        }
 
-            $teacher_id = request('teacher_id');
-            if ($teacher_id != null) {
-                session(['teacher_id' => $teacher_id]);
+        if ($teacher_id != 'total') {
+            // 評委個別成績
+            $teacher = User::where([
+                ['status', true],
+                ['id', $teacher_id]
+            ])->first();
+
+            if ($academy->name_id == 'H' || $academy->name_id == 'I') {
+                // 二階
+
+                return view('admin.gradeManagement.manager.personal.result2')->with([
+                    'academy' => $academy,
+                    'teacher' => $teacher,
+                ]);
             } else {
-                $teacher_id = session('teacher_id');
-                if ($teacher_id == null) {
-                    return redirect()->route('manager.search');
-                }
-            }
+                // 一階
+                $applicants = ImportApplicant::where('academy_id', $academy->id)->get();
 
-            if ($teacher_id != 'total') {
-                if ($academy->name_id == 'H' || $academy->name_id == 'I') {
-                    // 二階
-                    $teacher = User::where([
-                        ['status', true],
-                        ['id', $teacher_id]
-                    ])->first();
-
-                    return view('admin.gradeManagement.manager.seperate.result2')->with([
-                        'academy' => $academy,
-                        'teacher' => $teacher,
+                foreach ($applicants as $applicant) {
+                    $query = Score::where([
+                        ['academy_id', $academy->id],
+                        ['student_id', $applicant->id],
+                        ['teacher_id', $teacher->id]
                     ]);
-                } else {
-                    // 一階
-                    $teacher = User::where([
-                        ['status', true],
-                        ['id', $teacher_id]
-                    ])->first();
-
-                    return view('admin.gradeManagement.manager.seperate.result1')->with([
-                        'academy' => $academy,
-                        'teacher' => $teacher,
-                    ]);
+                    $applicant->scores = $query->get();
+                    $applicant->sum = $query->sum('score');
+                    $applicant->score_time = $query->select('score_time')->pluck('score_time')->first();
                 }
-            } else {
-                // 總成績
-                // 顯示該學制考生的一二階與總成績
-                if ($academy->name_id == 'H' || $academy->name_id == 'I') {
-                    return view('admin.gradeManagement.manager.total.result2')->with([
-                        'academy' => $academy,
-                    ]);
-                } else {
-                    return view('admin.gradeManagement.manager.total.result1')->with([
-                        'academy' => $academy,
-                    ]);
-                }
+
+                return view('admin.gradeManagement.manager.personal.result1')->with([
+                    'academy' => $academy,
+                    'teacher' => $teacher,
+                    'applicants' => $applicants,
+                ]);
             }
         } else {
-            return redirect()->route('gradeManagement.index')->withErrors([
-                'errors' => "權限不足",
-            ]);;
+            // 總成績
+            if ($academy->name_id == 'H' || $academy->name_id == 'I') {
+                // 二階
+                return view('admin.gradeManagement.manager.total.result2')->with([
+                    'academy' => $academy,
+                ]);
+            } else {
+                // 一階
+                return view('admin.gradeManagement.manager.total.result1')->with([
+                    'academy' => $academy,
+                ]);
+            }
         }
     }
 }

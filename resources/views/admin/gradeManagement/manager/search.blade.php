@@ -31,7 +31,9 @@
             <select id="teacher_id" name="teacher_id" class="form-control">
               <option value="total">總成績</option>
               @foreach($academy->teachers as $teacher)
-                <option value="{{ $teacher->id }}" @if($teacher->id == session('teacher_id')) selected @endif>{{ $teacher->name }}</option>
+                @if (!$teacher->isManager())
+                  <option value="{{ $teacher->id }}" @if($teacher->id == session('teacher_id')) selected @endif>{{ $teacher->name }}</option>
+                @endif
               @endforeach
             </select>
           </th>

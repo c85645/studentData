@@ -275,8 +275,27 @@ class GradeManageController extends Controller
                 ]);
             } else {
                 // 一階
+                $applicants = ImportApplicant::where('academy_id', $academy->id)->get();
+
+                foreach ($applicants as $applicant) {
+                    $raw_sql = DB::raw('avg(score) as average');
+                    $query_avg = Score::where([
+                        ['academy_id', $academy->id],
+                        ['student_id', $applicant->id],
+                    ])->select($raw_sql)->groupBy('no');
+
+                    $query_sum = DB::table(DB::raw("({$query_avg->toSql()}) as sub"))
+                    ->mergeBindings($query_avg->getQuery())
+                    ->sum('average');
+
+                    $applicant->avg = $query_avg->get();
+                    $applicant->sum = $query_sum;
+                    // dd($applicant->avg, $applicant->sum);
+                }
+
                 return view('admin.gradeManagement.manager.total.result1')->with([
                     'academy' => $academy,
+                    'applicants' => $applicants,
                 ]);
             }
         }

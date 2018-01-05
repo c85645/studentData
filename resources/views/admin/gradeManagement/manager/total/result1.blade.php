@@ -21,6 +21,35 @@
     <button class="btn btn-warning btn-lg" onclick="history.back();"><i class="fa fa-arrow-left"></i></button>
   </div>
 </div>
-
-總成績>>>一階
+<table class="table table-hover table-middle">
+  <thead>
+    <th>姓名</th>
+    <th>准考證號碼</th>
+    <th>評分項目一平均</th>
+    <th>評分項目二平均</th>
+    <th>評分項目三平均</th>
+    <th>評分項目四平均</th>
+    <th>總平均</th>
+  </thead>
+  <tbody>
+    @foreach ($applicants as $applicant)
+    <tr>
+      <td>{{ $applicant->name }}</td>
+      <td>{{ $applicant->exam_number }}</td>
+      @if (count($applicant->avg) > 0)
+        @foreach ($applicant->avg as $score)
+          @if ($score->average != null)
+            <td>{{ number_format($score->average, 2) }}</td>
+          @endif
+        @endforeach
+      @else
+        @for ($i = 0; $i < 4; $i++)
+          <td></td>
+        @endfor
+      @endif
+      <td>{{ number_format($applicant->sum, 2) }}</td>
+    </tr>
+    @endforeach
+  </tbody>
+</table>
 @endsection

@@ -238,6 +238,8 @@ class GradeManageController extends Controller
                 ['id', $teacher_id]
             ])->first();
 
+            $score_items = ScoreItem::where('academy_id', $academy->id)->get();
+
             if ($academy->name_id == 'H' || $academy->name_id == 'I') {
                 // 二階
 
@@ -264,6 +266,7 @@ class GradeManageController extends Controller
                     'academy' => $academy,
                     'teacher' => $teacher,
                     'applicants' => $applicants,
+                    'score_items' => $score_items,
                 ]);
             }
         } else {
@@ -276,6 +279,7 @@ class GradeManageController extends Controller
             } else {
                 // 一階
                 $applicants = ImportApplicant::where('academy_id', $academy->id)->get();
+                $score_items = ScoreItem::where('academy_id', $academy->id)->get();
 
                 foreach ($applicants as $applicant) {
                     $raw_sql = DB::raw('avg(score) as average');
@@ -296,6 +300,7 @@ class GradeManageController extends Controller
                 return view('admin.gradeManagement.manager.total.result1')->with([
                     'academy' => $academy,
                     'applicants' => $applicants,
+                    'score_items' => $score_items,
                 ]);
             }
         }

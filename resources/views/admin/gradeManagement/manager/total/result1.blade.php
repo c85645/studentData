@@ -25,10 +25,13 @@
   <thead>
     <th>姓名</th>
     <th>准考證號碼</th>
-    <th>評分項目一平均</th>
+    @foreach ($score_items as $key => $items)
+      <th>評分項目{{ $key+1 }}平均</th>
+    @endforeach
+    {{-- <th>評分項目一平均</th>
     <th>評分項目二平均</th>
     <th>評分項目三平均</th>
-    <th>評分項目四平均</th>
+    <th>評分項目四平均</th> --}}
     <th>總平均</th>
   </thead>
   <tbody>

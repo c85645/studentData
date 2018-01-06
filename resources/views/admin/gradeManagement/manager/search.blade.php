@@ -13,17 +13,12 @@
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">考委評分管理</h1>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
     <a class="btn btn-warning btn-lg" href="{{ route('gradeManagement.index') }}" role="button"><i class="fa fa-arrow-left"></i></a>
   </div>
 </div>
 <div class="row">
   <div class="col-xs-offset-4">
-    <form class="form-horizontal" method="post" action="{{ route('manager.result') }}">
-      {{ csrf_field() }}
+    <form class="form-horizontal" method="get" action="{{ route('manager.result') }}">
       <table>
         <tr>
           <th>資料：</th>

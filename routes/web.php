@@ -99,8 +99,10 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
 
         // 管理員視角
         Route::group(['prefix' => 'manager'], function(){
-            Route::post('search', 'GradeManageController@search')->name('manager.search');
-            Route::post('result', 'GradeManageController@result')->name('manager.result');
+            Route::get('search', 'GradeManageController@search')->name('manager.search');
+            Route::get('result', 'GradeManageController@result')->name('manager.result');
+            Route::get('edit', 'GradeManageController@edit')->name('manager.edit');
+            Route::post('store', 'GradeManageController@storeScores')->name('manager.store');
         });
 
         // 評審委員視角

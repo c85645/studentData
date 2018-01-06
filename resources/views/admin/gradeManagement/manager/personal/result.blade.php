@@ -18,7 +18,21 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <button class="btn btn-warning btn-lg" onclick="history.back();"><i class="fa fa-arrow-left"></i></button>
+    <div class="pull-left">
+      <a class="btn btn-warning btn-lg" href="{{ route('manager.search') }}" role="button"><i class="fa fa-arrow-left"></i></a>
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-info btn-lg">評審委員成績確認表</button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    @if ($academy->name_id == 'H' || $academy->name_id == 'I')
+      <div class="pull-left">
+        <h4>申請人第一階段總成績</h4>
+      </div>
+    @endif
   </div>
 </div>
 <table class="table table-hover table-middle">
@@ -43,7 +57,7 @@
           @endif
         @endforeach
       @else
-        @for ($i = 0; $i < 4; $i++)
+        @for ($i = 0; $i < count($score_items); $i++)
           <td></td>
         @endfor
       @endif

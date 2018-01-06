@@ -15,8 +15,7 @@
 </div>
 <div class="row">
   <div class="col-xs-offset-4">
-    <form class="form-horizontal" method="post" action="{{ route('manager.search') }}">
-      {{ csrf_field() }}
+    <form class="form-horizontal" method="get" action="{{ route('manager.search') }}">
       <table>
         <tr>
           <th>年度：</th>

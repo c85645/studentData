@@ -18,9 +18,78 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <button class="btn btn-warning btn-lg" onclick="history.back();"><i class="fa fa-arrow-left"></i></button>
+    <a class="btn btn-warning btn-lg" href="{{ route('manager.search') }}" role="button"><i class="fa fa-arrow-left"></i></a>
   </div>
 </div>
-
-總成績>>>二階
+@include('layout.common.errors')
+<div class="row">
+  <div class="col-xs-12">
+    <div class="pull-left">
+      <h4>申請人第一階段總成績</h4>
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-info btn-lg">成績審查總表</button>
+      <button class="btn btn-info btn-lg">面試評分表</button>
+    </div>
+  </div>
+</div>
+<table class="table table-hover table-middle">
+  <thead>
+    <th>姓名</th>
+    <th>准考證號碼</th>
+    @foreach ($score_items as $key => $items)
+      <th>評分項目{{ $key+1 }}平均</th>
+    @endforeach
+    <th>總分</th>
+  </thead>
+  <tbody>
+    @foreach ($applicants as $applicant)
+    <tr>
+      <td>{{ $applicant->name }}</td>
+      <td>{{ $applicant->exam_number }}</td>
+      @if (count($applicant->avg) > 0)
+        @foreach ($applicant->avg as $score)
+          @if ($score->average != null)
+            <td>{{ number_format($score->average, 2) }}</td>
+          @endif
+        @endforeach
+      @else
+        @for ($i = 0; $i < count($score_items); $i++)
+          <td></td>
+        @endfor
+      @endif
+      <td>{{ number_format($applicant->sum, 2) }}</td>
+    </tr>
+    @endforeach
+  </tbody>
+</table>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="pull-left">
+      <h4>申請人第一、二階段成績</h4>
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-info btn-lg">一階二階成績審查總表</button>
+      <a class="btn btn-success btn-lg" href="{{ route('manager.edit') }}" role="button">輸入第二階段成績</a>
+    </div>
+  </div>
+</div>
+<table class="table table-hover table-middle">
+  <thead>
+    <th>姓名</th>
+    <th>准考證號碼</th>
+    <th>一階總分</th>
+    <th>二階總分</th>
+  </thead>
+  <tbody>
+    @foreach ($applicants2 as $applicant)
+      <tr>
+        <td>{{ $applicant->name }}</td>
+        <td>{{ $applicant->exam_number }}</td>
+        <td>{{ number_format($applicant->sum, 2) }}</td>
+        <td>{{ number_format($applicant->step2_score, 2) }}</td>
+      </tr>
+    @endforeach
+  </tbody>
+</table>
 @endsection

@@ -216,11 +216,13 @@ class GradeManageController extends Controller
      */
     public function result()
     {
+        // 若session中有存學制id，則取出查學制
         if (session()->has('academy_id')) {
             $academy_id = session('academy_id');
         }
         $academy = Academy::find($academy_id);
 
+        // 判斷session內是否有存值
         $teacher_id = request('teacher_id');
         if ($teacher_id != null) {
             session(['teacher_id' => $teacher_id]);
@@ -231,58 +233,80 @@ class GradeManageController extends Controller
             }
         }
 
+        // 判斷查詢個別委員評分or總成績
         if ($teacher_id != 'total') {
             // 評委個別成績
             $teacher = User::where([
                 ['status', true],
                 ['id', $teacher_id]
             ])->first();
-
             $score_items = ScoreItem::where('academy_id', $academy->id)->get();
+            $applicants = ImportApplicant::where('academy_id', $academy->id)->get();
 
-            if ($academy->name_id == 'H' || $academy->name_id == 'I') {
-                // 二階
-
-                return view('admin.gradeManagement.manager.personal.result2')->with([
-                    'academy' => $academy,
-                    'teacher' => $teacher,
+            foreach ($applicants as $applicant) {
+                $query = Score::where([
+                    ['academy_id', $academy->id],
+                    ['student_id', $applicant->id],
+                    ['teacher_id', $teacher->id],
+                    ['step', 1]
                 ]);
-            } else {
-                // 一階
-                $applicants = ImportApplicant::where('academy_id', $academy->id)->get();
-
-                foreach ($applicants as $applicant) {
-                    $query = Score::where([
-                        ['academy_id', $academy->id],
-                        ['student_id', $applicant->id],
-                        ['teacher_id', $teacher->id]
-                    ]);
-                    $applicant->scores = $query->get();
-                    $applicant->sum = $query->sum('score');
-                    $applicant->score_time = $query->select('score_time')->pluck('score_time')->first();
-                }
-
-                return view('admin.gradeManagement.manager.personal.result1')->with([
-                    'academy' => $academy,
-                    'teacher' => $teacher,
-                    'applicants' => $applicants,
-                    'score_items' => $score_items,
-                ]);
+                $applicant->scores = $query->get();
+                $applicant->sum = $query->sum('score');
+                $applicant->score_time = $query->select('score_time')->pluck('score_time')->first();
             }
+
+            return view('admin.gradeManagement.manager.personal.result')->with([
+                'academy' => $academy,
+                'teacher' => $teacher,
+                'applicants' => $applicants,
+                'score_items' => $score_items,
+            ]);
         } else {
             // 總成績
             if ($academy->name_id == 'H' || $academy->name_id == 'I') {
-                // 二階
+                $applicants = ImportApplicant::where('academy_id', $academy->id)->get();
+                // 複製申請人清單給第二個表格使用
+                $applicants2 = $applicants;
+                $score_items = ScoreItem::where('academy_id', $academy->id)->get();
+
+                $raw_sql = DB::raw('avg(score) as average');
+                // 第一階段成績
+                foreach ($applicants as $applicant) {
+                    $query_avg = Score::where([
+                        ['academy_id', $academy->id],
+                        ['student_id', $applicant->id],
+                        ['step', 1]
+                    ])->select($raw_sql)->groupBy('no');
+                    $query_sum = DB::table(DB::raw("({$query_avg->toSql()}) as sub"))
+                    ->mergeBindings($query_avg->getQuery())
+                    ->sum('average');
+                    $applicant->avg = $query_avg->get();
+                    $applicant->sum = $query_sum;
+                }
+
+                // 第二階段成績
+                foreach ($applicants2 as $record) {
+                    $step2_score = Score::where([
+                        ['academy_id', $academy->id],
+                        ['student_id', $record->id],
+                        ['step', 2]
+                    ])->pluck('score')->first();
+                    $record->step2_score = $step2_score;
+                }
+
                 return view('admin.gradeManagement.manager.total.result2')->with([
                     'academy' => $academy,
+                    'applicants' => $applicants,
+                    'applicants2' => $applicants2,
+                    'score_items' => $score_items,
                 ]);
             } else {
                 // 一階
                 $applicants = ImportApplicant::where('academy_id', $academy->id)->get();
                 $score_items = ScoreItem::where('academy_id', $academy->id)->get();
 
+                $raw_sql = DB::raw('avg(score) as average');
                 foreach ($applicants as $applicant) {
-                    $raw_sql = DB::raw('avg(score) as average');
                     $query_avg = Score::where([
                         ['academy_id', $academy->id],
                         ['student_id', $applicant->id],
@@ -294,7 +318,6 @@ class GradeManageController extends Controller
 
                     $applicant->avg = $query_avg->get();
                     $applicant->sum = $query_sum;
-                    // dd($applicant->avg, $applicant->sum);
                 }
 
                 return view('admin.gradeManagement.manager.total.result1')->with([
@@ -304,5 +327,81 @@ class GradeManageController extends Controller
                 ]);
             }
         }
+    }
+
+    /**
+     * 輸入第二階段面試分數
+     * @return [type] [description]
+     */
+    public function edit()
+    {
+        // 若session中有存學制id，則取出查學制
+        if (session()->has('academy_id')) {
+            $academy_id = session('academy_id');
+        }
+        $academy = Academy::find($academy_id);
+        $applicants = ImportApplicant::where('academy_id', $academy->id)->get();
+
+        foreach ($applicants as $record) {
+            $scores = Score::where([
+                'academy_id' => $academy->id,
+                'student_id' => $record->id,
+                'step' => 2,
+            ])->pluck('score')->first();
+            $record->score = $scores;
+        }
+
+        return view('admin.gradeManagement.manager.edit')->with([
+            'academy' => $academy,
+            'applicants' => $applicants,
+        ]);
+    }
+
+    /**
+     * 儲存第二階段面試分數
+     * @return [type] [description]
+     */
+    public function storeScores()
+    {
+        // 若session中有存學制id，則取出查學制
+        if (session()->has('academy_id')) {
+            $academy_id = session('academy_id');
+        }
+        $academy = Academy::find($academy_id);
+
+        $data = request()->all();
+        $id_list = array_get($data, 'dataList.student_id');
+        $score_list = array_get($data, 'dataList.score');
+        $records = array_map(function ($student_id, $score) {
+            return compact('student_id', 'score');
+        }, $id_list, $score_list);
+
+        $array_list = array();
+        foreach ($records as $record) {
+            array_push($array_list, [
+                'academy_id' => $academy->id,
+                'student_id' => $record['student_id'],
+                'score' => $record['score'],
+                'step' => 2,
+                'score_time' => Carbon::now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+        }
+
+        foreach ($array_list as $record) {
+            $query = Score::where([
+                'academy_id' => $academy->id,
+                'student_id' => $record['student_id'],
+                'step' => 2,
+            ]);
+            if ($query->exists()) {
+                $query->delete();
+            }
+
+            DB::table('scores')->insert($record);
+        }
+
+        return redirect()->route('manager.result')->with('status', '資料已儲存!');
     }
 }

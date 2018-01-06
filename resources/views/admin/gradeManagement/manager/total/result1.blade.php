@@ -18,7 +18,12 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <button class="btn btn-warning btn-lg" onclick="history.back();"><i class="fa fa-arrow-left"></i></button>
+    <div class="pull-left">
+      <a class="btn btn-warning btn-lg" href="{{ route('manager.search') }}" role="button"><i class="fa fa-arrow-left"></i></a>
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-info btn-lg">書面資料審查評分總表</button>
+    </div>
   </div>
 </div>
 <table class="table table-hover table-middle">
@@ -28,11 +33,7 @@
     @foreach ($score_items as $key => $items)
       <th>評分項目{{ $key+1 }}平均</th>
     @endforeach
-    {{-- <th>評分項目一平均</th>
-    <th>評分項目二平均</th>
-    <th>評分項目三平均</th>
-    <th>評分項目四平均</th> --}}
-    <th>總平均</th>
+    <th>總分</th>
   </thead>
   <tbody>
     @foreach ($applicants as $applicant)
@@ -46,7 +47,7 @@
           @endif
         @endforeach
       @else
-        @for ($i = 0; $i < 4; $i++)
+        @for ($i = 0; $i < count($score_items); $i++)
           <td></td>
         @endfor
       @endif

@@ -404,4 +404,33 @@ class GradeManageController extends Controller
 
         return redirect()->route('manager.result')->with('status', '資料已儲存!');
     }
+
+    public function editIsPass($id)
+    {
+        // 若session中有存學制id，則取出查學制
+        if (session()->has('academy_id')) {
+            $academy_id = session('academy_id');
+        }
+        $academy = Academy::find($academy_id);
+        $applicant = ImportApplicant::where([
+            ['academy_id', $academy->id],
+            ['id', $id],
+        ])->first();
+
+        return view('admin.gradeManagement.manager.editIsPass')->with([
+            'academy' => $academy,
+            'applicant' => $applicant,
+        ]);
+    }
+
+    public function storeIsPass($id)
+    {
+        $is_pass = request('is_pass');
+        $applicant = ImportApplicant::find($id);
+        $applicant->update([
+            'is_pass' => $is_pass,
+        ]);
+
+        return redirect()->route('manager.result')->with('status', '資料已儲存!');
+    }
 }

@@ -22,7 +22,7 @@
       <div class="form-group">
         <label class="col-sm-2 control-label" for="account"><span style="color: red">*</span> 帳號</label>
         <div class="col-sm-8">
-          <input type="text" name="account" class="form-control" value="{{ old('account',$user->account) }}" placeholder="請輸入英文帳號..." maxlength="20" onkeyup="enterArabEng(this);" disabled="">
+          <input type="text" name="account" class="form-control" value="{{ old('account',$user->account) }}" placeholder="請輸入英文帳號..." maxlength="20" onkeyup="enterArabEng(this);" disabled>
         </div>
       </div>
       <div class="form-group">

@@ -41,6 +41,8 @@
       <th>評分項目{{ $key+1 }}平均</th>
     @endforeach
     <th>總分</th>
+    <th>是否通過</th>
+    <th>操作</th>
   </thead>
   <tbody>
     @foreach ($applicants as $applicant)
@@ -59,6 +61,8 @@
         @endfor
       @endif
       <td>{{ number_format($applicant->sum, 2) }}</td>
+      <td>@if ($applicant->is_pass) 是 @else 否 @endif</td>
+      <td><a class="btn btn-success" href="/studentData/admin/gradeManagement/manager/{{ $applicant->id }}/editIsPass"><i class="fa fa-pencil"></i></a></td>
     </tr>
     @endforeach
   </tbody>

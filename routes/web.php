@@ -103,6 +103,8 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
             Route::get('result', 'GradeManageController@result')->name('manager.result');
             Route::get('edit', 'GradeManageController@edit')->name('manager.edit');
             Route::post('store', 'GradeManageController@storeScores')->name('manager.store');
+            Route::get('{id}/editIsPass', 'GradeManageController@editIsPass')->name('manager.editIsPass');
+            Route::post('/{id}', 'GradeManageController@storeIsPass')->name('manager.storeIsPass');
         });
 
         // 評審委員視角

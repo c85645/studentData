@@ -28,8 +28,12 @@
       <h4>申請人第一階段總成績</h4>
     </div>
     <div class="pull-right">
-      <button class="btn btn-info btn-lg">成績審查總表</button>
-      <button class="btn btn-info btn-lg">面試評分表</button>
+      <button class="btn btn-info btn-lg">書面資料審查評分總表</button>
+      <form action="{{ route('export.interviewExcel') }}" method="POST" style="margin:0px; display:inline;">
+        {{ csrf_field() }}
+        <input type="hidden" name="academy_id" value="{{ $academy->id }}">
+        <button class="btn btn-info btn-lg" type="submit">面試評分表</button>
+      </form>
     </div>
   </div>
 </div>

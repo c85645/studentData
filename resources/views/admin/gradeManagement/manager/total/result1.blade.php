@@ -22,7 +22,11 @@
       <a class="btn btn-warning btn-lg" href="{{ route('manager.search') }}" role="button"><i class="fa fa-arrow-left"></i></a>
     </div>
     <div class="pull-right">
-      <button class="btn btn-info btn-lg">書面資料審查評分總表</button>
+      <form action="{{ route('export.reviewExcel') }}" method="POST">
+        {{ csrf_field() }}
+        <input type="hidden" name="academy_id" value="{{ $academy->id }}">
+        <button class="btn btn-info btn-lg" type="submit">書面資料審查評分總表</button>
+      </form>
     </div>
   </div>
 </div>

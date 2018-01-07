@@ -116,9 +116,9 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
 
         Route::group(['prefix' => 'export'], function(){
             Route::post('personalExcel', 'ExportDataController@personalExcel')->name('export.personal');
-            Route::get('reviewExcel', 'ExportDataController@reviewExcel')->name('export.reviewExcel');
-            Route::get('interviewExcel', 'ExportDataController@interviewExcel')->name('export.interviewExcel');
-            Route::get('totalExcel', 'ExportDataController@totalExcel')->name('export.totalExcel');
+            Route::post('reviewExcel', 'ExportDataController@reviewExcel')->name('export.reviewExcel');
+            Route::post('interviewExcel', 'ExportDataController@interviewExcel')->name('export.interviewExcel');
+            Route::post('totalExcel', 'ExportDataController@totalExcel')->name('export.totalExcel');
         });
     });
 });

@@ -53,7 +53,7 @@ class ExportDataController extends Controller
 
                 $sheet->row(1, array(<<<EOT
 $academy->year 學年巨資學院 $academy_name
-招生考試書面資料審查成績評分表($teacher->name 老師)
+招生考試書面資料審查成績評分表($teacher->name)
 EOT
                 ));
                 $sheet->row(2, array('委員簽名：'));

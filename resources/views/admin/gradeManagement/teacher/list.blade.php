@@ -22,7 +22,12 @@
       <a class="btn btn-warning btn-lg" href="{{ route('gradeManagement.index') }}" role="button"><i class="fa fa-arrow-left"></i></a>
     </div>
     <div class="pull-right">
-      <input class="btn btn-info btn-lg" type="button" value="匯出Excel">
+      <form action="{{ route('export.personal') }}" method="POST">
+        {{ csrf_field() }}
+        <input type="hidden" name="teacher_id" value="{{ auth()->user()->id }}">
+        <input type="hidden" name="academy_id" value="{{ $academy->id }}">
+        <button class="btn btn-info btn-lg" type="submit">評審委員成績確認表</button>
+      </form>
       <label>評分截止日期：{{ $academy->score_edate }}</label>
     </div>
   </div>

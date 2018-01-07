@@ -23,7 +23,7 @@
   </div>
 </div>
 <div class="row">
-  <div align="col-xs-offset-6 col-xs-6">
+  <div class="col-xs-offset-2 col-xs-8">
     <form id="action_form" action="/studentData/admin/gradeManagement/manager/{{ $applicant->id }}" method="post" class="form-horizontal">
       {{ csrf_field() }}
       <div class="form-group">

@@ -47,8 +47,8 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
     // 學制管理
     Route::group(['prefix' => 'academy'], function(){
         Route::get('/', 'AcademyController@index')->name('academy.index');
-        Route::get('/{id}/edit', 'AcademyController@edit');
-        Route::put('/{id}', 'AcademyController@update');
+        Route::get('{id}/edit', 'AcademyController@edit');
+        Route::put('{id}', 'AcademyController@update');
     });
 
     // 學制年度設定
@@ -112,6 +112,13 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
             Route::get('list', 'GradeManageController@list')->name('teacher.list');
             Route::post('score', 'GradeManageController@score')->name('teacher.score');
             Route::post('store', 'GradeManageController@store')->name('teacher.store');
+        });
+
+        Route::group(['prefix' => 'export'], function(){
+            Route::post('personalExcel', 'ExportDataController@personalExcel')->name('export.personal');
+            Route::get('reviewExcel', 'ExportDataController@reviewExcel')->name('export.reviewExcel');
+            Route::get('interviewExcel', 'ExportDataController@interviewExcel')->name('export.interviewExcel');
+            Route::get('totalExcel', 'ExportDataController@totalExcel')->name('export.totalExcel');
         });
     });
 });

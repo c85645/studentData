@@ -276,7 +276,7 @@
               @if ($academyA->isOpen())
                 <p>報名截止日期：{{ $academyA->fill_out_edate }}</p>
                 <script type="text/javascript">
-                  counterA();
+                  counterA(balala);
                 </script>
               @else
                 <p>尚未開放</p>

@@ -88,7 +88,7 @@
               @if ($academyH->isOpen())
                 <p>報名截止日期：{{ $academyH->fill_out_edate }}</p>
                 <script type="text/javascript">
-                  counterH();
+                  counter("<?php echo $academyH->fill_out_edate; ?>");
                 </script>
               @else
                 <p>尚未開放</p>
@@ -119,7 +119,7 @@
               @if ($academyI->isOpen())
                 <p>報名截止日期：{{ $academyI->fill_out_edate }}</p>
                 <script type="text/javascript">
-                  counterI();
+                  counter("<?php echo $academyI->fill_out_edate; ?>");
                 </script>
               @else
                 <p>尚未開放</p>
@@ -150,7 +150,7 @@
               @if ($academyB->isOpen())
                 <p>報名截止日期：{{ $academyB->fill_out_edate }}</p>
                 <script type="text/javascript">
-                  counterB();
+                  counter("<?php echo $academyB->fill_out_edate; ?>");
                 </script>
               @else
                 <p>尚未開放</p>
@@ -181,7 +181,7 @@
               @if ($academyC->isOpen())
                 <p>報名截止日期：{{ $academyC->fill_out_edate }}</p>
                 <script type="text/javascript">
-                  counterC();
+                  counter("<?php echo $academyC->fill_out_edate; ?>");
                 </script>
               @else
                 <p>尚未開放</p>
@@ -212,7 +212,7 @@
               @if ($academyE->isOpen())
                 <p>報名截止日期：{{ $academyE->fill_out_edate }}</p>
                 <script type="text/javascript">
-                  counterE();
+                  counter("<?php echo $academyE->fill_out_edate; ?>");
                 </script>
               @else
                 <p>尚未開放</p>
@@ -245,7 +245,7 @@
               @if ($academyG->isOpen())
                 <p>報名截止日期：{{ $academyG->fill_out_edate }}</p>
                 <script type="text/javascript">
-                  counterG();
+                  counter("<?php echo $academyG->fill_out_edate; ?>");
                 </script>
               @else
                 <p>尚未開放</p>
@@ -276,7 +276,7 @@
               @if ($academyA->isOpen())
                 <p>報名截止日期：{{ $academyA->fill_out_edate }}</p>
                 <script type="text/javascript">
-                  counterA(<?php $academyA->fill_out_edate ; ?>);
+                  counter("<?php echo $academyA->fill_out_edate; ?>");
                 </script>
               @else
                 <p>尚未開放</p>
@@ -307,7 +307,7 @@
               @if ($academyD->isOpen())
                 <p>報名截止日期：{{ $academyD->fill_out_edate }}</p>
                 <script type="text/javascript">
-                  counterD();
+                  counter("<?php echo $academyD->fill_out_edate; ?>");
                 </script>
               @else
                 <p>尚未開放</p>
@@ -338,7 +338,7 @@
               @if ($academyF->isOpen())
                 <p>報名截止日期：{{ $academyF->fill_out_edate }}</p>
                 <script type="text/javascript">
-                  counterF();
+                  counter("<?php echo $academyF->fill_out_edate; ?>");
                 </script>
               @else
                 <p>尚未開放</p>
@@ -408,12 +408,11 @@
   }
 
 //function counter(date,div)
-  function counterA(date) { 
-    document.write(date);
-    var date = date.split("-");
-    var year = date[0];
-    var month = date[1];
-    var day = date[2];
+  function counter(date) {
+    var date1 = date.split("-");
+    var year = date1[0];
+    var month = date1[1];
+    var day = date1[2];
     var hour = "0";
     var minute = "0";
     var centi = "5";

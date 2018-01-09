@@ -33,5 +33,5 @@
 <link rel="stylesheet" href="{{ asset('css/web/style.css') }}">
 <!-- 網頁icon -->
 <link rel="icon" type="image/png" href="{{ asset('images/bigdata_icon.png') }}" />
-<!-- 將js置頂 -->
+
 @yield('javascript')

@@ -74,7 +74,7 @@ class ImportDataController extends Controller
         $applicant->address = request('address');
         $applicant->mobile = request('mobile');
         $applicant->email = request('email');
-        $applicant->is_pass = request('is_pass');
+        // $applicant->is_pass = request('is_pass');
         $applicant->import_time = Carbon::now()->toDateTimeString();
         $applicant->save();
 
@@ -133,7 +133,7 @@ class ImportDataController extends Controller
         $applicant->address = request('address');
         $applicant->mobile = request('mobile');
         $applicant->email = request('email');
-        $applicant->is_pass = request('is_pass');
+        // $applicant->is_pass = request('is_pass');
         $applicant->import_time = Carbon::now()->toDateTimeString();
         $applicant->save();
 

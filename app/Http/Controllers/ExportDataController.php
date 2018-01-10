@@ -90,7 +90,8 @@ EOT
                 // 取得不同老師的分數
                 $query_scores = Score::where([
                     ['student_id', $student->id],
-                    ['academy_id', $student->academy_id]
+                    ['academy_id', $student->academy_id],
+                    ['step', 1]
                 ])->select(DB::raw('sum(score) as score'))->groupBy('teacher_id');
                 $result = array_merge($record, $query_scores->get()->pluck('score')->toArray());
 
@@ -98,6 +99,7 @@ EOT
                 $query_avg = DB::table(DB::raw("({$query_scores->toSql()}) as sub"))
                 ->mergeBindings($query_scores->getQuery())
                 ->avg('score');
+
                 $result = array_merge($result, array($query_avg));
                 // 整理好的資料丟到要給excel的data
                 array_push($data, $result);

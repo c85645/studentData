@@ -65,7 +65,13 @@
         @endfor
       @endif
       <td>{{ number_format($applicant->sum, 2) }}</td>
-      <td>@if ($applicant->is_pass) 是 @else 否 @endif</td>
+      <td>
+        @if ($applicant->is_pass)
+          <p style="color: blue;">通過</p>
+        @else
+          <p style="color: red;">不通過</p>
+        @endif
+      </td>
       <td><a class="btn btn-success" href="/studentData/admin/gradeManagement/manager/{{ $applicant->id }}/editIsPass"><i class="fa fa-pencil"></i></a></td>
     </tr>
     @endforeach

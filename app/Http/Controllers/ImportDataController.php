@@ -212,7 +212,7 @@ class ImportDataController extends Controller
                             'academy_id' => $academy->id,
                             'exam_number' => $row['報考序號'],
                             'name' => $row['姓名'],
-                            'gender' => $row['性別'],
+                            'gender' => $this->changeGender($row['性別']),
                             'graduated_school' => $row['畢業學校'],
                             'graduated_department' => $row['畢業學系'],
                             'equivalent_qualifications' => $row['同等學歷與否'],
@@ -240,6 +240,17 @@ class ImportDataController extends Controller
             }
         } else {
             return "上傳發生錯誤，請確認檔案";
+        }
+    }
+
+    function changeGender($gender)
+    {
+        if ($gender == '男') {
+            return 1;
+        } elseif ($gender == '女') {
+            return 2;
+        } else {
+            return "Data Error";
         }
     }
 

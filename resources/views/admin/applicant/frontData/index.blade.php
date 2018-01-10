@@ -45,9 +45,9 @@
       <td>{{ $applicant->mobile }}</td>
       <td>
         @if ($applicant->pdf_path != null)
-        是
+          <p style="color: blue;">已繳交</p>
         @else
-        否
+          <p style="color: red;">未繳交</p>
         @endif
       </td>
       <td>{{ $applicant->created_at }}</td>

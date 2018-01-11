@@ -34,32 +34,36 @@ class ExportDataController extends Controller
             $academy->name = $academy->name->name;
 
             $excel->sheet('mySheet', function ($sheet) use ($data, $teacher, $academy) {
-                $sheet->mergeCells('A1:J1');
-                $sheet->mergeCells('A2:G2');
-                $sheet->mergeCells('H2:J2');
+                $sheet->setFontSize(15);
+                $sheet->setAllBorders('thin');
+                $sheet->mergeCells('A1:E1');
+                $sheet->mergeCells('A2:E2');
                 $sheet->setPageMargin(0.25);
-                $sheet->setHeight(1, 30);
                 $sheet->setWidth(array(
                     'A' => 20,
                     'B' => 10,
                     'C' => 10,
                 ));
-
-                $sheet->cells('A1:K1', function ($cells) {
+                $sheet->cells('A1:E2', function ($cells) {
                     $cells->setAlignment('center');
                 });
-                $sheet->cells('A2:I2', function ($cells) {
-                    $cells->setAlignment('right');
-                });
 
-                $sheet->row(1, array(<<<EOT
-$academy->year 學年度巨資學院 $academy->name
-招生考試書面資料審查成績評分表($teacher->name)
-EOT
-                ));
-                $sheet->row(2, array('委員簽名：'));
+                $sheet->row(1, array($academy->year . ' 學年度巨資學院 ' . $academy->name));
+                $sheet->row(2, array('招生考試書面資料審查成績評分表(' . $teacher->name . ' )'));
                 $sheet->row(3, array('報名序號', '姓名', '總分'));
                 $sheet->fromArray($data, null, 'A4', false, false);
+
+                // 控制表尾委員簽名的位置
+                if (count($data) + 3 <= 40) {
+                    $num = 40;
+                } else {
+                    $num = 80;
+                }
+                $sheet->mergeCells('A' . $num . ':E' . $num);
+                $sheet->row($num, array('委員簽名：'));
+                $sheet->cells('A3:E' . $num, function ($cells) {
+                    $cells->setAlignment('center');
+                });
             });
         })->export('xlsx');
     }
@@ -100,33 +104,46 @@ EOT
                 ->mergeBindings($query_scores->getQuery())
                 ->avg('score');
 
-                $result = array_merge($result, array($query_avg));
+                $result = array_merge($result, array(number_format($query_avg, 2)));
                 // 整理好的資料丟到要給excel的data
                 array_push($data, $result);
             }
 
             $excel->sheet('mySheet', function ($sheet) use ($academy, $teacher_name, $data) {
-                $sheet->mergeCells('A1:J1');
+                $sheet->setFontSize(15);
+                $sheet->setAllBorders('thin');
+                $sheet->mergeCells('A1:F1');
+                $sheet->mergeCells('A2:F2');
                 $sheet->setPageMargin(0.25);
-                $sheet->setHeight(1, 30);
                 $sheet->setWidth('A', 20);
 
-                $sheet->cells('A1:J1', function ($cells) {
+                $sheet->cells('A1:F1', function ($cells) {
+                    $cells->setAlignment('center');
+                });
+                $sheet->cells('A2:F2', function ($cells) {
                     $cells->setAlignment('center');
                 });
 
-                $sheet->row(1, array(<<<EOT
-$academy->year 學年度巨量資料管理學院 $academy->name 書面資料審查評分總表
-EOT
-                ));
+                $sheet->row(1, array($academy->year . ' 學年度巨量資料管理學院 ' . $academy->name ));
+                $sheet->row(2, array('書面資料審查評分總表'));
                 $array1 = array('報名序號', '姓名');
                 $array2 = array('總平均', '備註');
                 $result = array_merge($array1, $teacher_name);
                 $result = array_merge($result, $array2);
-                // $sheet->row(2, array('報名序號', '姓名', '第一位老師', '第二位老師', '第三位老師', '總分', '平均', '備註'));
-                $sheet->row(2, $result);
+                $sheet->row(3, $result);
+                $sheet->fromArray($data, null, 'A4', false, false);
 
-                $sheet->fromArray($data, null, 'A3', false, false);
+                // 控制表尾委員簽名的位置
+                if (count($data) + 3 <= 40) {
+                    $num = 40;
+                } else {
+                    $num = 80;
+                }
+                $sheet->mergeCells('A' . $num . ':F' . $num);
+                $sheet->row($num, array('委員簽名：'));
+                $sheet->cells('A3:F' . $num, function ($cells) {
+                    $cells->setAlignment('center');
+                });
             });
         })->export('xlsx');
     }
@@ -142,35 +159,48 @@ EOT
             $academy = Academy::find(request('academy_id'));
             $academy->name = $academy->name->name;
 
-            $excel->sheet('mySheet', function ($sheet) use ($academy) {
-                $sheet->mergeCells('A1:J1');
+            $applicants = ImportApplicant::where([
+                ['academy_id', $academy->id],
+                ['is_pass', true]
+            ])->select('exam_number', 'name')->get()->toArray();
+
+            $excel->sheet('mySheet', function ($sheet) use ($academy, $applicants) {
+                $sheet->setFontSize(15);
+                $sheet->setAllBorders('thin');
+                $sheet->mergeCells('A1:D1');
+                $sheet->mergeCells('A2:D2');
+                $sheet->mergeCells('A3:D3');
                 $sheet->setPageMargin(0.25);
-                $sheet->setHeight(1, 30);
                 $sheet->setWidth(array(
                     'A' => 20,
-                    'B' => 10,
-                    'C' => 10,
-                    'D' => 10,
-                    'E' => 10,
-                    'F' => 10,
-                    'G' => 10,
-                    'H' => 10,
-                    'I' => 10,
-                    'J' => 10,
+                    'B' => 14,
+                    'C' => 14,
                 ));
-
-                $sheet->cells('A1:J1', function ($cells) {
+                $sheet->cells('A1:D2', function ($cells) {
                     $cells->setAlignment('center');
                 });
+                $sheet->cells('A3:D3', function ($cells) {
+                    $cells->setAlignment('right');
+                });
 
-                $sheet->row(1, array(<<<EOT
-$academy->year 學年度巨量資料管理學院 $academy->name 考試委員面試評分表
-EOT
-                ));
+                $sheet->row(1, array($academy->year . ' 學年度巨量資料管理學院 ' . $academy->name));
+                $sheet->row(2, array('考試委員面試評分表'));
+                $sheet->row(3, array('委員姓名：                  '));
+                $sheet->row(4, array('報名序號', '姓名', '分數'));
+                $sheet->fromArray($applicants, null, 'A5', false, false);
 
-                $sheet->row(2, array('報名序號', '姓名', '第一位老師', '第二位老師', '第三位老師', '總平均', '備註'));
-                // $sheet->row(2, $result);
-                //$sheet->fromArray($data, null, 'A4', false, false);
+                // 帶完資料後修改為動態調整位置
+                // 控制表尾委員簽名的位置
+                if (count($applicants) + 4 <= 40) {
+                    $num = 40;
+                } else {
+                    $num = 80;
+                }
+                $sheet->mergeCells('A' . $num . ':D' . $num);
+                $sheet->row($num, array('委員簽名：'));
+                $sheet->cells('A4:D' . $num, function ($cells) {
+                    $cells->setAlignment('center');
+                });
             });
         })->export('xlsx');
     }

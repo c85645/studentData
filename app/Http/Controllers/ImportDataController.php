@@ -243,7 +243,7 @@ class ImportDataController extends Controller
         }
     }
 
-    function changeGender($gender)
+    private function changeGender($gender)
     {
         if ($gender == '男') {
             return 1;

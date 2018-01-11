@@ -87,7 +87,11 @@
       <h4>申請人第一、二階段成績</h4>
     </div>
     <div class="pull-right">
-      <button class="btn btn-info btn-lg">一階二階成績審查總表</button>
+      <form action="{{ route('export.totalExcel') }}" method="POST" style="margin:0px; display:inline;">
+        {{ csrf_field() }}
+        <input type="hidden" name="academy_id" value="{{ $academy->id }}">
+        <button class="btn btn-info btn-lg" type="submit">一階二階成績審查總表</button>
+      </form>
       <a class="btn btn-success btn-lg" href="{{ route('manager.edit') }}" role="button">輸入第二階段成績</a>
     </div>
   </div>

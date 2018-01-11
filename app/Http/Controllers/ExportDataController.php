@@ -33,7 +33,7 @@ class ExportDataController extends Controller
             $academy = Academy::find(request('academy_id'));
             $academy->name = $academy->name->name;
 
-            $excel->sheet('mySheet', function ($sheet) use ($data, $teacher, $academy) {
+            $excel->sheet('sheet', function ($sheet) use ($data, $teacher, $academy) {
                 $sheet->setFontSize(15);
                 $sheet->setAllBorders('thin');
                 $sheet->mergeCells('A1:E1');
@@ -54,10 +54,10 @@ class ExportDataController extends Controller
                 $sheet->fromArray($data, null, 'A4', false, false);
 
                 // 控制表尾委員簽名的位置
-                if (count($data) + 3 <= 40) {
-                    $num = 40;
+                if (count($data) + 3 <= 36) {
+                    $num = 36;
                 } else {
-                    $num = 80;
+                    $num = 72;
                 }
                 $sheet->mergeCells('A' . $num . ':E' . $num);
                 $sheet->row($num, array('委員簽名：'));
@@ -109,7 +109,7 @@ class ExportDataController extends Controller
                 array_push($data, $result);
             }
 
-            $excel->sheet('mySheet', function ($sheet) use ($academy, $teacher_name, $data) {
+            $excel->sheet('sheet', function ($sheet) use ($academy, $teacher_name, $data) {
                 $sheet->setFontSize(15);
                 $sheet->setAllBorders('thin');
                 $sheet->mergeCells('A1:F1');
@@ -134,10 +134,10 @@ class ExportDataController extends Controller
                 $sheet->fromArray($data, null, 'A4', false, false);
 
                 // 控制表尾委員簽名的位置
-                if (count($data) + 3 <= 40) {
-                    $num = 40;
+                if (count($data) + 3 <= 36) {
+                    $num = 36;
                 } else {
-                    $num = 80;
+                    $num = 72;
                 }
                 $sheet->mergeCells('A' . $num . ':F' . $num);
                 $sheet->row($num, array('委員簽名：'));
@@ -164,7 +164,7 @@ class ExportDataController extends Controller
                 ['is_pass', true]
             ])->select('exam_number', 'name')->get()->toArray();
 
-            $excel->sheet('mySheet', function ($sheet) use ($academy, $applicants) {
+            $excel->sheet('sheet', function ($sheet) use ($academy, $applicants) {
                 $sheet->setFontSize(15);
                 $sheet->setAllBorders('thin');
                 $sheet->mergeCells('A1:D1');
@@ -191,10 +191,10 @@ class ExportDataController extends Controller
 
                 // 帶完資料後修改為動態調整位置
                 // 控制表尾委員簽名的位置
-                if (count($applicants) + 4 <= 40) {
-                    $num = 40;
+                if (count($applicants) + 4 <= 36) {
+                    $num = 36;
                 } else {
-                    $num = 80;
+                    $num = 72;
                 }
                 $sheet->mergeCells('A' . $num . ':D' . $num);
                 $sheet->row($num, array('委員簽名：'));
@@ -205,9 +205,87 @@ class ExportDataController extends Controller
         })->export('xlsx');
     }
 
-    // 一階二階成績審查總表
+    // 一階二階總成績確認表
     public function totalExcel()
     {
-        return "totalExcel";
+        return Excel::create('一階二階總成績確認表', function ($excel) {
+            $excel->setTitle('一階二階總成績確認表');
+            $excel->setCreator('DLAB ADMIN')->setCompany('DLAB ADMIN');
+            $excel->setDescription('一階二階總成績確認表');
+
+            $academy = Academy::find(request('academy_id'));
+            $academy->name = $academy->name->name;
+
+            $teacher_name = User::join('role_user', 'users.id', 'role_user.user_id')
+            ->where('role_user.role_id', 3)
+            ->select('users.name')->get()->pluck('name')->toArray();
+
+            $students = ImportApplicant::where('academy_id', $academy->id)->get();
+            $teachers = DB::table('academy_teacher')->where('academy_id', $academy->id)->get();
+
+            $data = array();
+            foreach ($students as $student) {
+                // 組合單筆
+                $record = array($student->exam_number, $student->name);
+
+                // 第一階段
+                // 取得不同老師的分數
+                $query_scores = Score::where([
+                    ['student_id', $student->id],
+                    ['academy_id', $student->academy_id],
+                    ['step', 1]
+                ])->select(DB::raw('sum(score) as score'))->groupBy('teacher_id');
+                // 計算不同老師分數的總平均
+                $query_avg = DB::table(DB::raw("({$query_scores->toSql()}) as sub"))
+                ->mergeBindings($query_scores->getQuery())
+                ->avg('score');
+                $result = array_merge($record, array(number_format($query_avg, 2)));
+
+
+                // 第二階段（直接取值）
+                $step2 = Score::where([
+                    ['student_id', $student->id],
+                    ['academy_id', $student->academy_id],
+                    ['step', 2]
+                ])->get()->pluck('score')->toArray();
+                $result = array_merge($result, $step2);
+
+                // 整理好的資料丟到要給excel的data
+                array_push($data, $result);
+            }
+
+            $excel->sheet('sheet', function ($sheet) use ($academy, $teacher_name, $data) {
+                $sheet->setFontSize(15);
+                $sheet->setAllBorders('thin');
+                $sheet->mergeCells('A1:E1');
+                $sheet->mergeCells('A2:E2');
+                $sheet->setPageMargin(0.25);
+                $sheet->setWidth('A', 20);
+
+                $sheet->row(1, array($academy->year . ' 學年度巨量資料管理學院 ' . $academy->name ));
+                $sheet->row(2, array('一階二階總成績確認表'));
+                $sheet->row(3, array('報名序號', '姓名', '一階分數', '二階分數', '總分'));
+                $sheet->fromArray($data, null, 'A4', false, false);
+
+                // 控制表尾委員簽名的位置
+                if (count($data) + 3 <= 36) {
+                    $num = 36;
+                } else {
+                    $num = 72;
+                }
+                $sheet->cells('A1:E' . ($num - 1), function ($cells) {
+                    $cells->setAlignment('center');
+                });
+                $sheet->mergeCells('C' . $num . ':E' . $num);
+                // $sheet->cells('A' . $num . ':E' . $num , function ($cells) {
+                //     $cells->setAlignment('right');
+                // });
+                // $sheet->row($num, array('主任簽名：'));
+                $sheet->setBorder('A' . $num .':B' . $num, 'thin');
+                $sheet->cell('C' . $num, function ($cell) {
+                    $cell->setValue('主任簽名：');
+                });
+            });
+        })->export('xlsx');
     }
 }

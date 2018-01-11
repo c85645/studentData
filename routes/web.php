@@ -114,6 +114,7 @@ Route::group(['middleware' => ['auth', 'checkPermission'], 'prefix' => 'studentD
             Route::post('store', 'GradeManageController@store')->name('teacher.store');
         });
 
+        // 匯出Excel
         Route::group(['prefix' => 'export'], function(){
             Route::post('personalExcel', 'ExportDataController@personalExcel')->name('export.personal');
             Route::post('reviewExcel', 'ExportDataController@reviewExcel')->name('export.reviewExcel');

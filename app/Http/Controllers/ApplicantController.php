@@ -108,25 +108,12 @@ class ApplicantController extends Controller
                 'keyword' => $keyword,
             ]);
         } elseif ($data_type == 3) {
-            if ($keyword == '') {
-                $sign_up_finish_applicants = ImportApplicant::where([
-                    ['academy_id', $academy->id],
-                    ['is_pass', true],
-                ])->paginate(10);
-            } else {
-                $sign_up_finish_applicants = ImportApplicant::where([
-                    ['academy_id', $academy->id],
-                    ['is_pass', true],
-                    ['name', 'like', '%'.$keyword.'%'],
-                ])->paginate(10);
-            }
-
             $results = collect([]);
             $import_applicants = ImportApplicant::where('academy_id', $academy->id)->get();
 
-            foreach ($import_applicants as $apts) {
+            foreach ($import_applicants as $import_applicant) {
                 // 擷取匯入人的身分證後六碼
-                $substr_id = substr($apts->personal_id, 4, 9);
+                $substr_id = substr($import_applicant->personal_id, 4, 9);
                 $rawSql = DB::raw('substring(import_applicants.personal_id,5,9)');
 
                 // 用身分證後六碼去找前台是否有資料
@@ -137,12 +124,11 @@ class ApplicantController extends Controller
 
                 // 若有資料則由匯入資料為主串前台資料
                 if ($applicant_query->exists()) {
-                    // 若有資料則由匯入資料為主串前台資料
                     if ($keyword != '') {
                         $list = ImportApplicant::join('applicants', 'applicants.personal_id', '=', $rawSql)
                         ->where([
                             ['import_applicants.academy_id', $academy->id],
-                            ['import_applicants.personal_id', $apts->personal_id],
+                            ['import_applicants.personal_id', $import_applicant->personal_id],
                             ['import_applicants.name', 'like', '%'.$keyword.'%'],
                         ])
                         ->select('import_applicants.*', 'applicants.pdf_path')
@@ -152,7 +138,7 @@ class ApplicantController extends Controller
                         $list = ImportApplicant::join('applicants', 'applicants.personal_id', '=', $rawSql)
                         ->where([
                             ['import_applicants.academy_id', $academy->id],
-                            ['import_applicants.personal_id', $apts->personal_id]
+                            ['import_applicants.personal_id', $import_applicant->personal_id]
                         ])
                         ->select('import_applicants.*', 'applicants.pdf_path')
                         ->orderBy('applicants.created_at', 'desc')
@@ -171,24 +157,61 @@ class ApplicantController extends Controller
                 'keyword' => $keyword,
             ]);
         } elseif ($data_type == 4) {
-            // if ($keyword == '') {
-            //     $sign_up_unfinish_applicants = ImportApplicant::where([
-            //         ['academy_id', $academy->id],
-            //         ['is_pass', false],
-            //     ])->paginate(10);
-            // } else {
-            //     $sign_up_unfinish_applicants = ImportApplicant::where([
-            //         ['academy_id', $academy->id],
-            //         ['is_pass', false],
-            //         ['name', 'like', '%'.$keyword.'%'],
-            //     ])->paginate(10);
-            // }
+            $results = array();
+            $web_applicants = Applicant::where('academy_id', $academy->id)->get();
+            $import_applicants = ImportApplicant::where('academy_id', $academy->id)->get();
 
-            // return view('admin.applicant.signUpUnFinish.index')->with([
-            //     'academy' => $academy,
-            //     'sign_up_unfinish_applicants' => $sign_up_unfinish_applicants,
-            //     'keyword' => $keyword,
-            // ]);
+            // 先以前台資料為主查詢後台有無資料，若無，加入狀態並加入reuslts內
+            foreach ($web_applicants as $web_applicant) {
+                $rawSql = DB::raw('substring(import_applicants.personal_id,5,9)');
+                $imports = ImportApplicant::where([
+                    ['academy_id', $academy->id],
+                    [$rawSql, $web_applicant->personal_id]
+                ]);
+
+                if (!$imports->exists()) {
+                    array_push($results, [
+                        'name' => $web_applicant->name,
+                        'personal_id' => $web_applicant->personal_id,
+                        'mobile' => $web_applicant->mobile,
+                        'email' => $web_applicant->email,
+                        'status' => '查無後台匯入資料',
+                    ]);
+                }
+            }
+
+            // 以後台資料為主查詢前台有無資料，若無，加入狀態並加入results內
+            foreach ($import_applicants as $import_applicant) {
+                // 擷取匯入人的身分證後六碼
+                $substr_id = substr($import_applicant->personal_id, 4, 9);
+                $rawSql = DB::raw('substring(import_applicants.personal_id,5,9)');
+
+                // 用身分證後六碼去找前台是否有資料
+                $applicant_query = Applicant::where([
+                    ['personal_id', $substr_id],
+                    ['academy_id', $academy->id],
+                ])->orderBy('created_at', 'desc');
+
+                // 若有資料則由匯入資料為主串前台資料
+                if (!$applicant_query->exists()) {
+                    // 若查不到資料則列入清單
+                    array_push($results, [
+                        'name' => $import_applicant->name,
+                        'personal_id' => $import_applicant->personal_id,
+                        'mobile' => $import_applicant->mobile,
+                        'email' => $import_applicant->email,
+                        'status' => '查無前台填寫資料',
+                    ]);
+                }
+            }
+
+            // dd($results);
+
+            return view('admin.applicant.signUpUnFinish.index')->with([
+                'academy' => $academy,
+                'results' => $results,
+                // 'keyword' => $keyword,
+            ]);
         } else {
             return redirect()->route('gradeManagement.index');
         }

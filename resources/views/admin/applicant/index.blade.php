@@ -44,7 +44,7 @@
               <option value="1" @if($data_type == 1) selected @endif>前台表單</option>
               <option value="2" @if($data_type == 2) selected @endif>繳交紙本</option>
               <option value="3" @if($data_type == 3) selected @endif>報名完成</option>
-              {{-- <option value="4" @if($data_type == 4) selected @endif>報名尚未完成</option> --}}
+              <option value="4" @if($data_type == 4) selected @endif>報名尚未完成</option>
             </select>
           </th>
         </tr>

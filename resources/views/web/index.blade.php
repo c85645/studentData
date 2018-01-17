@@ -82,7 +82,7 @@
             <img src="{{ asset('images/png/graduate.png') }}" width="60px">
           </div>
           <div class="gtco-copy">
-            <h3>碩士甄試H</h3>
+            <h3>碩士甄試</h3>
             <br>
             <div class="col-md-12">
               @if ($academyH->isOpen())
@@ -114,7 +114,7 @@
             <img src="{{ asset('images/png/id-card.png') }}" width="60px">
           </div>
           <div class="gtco-copy">
-            <h3>碩士在職專班I</h3>
+            <h3>碩士在職專班</h3>
             <br>
             <div class="col-md-12">
               @if ($academyI->isOpen())
@@ -146,7 +146,7 @@
             <img src="{{ asset('images/png/writing.png') }}" width="60px">
           </div>
           <div class="gtco-copy">
-            <h3>轉系考試B</h3>
+            <h3>轉系考試</h3>
             <br>
             <div class="col-md-12">
               @if ($academyB->isOpen())
@@ -178,7 +178,7 @@
             <img src="{{ asset('images/png/library.png') }}" width="60px">
           </div>
           <div class="gtco-copy">
-            <h3>雙主修C</h3>
+            <h3>雙主修</h3>
             <br>
             <div class="col-md-12">
               @if ($academyC->isOpen())
@@ -210,7 +210,7 @@
             <img src="{{ asset('images/png/lecture.png') }}" width="60px">
           </div>
           <div class="gtco-copy">
-            <h3>學士後E</h3>
+            <h3>學士後</h3>
             <br>
             <div class="col-md-12">
               @if ($academyE->isOpen())
@@ -244,7 +244,7 @@
             <img src="{{ asset('images/png/ereader-1.png') }}" width="60px">
           </div>
           <div class="gtco-copy">
-            <h3>碩士考試G</h3>
+            <h3>碩士考試</h3>
             <br>
             <div class="col-md-12">
               @if ($academyG->isOpen())
@@ -276,7 +276,7 @@
             <img src="{{ asset('images/png/ereader.png') }}" width="60px">
           </div>
           <div class="gtco-copy">
-            <h3>轉學考試A</h3>
+            <h3>轉學考試</h3>
             <br>
             <div class="col-md-12">
               @if ($academyA->isOpen())
@@ -308,7 +308,7 @@
             <img src="{{ asset('images/png/chat.png') }}" width="60px">
           </div>
           <div class="gtco-copy">
-            <h3>輔系D</h3>
+            <h3>輔系</h3>
             <br>
             <div class="col-md-12">
               @if ($academyD->isOpen())
@@ -340,7 +340,7 @@
             <img src="{{ asset('images/png/learning.png') }}" width="60px">
           </div>
           <div class="gtco-copy">
-            <h3>學程F</h3>
+            <h3>學程</h3>
             <br>
             <div class="col-md-12">
               @if ($academyF->isOpen())
@@ -416,7 +416,6 @@
     $("#action_form").submit();
   }
 
-//function counter(date,div)
   function counter() {
     var date1 = date.split("-");
     var year = date1[0];

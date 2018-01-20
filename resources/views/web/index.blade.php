@@ -1,8 +1,8 @@
 @extends('layout.web.master')
 
+@section('html')
 <!-- Counter -->
 <script src="{{ asset('js/web/counter.js') }}"></script>
-@section('html')
 <nav class="gtco-nav" role="navigation">
   <div class="container">
     <div class="row">

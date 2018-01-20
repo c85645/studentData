@@ -14,8 +14,8 @@
   <div class="gototop js-top">
     <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
   </div>
-  @yield('javascript')
   @include('layout.web.script')
+  @yield('javascript')
 </body>
 
 </html>

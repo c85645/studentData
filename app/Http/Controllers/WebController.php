@@ -93,6 +93,14 @@ class WebController extends Controller
     // 儲存資料
     public function save()
     {
+        $this -> validate(request(), [
+            'name' => 'required|min:2|max:10',
+            'personal_id' => 'required|max:6',
+            'mobile' => 'required|max:10',
+            'email' => 'required|email|max:30',
+            'file' => 'required|file'
+        ]);
+
         $applicant = new Applicant;
         $applicant->academy_id = request('academy_id');
         $applicant->name = request('name');

@@ -34,7 +34,7 @@ function counter() {
     if(!font2) var font2="0";
     if(!cuttime) var cuttime="0";
     // 印出倒數時間資料
-    document.write("<iframe src='https://countdown.reportitle.com/neo_parts.php?year="+year+"&month="+month+"&day="+day+"&hour="+hour+"&minute="+minute+"&centi="+centi+"&cnt1="+cnt1+"&cnt2="+cnt2+"&cnt3="+cnt3+"&cnt4="+cnt4+"&br1="+br1+"&br2="+br2+"&br3="+br3+"&br4="+br4+"&com1="+com1+"&com2="+com2+"&com3="+com3+"&com4="+com4+"&end="+end+"&width="+width+"&height="+height+"&font="+font+"&size="+size+"&l_height="+l_height+"&bold="+bold+"&italic="+italic+"&line="+line+"&space="+space+"&align="+align+"&img="+img+"&color1="+color1+"&color2="+color2+"&color3="+color3+"&roop="+roop+"&convert="+convert+"&baseoffset="+baseoffset+"&font2="+font2+"&cuttime="+cuttime+"' width='"+width+"px' height='"+height+"px' frameborder='0' scrolling='no' style='margin:0;padding:0'></iframe>");
+    document.write("<iframe src='http://countdown.reportitle.com/neo_parts.php?year="+year+"&month="+month+"&day="+day+"&hour="+hour+"&minute="+minute+"&centi="+centi+"&cnt1="+cnt1+"&cnt2="+cnt2+"&cnt3="+cnt3+"&cnt4="+cnt4+"&br1="+br1+"&br2="+br2+"&br3="+br3+"&br4="+br4+"&com1="+com1+"&com2="+com2+"&com3="+com3+"&com4="+com4+"&end="+end+"&width="+width+"&height="+height+"&font="+font+"&size="+size+"&l_height="+l_height+"&bold="+bold+"&italic="+italic+"&line="+line+"&space="+space+"&align="+align+"&img="+img+"&color1="+color1+"&color2="+color2+"&color3="+color3+"&roop="+roop+"&convert="+convert+"&baseoffset="+baseoffset+"&font2="+font2+"&cuttime="+cuttime+"' width='"+width+"px' height='"+height+"px' frameborder='0' scrolling='no' style='margin:0;padding:0'></iframe>");
 
     document.write("");
   }

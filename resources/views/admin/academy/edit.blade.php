@@ -89,11 +89,11 @@
             <table class="table table-middle">
               <tbody>
                 <tr>
-                  <td>前台開放報名時間</td>
+                  <td>前台報名開始時間</td>
                   <td><input type="date" name="fill_out_sdate" class="form-control" value="{{ old('fill_out_sdate', $academy->fill_out_sdate) }}"></td>
                 </tr>
                 <tr>
-                  <td>前台開放報名時間</td>
+                  <td>前台報名截止時間</td>
                   <td><input type="date" name="fill_out_edate" class="form-control" value="{{ old('fill_out_edate', $academy->fill_out_edate) }}"></td>
                 </tr>
                 <tr>

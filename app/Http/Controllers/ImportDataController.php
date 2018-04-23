@@ -219,7 +219,7 @@ class ImportDataController extends Controller
                             'identity' => $row['身份別'],
                             'graduated_school_classification' => $row['畢業學校類別'],
                             'birth' => date_format($row['生日'], 'Y-m-d'),
-                            'personal_id' => $row['身分證字號'],
+                            'personal_id' => strtoupper($row['身分證字號']),
                             'address' => $row['地址'],
                             'mobile' => str_pad($row['電話'], 10, '0', STR_PAD_LEFT),
                             'email' => $row['email'],

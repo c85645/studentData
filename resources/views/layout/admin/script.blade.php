@@ -7,6 +7,7 @@
 <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
 <script src="{{ asset('js/common/common.js') }}"/></script>
+<script src="{{ asset('js/locales/bootstrap-datepicker.zh-TW.min.js') }}" charset="UTF-8"></script>
 <script type="text/javascript">
 $.ajaxSetup({
   headers: {

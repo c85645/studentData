@@ -90,19 +90,19 @@
               <tbody>
                 <tr>
                   <td>前台報名開始時間</td>
-                  <td><input type="date" name="fill_out_sdate" class="form-control" value="{{ old('fill_out_sdate', $academy->fill_out_sdate) }}"></td>
+                  <td><div class="input-group date"><input type="text" name="fill_out_sdate" class="form-control" placeholder="YYYY-MM-DD" value="{{ old('fill_out_sdate', $academy->fill_out_sdate) }}"></div></td>
                 </tr>
                 <tr>
                   <td>前台報名截止時間</td>
-                  <td><input type="date" name="fill_out_edate" class="form-control" value="{{ old('fill_out_edate', $academy->fill_out_edate) }}"></td>
+                  <td><div class="input-group date"><input type="text" name="fill_out_edate" class="form-control" placeholder="YYYY-MM-DD" value="{{ old('fill_out_edate', $academy->fill_out_edate) }}"></div></td>
                 </tr>
                 <tr>
                   <td>考試委員評分開始時間</td>
-                  <td><input type="date" name="score_sdate" class="form-control" value="{{ old('score_sdate', $academy->score_sdate) }}"></td>
+                  <td><div class="input-group date"><input type="text" name="score_sdate" class="form-control" placeholder="YYYY-MM-DD" value="{{ old('score_sdate', $academy->score_sdate) }}"></div></td>
                 </tr>
                 <tr>
                   <td>考試委員評分截止時間</td>
-                  <td><input type="date" name="score_edate" class="form-control" value="{{ old('score_edate', $academy->score_edate) }}"></td>
+                  <td><div class="input-group date"><input type="text" name="score_edate" class="form-control" placeholder="YYYY-MM-DD" value="{{ old('score_edate', $academy->score_edate) }}"></div></td>
                 </tr>
               </tbody>
             </table>
@@ -122,6 +122,40 @@
 
 @section("javascript")
 <script type="text/javascript">
+  $(function() {
+    $('input[name="fill_out_sdate"]').datepicker({
+      format: "yyyy-mm-dd",
+      language: "zh-TW",
+      todayBtn: "linked",
+      autoclose: true,
+      todayHighlight: true,
+      toggleActive: true
+    });
+    $('input[name="fill_out_edate"]').datepicker({
+      format: "yyyy-mm-dd",
+      language: "zh-TW",
+      todayBtn: "linked",
+      autoclose: true,
+      todayHighlight: true,
+      toggleActive: true
+    });
+    $('input[name="score_sdate"]').datepicker({
+      format: "yyyy-mm-dd",
+      language: "zh-TW",
+      todayBtn: "linked",
+      autoclose: true,
+      todayHighlight: true,
+      toggleActive: true
+    });
+    $('input[name="score_edate"]').datepicker({
+      format: "yyyy-mm-dd",
+      language: "zh-TW",
+      todayBtn: "linked",
+      autoclose: true,
+      todayHighlight: true,
+      toggleActive: true
+    });
+  });
   function addCol() {
     var tbody = $("#tbody");
     if (tbody.length>0) {

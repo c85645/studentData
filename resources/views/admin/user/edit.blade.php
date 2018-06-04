@@ -53,6 +53,11 @@
         </div>
       </div>
       <div align="center">
+        <label>
+          <span style="color: red">* 提示：重置密碼會將密碼重置與帳號相同</span>
+        </label>
+      </div>
+      <div align="center">
         <input class="btn btn-primary" type="submit" value="儲存">
         <a class="btn btn-warning" href="/studentData/admin/user" role="button">取消</a>
         <input class="btn btn-danger" type="button" value="重置密碼" onclick="resetPassword();">

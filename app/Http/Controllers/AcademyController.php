@@ -41,10 +41,24 @@ class AcademyController extends Controller
     {
         $academy = Academy::where('academies.id', $id)->first();
 
-        $teachers = User::where('users.status', true)
-        ->whereHas('roles', function ($query) {
-            $query->whereIn('id', [2, 3]);
-        })->get();
+        /**
+         * 判斷使用者權限
+         * 若為「最高管理員」則可以修改「管理員」與「評審委員」權限
+         * 若為「管理員」則只能修改「評審委員」權限
+         */
+        $queryTeachers = User::where('users.status', true);
+        $teachers;
+        if (auth()->user()->isAdministrator() == true) {
+            // 最高管理員
+            $teachers = $queryTeachers->whereHas('roles', function ($query) {
+                $query->whereIn('id', [2, 3]);
+            })->get();
+        } else {
+            // 管理員
+            $teachers = $queryTeachers->whereHas('roles', function ($query) {
+                $query->whereIn('id', [3]);
+            })->get();
+        }
 
         $available_teachers = $academy->teachers->pluck('id')->toArray();
 

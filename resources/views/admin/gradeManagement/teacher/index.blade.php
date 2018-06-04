@@ -19,7 +19,7 @@
   </div>
 </div>
 <div class="row">
-  @if (count($academies) != 0)
+  @if (count(json_decode($academies)) != 0)
     @foreach ($academies as $academy)
     <div class="col-sm-12">
       <h4>距離 {{ $academy->year }} 學年，{{ $academy->name }} 的評分截止時間： {{ $academy->leftTime }}</h4>
@@ -42,7 +42,7 @@
     @endforeach
   </form>
   <div>
-    @if (count($academies) != 0)
+    @if (count(json_decode($academies)) != 0)
       <input class="btn btn-info" type="button" value="開始評分GO" onclick="goSubmit();">
     @endif
   </div>

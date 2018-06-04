@@ -26,7 +26,7 @@
         <div class="form-group">
           <label class="col-sm-3">{{ $item->name .' ('.$item->percent.'%)'}}</label>
           <div class="col-sm-9">
-            <input name="score[]" type="number" max="{{ $item->percent }}" required>
+            <input name="score[]" type="number" max="{{ $item->percent }}" min="0" required>
           </div>
         </div>
       @endforeach

@@ -83,11 +83,11 @@
         @endif
       </td> --}}
       <td>
-        <form class="form-inline" method="post" action="/studentData/admin/applicant/importData/{{ $applicant->id }}">
+        <form id="dataForm" class="form-inline" method="post" action="/studentData/admin/applicant/importData/{{ $applicant->id }}">
           <a class="btn btn-success" href="/studentData/admin/applicant/importData/{{ $applicant->id }}/edit"><i class="fa fa-pencil"> </i></a>
           {{ method_field('delete') }}
           {{ csrf_field() }}
-          <button class="btn btn-danger" type="submit" name=""><i class="fa fa-trash"></i></button>
+          <button class="btn btn-danger" type="button" onclick="goSubmit()"><i class="fa fa-trash"></i></button>
         </form>
       </td>
     </tr>
@@ -95,4 +95,14 @@
   </tbody>
 </table>
 <div align="center">{!! $import_applicants->render() !!}</div>
+@endsection
+@section('javascript')
+<script type="text/javascript">
+  function goSubmit() {
+    var msg = "確定要執行刪除？";
+    if (confirm(msg)) {
+      $("#dataForm").submit();
+    }
+  }
+</script>
 @endsection

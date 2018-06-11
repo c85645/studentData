@@ -74,18 +74,21 @@
 @section('javascript')
 <script type="text/javascript">
 $(document).keypress(
-function(event){
-if (event.which == '13') {
-event.preventDefault();
-}
+  function(event){
+  if (event.which == '13') {
+    event.preventDefault();
+  }
 });
-function doInsert() {
-$("#action").val("insert");
-$("#submit_form").submit();
-}
+  function doInsert() {
+    $("#action").val("insert");
+    $("#submit_form").submit();
+  }
 function doDelete() {
-$("#action").val("delete");
-$("#submit_form").submit();
+  $("#action").val("delete");
+  var msg = "確定要執行刪除？";
+  if (confirm(msg)) {
+    $("#submit_form").submit();
+  }
 }
 </script>
 @endsection

@@ -41,12 +41,12 @@
       <td><label>{{ $role->role_name }}</label></td>
       <td>{{ implode(', ', $role->permissions()->pluck('title')->toArray()) }}</td>
       <td>
-        <form class="form-inline" method="post" action="/studentData/admin/role/{{ $role->id }}">
+        <form id="dataForm" class="form-inline" method="post" action="/studentData/admin/role/{{ $role->id }}">
           <a class="btn btn-success" href="/studentData/admin/role/{{ $role->id }}/edit"><i class="fa fa-pencil"> </i></a>
           {{ method_field('delete') }}
           {{ csrf_field() }}
           @if($role->role_id != 'administrator' && $role->role_id != 'manager' && $role->role_id != 'teacher')
-          <button class="btn btn-danger" type="submit" name=""><i class="fa fa-trash"></i></button>
+          <button class="btn btn-danger" type="button" onclick="goSubmit()"><i class="fa fa-trash"></i></button>
           @endif
         </form>
       </td>
@@ -55,4 +55,14 @@
   </tbody>
 </table>
 {!! $rows->render() !!}
+@endsection
+@section('javascript')
+<script type="text/javascript">
+  function goSubmit() {
+    var msg = "確定要執行刪除？";
+    if (confirm(msg)) {
+      $("#dataForm").submit();
+    }
+  }
+</script>
 @endsection

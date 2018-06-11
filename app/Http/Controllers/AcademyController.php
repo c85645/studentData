@@ -28,7 +28,12 @@ class AcademyController extends Controller
             }
         }
 
-        $rows = $query->where('year', $year)->paginate(9);
+        // return array
+        $teacherPermission = auth()->user()->getAcademyPermission($year);
+
+        $rows = $query->where('year', $year)
+        ->whereIn('academies.name_id', $teacherPermission)
+        ->paginate(9);
 
         return view('admin.academy.index')->with([
             'years' => $options,

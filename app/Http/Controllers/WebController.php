@@ -48,6 +48,9 @@ class WebController extends Controller
                 case 'I':
                     $academyI = $academy;
                     break;
+                case 'J':
+                    $academyJ = $academy;
+                    break;
             }
         }
 
@@ -62,6 +65,7 @@ class WebController extends Controller
             'academyG' => $academyG,
             'academyH' => $academyH,
             'academyI' => $academyI,
+            'academyJ' => $academyJ,
         ]);
     }
 

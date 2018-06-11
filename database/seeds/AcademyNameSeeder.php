@@ -49,6 +49,10 @@ class AcademyNameSeeder extends Seeder
             'id'    =>  'I',
             'name'  =>  '碩士在職專班',
           ],
+          [
+            'id'    =>  'J',
+            'name'  =>  '學碩一貫',
+          ],
       ]);
     }
 }

@@ -33,7 +33,7 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    @if ($academy->name_id == 'H' || $academy->name_id == 'I')
+    @if ($academy->name_id == 'H' || $academy->name_id == 'I' || $academy->name_id == 'J')
       <div class="pull-left">
         <h4>申請人第一階段總成績</h4>
       </div>

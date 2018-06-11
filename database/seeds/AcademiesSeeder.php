@@ -94,6 +94,15 @@ class AcademiesSeeder extends Seeder
             'score_sdate' => '2017-12-16',
             'score_edate' => '2017-12-31',
           ],
+          [
+            'year' => 107,
+            'name_id' => 'J',
+            'pdf_url' => 'http://www.scu.edu.tw/entrance/anounce/107/E/E-book/700.pdf',
+            'fill_out_sdate' => '2017-12-01',
+            'fill_out_edate' => '2017-12-15',
+            'score_sdate' => '2017-12-16',
+            'score_edate' => '2017-12-31',
+          ],
         ]);
 
         \DB::table('score_item_data')->insert([
@@ -343,6 +352,33 @@ class AcademiesSeeder extends Seeder
             ],
             [
               'academy_id' => 9,
+              'step' => 1,
+              'no' => 4,
+              'name' => '有利證照',
+              'percent' => 10,
+            ],[
+              'academy_id' => 10,
+              'step' => 1,
+              'no' => 1,
+              'name' => '基本資料',
+              'percent' => 40,
+            ],
+            [
+              'academy_id' => 10,
+              'step' => 1,
+              'no' => 2,
+              'name' => '自傳與讀書計畫',
+              'percent' => 30,
+            ],
+            [
+              'academy_id' => 10,
+              'step' => 1,
+              'no' => 3,
+              'name' => '工作與bigdata相關性',
+              'percent' => 20,
+            ],
+            [
+              'academy_id' => 10,
               'step' => 1,
               'no' => 4,
               'name' => '有利證照',

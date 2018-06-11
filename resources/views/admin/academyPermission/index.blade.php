@@ -63,6 +63,7 @@
         <td>@if(in_array('G', $user->getAcademyPermission($year))) V @endif</td>
         <td>@if(in_array('H', $user->getAcademyPermission($year))) V @endif</td>
         <td>@if(in_array('I', $user->getAcademyPermission($year))) V @endif</td>
+        <td>@if(in_array('J', $user->getAcademyPermission($year))) V @endif</td>
         <td><button class="btn btn-success" type="submit"><i class="fa fa-pencil"></i></button></td>
       </tr>
     </form>

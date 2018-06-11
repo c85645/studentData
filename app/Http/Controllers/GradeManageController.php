@@ -205,6 +205,19 @@ class GradeManageController extends Controller
         ])->first();
         session(['academy_id' => $academy->id]);
 
+        // 先判斷是否有該學制的權限
+        $hasPermission = DB::table('academy_teacher')
+        ->where([
+            ['academy_id', $academy->id],
+            ['teacher_id', auth()->user()->id]
+        ])->exists();
+
+        if ($hasPermission == false) {
+            return redirect()->route('gradeManagement.index')->withErrors([
+                'errors' => "權限不足",
+            ]);
+        }
+
         return view('admin.gradeManagement.manager.search')->with([
             'academy' => $academy,
         ]);
@@ -263,7 +276,7 @@ class GradeManageController extends Controller
             ]);
         } else {
             // 總成績
-            if ($academy->name_id == 'H' || $academy->name_id == 'I') {
+            if ($academy->name_id == 'H' || $academy->name_id == 'I' || $academy->name_id == 'J') {
                 $applicants = ImportApplicant::where('academy_id', $academy->id)->get();
                 // 複製申請人清單給第二個表格使用
                 $applicants2 = $applicants;

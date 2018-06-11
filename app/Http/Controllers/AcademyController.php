@@ -33,7 +33,7 @@ class AcademyController extends Controller
 
         $rows = $query->where('year', $year)
         ->whereIn('academies.name_id', $teacherPermission)
-        ->paginate(9);
+        ->paginate(10);
 
         return view('admin.academy.index')->with([
             'years' => $options,

@@ -47,4 +47,5 @@
     </form>
   </div>
 </div>
+@include('layout.common.errors')
 @endsection

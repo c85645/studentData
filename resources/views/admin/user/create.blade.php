@@ -58,6 +58,11 @@
         </div>
       </div>
       <div align="center">
+        <label>
+          <span style="color: red">* 提示：首次密碼將與帳號相同</span>
+        </label>
+      </div>
+      <div align="center">
         <input class="btn btn-primary" type="submit" value="儲存">
         <a class="btn btn-warning" href="/studentData/admin/user" role="button">取消</a>
       </div>

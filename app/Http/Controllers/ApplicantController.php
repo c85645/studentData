@@ -207,7 +207,7 @@ class ApplicantController extends Controller
 
             // dd($results);
 
-            return view('admin.applicant.signUpUnFinish.index')->with([
+            return view('admin.applicant.signUpUnfinish.index')->with([
                 'academy' => $academy,
                 'results' => $results,
                 // 'keyword' => $keyword,

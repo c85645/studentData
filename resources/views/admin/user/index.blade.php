@@ -50,12 +50,12 @@
         @endif
       </td>
       <td>
-        <form id="dataForm" class="form-inline" method="post" action="/studentData/admin/user/{{ $user->id }}">
+      <form id="dataForm{{$user->id}}" class="form-inline" method="post" action="/studentData/admin/user/{{ $user->id }}">
           <a class="btn btn-success" href="/studentData/admin/user/{{ $user->id }}/edit"><i class="fa fa-pencil"> </i></a>
           {{ method_field('delete') }}
           {{ csrf_field() }}
           @if($user->id != 1)
-          <button class="btn btn-danger" type="button" onclick="goSubmit()"><i class="fa fa-trash"></i></button>
+          <button class="btn btn-danger" type="button" onclick="goSubmit({{$user->id}})"><i class="fa fa-trash"></i></button>
           @endif
         </form>
       </td>
@@ -67,10 +67,10 @@
 @endsection
 @section('javascript')
 <script type="text/javascript">
-  function goSubmit() {
+  function goSubmit(id) {
     var msg = "確定要執行刪除？";
     if (confirm(msg)) {
-      $("#dataForm").submit();
+      $("#dataForm" + id).submit();
     }
   }
 </script>

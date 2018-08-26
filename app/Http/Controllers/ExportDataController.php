@@ -22,6 +22,7 @@ class ExportDataController extends Controller
 
             // FIXME
             // 若有兩階段的話會有問題
+            // 判斷若為有兩階段的話，則取資料方式增加條件step=1
             $data = ImportApplicant::leftJoin('scores', 'import_applicants.id', 'scores.student_id')
             ->select(DB::raw('import_applicants.exam_number, import_applicants.name, coalesce(sum(scores.score), 0)'))
             ->groupBy('import_applicants.id')
@@ -39,29 +40,26 @@ class ExportDataController extends Controller
             $excel->sheet('sheet', function ($sheet) use ($data, $teacher, $academy) {
                 $sheet->setFontSize(15);
                 $sheet->setAllBorders('thin');
-                $sheet->mergeCells('A1:E1');
-                $sheet->mergeCells('A2:E2');
                 $sheet->setPageMargin(0.25);
-                $sheet->setWidth(array(
-                    'A' => 20,
-                    'B' => 10,
-                    'C' => 10,
-                ));
-                $sheet->cells('A1:E2', function ($cells) {
-                    $cells->setAlignment('center');
-                });
+                $sheet->setWidth('A', 20);
 
                 $sheet->row(1, array($academy->year . ' 學年度巨資學院 ' . $academy->name));
-                $sheet->row(2, array('招生考試書面資料審查成績評分表(' . $teacher->name . ' )'));
+                $sheet->row(2, array('招生考試書面資料審查成績評分表(' . $teacher->name . ')'));
                 $sheet->row(3, array('報名序號', '姓名', '總分'));
                 $sheet->fromArray($data, null, 'A4', true, false);
 
                 // 20180721修改為最後一筆資料的往下兩行
                 // 控制表尾委員簽名的位置
                 $num = count($data) + 3 + 2;
-
-                $sheet->mergeCells('A' . $num . ':E' . $num);
                 $sheet->row($num, array('委員簽名：'));
+
+                $sheet->mergeCells('A1:E1');
+                $sheet->mergeCells('A2:E2');
+                $sheet->mergeCells('A' . $num . ':E' . $num);
+
+                $sheet->cells('A1:E2', function ($cells) {
+                    $cells->setAlignment('center');
+                });
                 $sheet->cells('A3:E' . $num, function ($cells) {
                     $cells->setAlignment('center');
                 });
@@ -265,6 +263,7 @@ class ExportDataController extends Controller
                     ['academy_id', $student->academy_id],
                     ['step', 1]
                 ])->select(DB::raw('sum(score) as score'))->groupBy('teacher_id');
+
                 // 計算不同老師分數的總平均
                 $query_avg = DB::table(DB::raw("({$query_scores->toSql()}) as sub"))
                 ->mergeBindings($query_scores->getQuery())
@@ -286,8 +285,6 @@ class ExportDataController extends Controller
             $excel->sheet('sheet', function ($sheet) use ($academy, $teacher_name, $data) {
                 $sheet->setFontSize(15);
                 $sheet->setAllBorders('thin');
-                $sheet->mergeCells('A1:E1');
-                $sheet->mergeCells('A2:E2');
                 $sheet->setPageMargin(0.25);
                 $sheet->setWidth('A', 20);
 
@@ -299,11 +296,13 @@ class ExportDataController extends Controller
                 // 控制表尾委員簽名的位置
                 $num = count($data) + 3 + 2;
 
+                $sheet->mergeCells('A1:E1');
+                $sheet->mergeCells('A2:E2');
+                $sheet->mergeCells('C' . $num . ':E' . $num);
+                $sheet->setBorder('A' . $num .':B' . $num, 'thin');
                 $sheet->cells('A1:E' . ($num - 1), function ($cells) {
                     $cells->setAlignment('center');
                 });
-                $sheet->mergeCells('C' . $num . ':E' . $num);
-                $sheet->setBorder('A' . $num .':B' . $num, 'thin');
                 $sheet->cell('C' . $num, function ($cell) {
                     $cell->setValue('主任簽名：');
                 });
@@ -325,5 +324,4 @@ class ExportDataController extends Controller
             return $letter;
         }
     }
-
 }

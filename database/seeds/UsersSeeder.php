@@ -16,14 +16,14 @@ class UsersSeeder extends Seeder
         User::insert([
             [
                 'account' => 'admin',
-                'name' => '傑夫',
+                'name' => '最高管理員',
                 'password' => bcrypt('admin'),
                 'status' => true,
                 'created_name' => 'admin',
                 'updated_name' => 'admin',
             ],[
                 'account' => 'user',
-                'name' => '老師一',
+                'name' => '老師',
                 'password' => bcrypt('user'),
                 'status' => true,
                 'created_name' => 'admin',

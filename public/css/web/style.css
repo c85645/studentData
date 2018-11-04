@@ -769,6 +769,10 @@ h1, h2, h3, h4, h5, h6, figure {
   font-size: 23px;
   content: "\ea37";
 }
+.gtco-contact-info ul li.clock:before {
+  font-size: 23px;
+  content: "\e014";
+}
 
 form label {
   font-weight: normal !important;

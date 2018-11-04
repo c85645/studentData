@@ -116,7 +116,7 @@
             <img src="{{ asset('images/png/id-card.png') }}" width="60px">
           </div>
           <div class="gtco-copy">
-            <h3>碩士在職專班</h3>
+            <h3>碩士在職學位學程</h3>
             <br>
             <div class="col-md-12">
               @if ($academyI->isOpen())
@@ -409,27 +409,35 @@
   <div class="container">
     <div class="col-md-8 col-md-offset-2 heading animate-box" data-animate-effect="fadeIn">
       <h1>聯絡我們</h1>
-      <p class="sub">有問題歡迎私訊東吳巨資Facebook粉絲專頁</p>
+      <p class="sub">有問題歡迎來電洽詢 or 私訊東吳巨資Facebook粉絲專頁</p>
       <p class="subtle-text animate-box" data-animate-effect="fadeIn">Contact</p>
     </div>
     <div class="row">
-      <div class="col-md-5 col-md-push-6 animate-box">
+      <div class="col-md-6 col-md-push-7 animate-box">
         <div class="gtco-contact-info">
           <ul>
+            <li class="facebook"><a href="https://www.facebook.com/scubigdata/" target="_blank">東吳巨資粉絲專頁</a></li>
             <li class="fax">02-2880-3947</li>
-            <li class="url"><a href="http://bigdata.scu.edu.tw" target="_blank">東吳巨資官網</a></li>
-            <li class="address">台北市士林區臨溪路70號【東吳大學外雙溪校區】</li>
+            <li>&nbsp</li>
+            <li class="email">amanda@scu.edu.tw</li>
+            <li>&nbsp</li>
+            <li class="email">tychen@gm.scu.edu.tw</li>
+            <li>&nbsp</li>
+            <li class="email">wanning@gm.scu.edu.tw</li>
           </ul>
         </div>
       </div>
-      <div class="col-md-3 col-md-push-6"></div>
-      <div class="col-md-4 col-md-pull-6 animate-box">
+      <div class="col-md-6 col-md-pull-4 animate-box">
         <div class="gtco-contact-info">
           <ul>
-            <li class="phone">02-2881-9471 轉 5932~5935</li>
-            <li class="email">bigdata@gm.scu.edu.tw</li>
-            <li class="facebook"><a href="https://www.facebook.com/scubigdata/" target="_blank">東吳巨資粉絲專頁</a></li>
-            <li class="user">星期一至五 8:30~17:00</li>
+            <li class="url"><a href="http://bigdata.scu.edu.tw" target="_blank">東吳巨資官網</a></li>
+            <li class="clock">承辦業務時間：星期一至五 8:30~17:00</li>
+            <li class="user">曾淑晶秘書 &nbsp For 碩士學位學程</li>
+            <li class="phone">02-2881-9471 #5934</li>
+            <li class="user">陳姿吟組員 &nbsp For 學士學位學程</li>
+            <li class="phone">02-2881-9471 #5935</li>
+            <li class="user">李婉寧助教 &nbsp For 碩士在職學位學程、巨量資料分析學分學程</li>
+            <li class="phone">02-2881-9471 #5936</li>
           </ul>
         </div>
       </div>

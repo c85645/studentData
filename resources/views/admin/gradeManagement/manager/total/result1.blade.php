@@ -58,7 +58,11 @@
           <td></td>
         @endfor
       @endif
-      <td>{{ number_format($applicant->sum, 2) }}</td>
+      @if ($applicant->sum != null) 
+        <td>{{ number_format($applicant->sum, 2) }}</td>
+      @else
+        <td></td>
+      @endif
       <td>
         @if ($applicant->is_pass)
           <p style="color: blue;">通過</p>

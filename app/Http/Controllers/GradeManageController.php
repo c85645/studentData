@@ -264,7 +264,12 @@ class GradeManageController extends Controller
                     ['step', 1]
                 ]);
                 $applicant->scores = $query->get();
-                $applicant->sum = $query->sum('score');
+
+                if ($applicant->scores->isNotEmpty()) {
+                    $applicant->sum = $query->sum('score');
+                } else {
+                    $applicant->sum = '';
+                }
                 $applicant->score_time = $query->select('score_time')->pluck('score_time')->first();
             }
 
@@ -326,11 +331,13 @@ class GradeManageController extends Controller
                     ])->select($raw_sql)->groupBy('no');
 
                     $query_sum = DB::table(DB::raw("({$query_avg->toSql()}) as sub"))
-                    ->mergeBindings($query_avg->getQuery())
-                    ->sum('average');
-
+                    ->mergeBindings($query_avg->getQuery());
+                    if ($query_sum->get()->isNotEmpty()) {
+                        $applicant->sum = $query_sum->sum('average');
+                    } else {
+                        $applicant->sum = '';
+                    }
                     $applicant->avg = $query_avg->get();
-                    $applicant->sum = $query_sum;
                 }
 
                 return view('admin.gradeManagement.manager.total.result1')->with([

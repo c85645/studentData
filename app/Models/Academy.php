@@ -17,7 +17,7 @@ class Academy extends Model
             return false;
         } else {
             $fill_out_sdate = Carbon::createFromFormat('Y-m-d', $this->fill_out_sdate);
-            $fill_out_edate = Carbon::createFromFormat('Y-m-d', $this->fill_out_edate);
+            $fill_out_edate = Carbon::createFromFormat('Y-m-d', $this->fill_out_edate)->addDay(1);
             return Carbon::now()
             ->between($fill_out_sdate, $fill_out_edate);
         }

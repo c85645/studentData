@@ -2,7 +2,7 @@ function counter() {
     var date1 = date.split("-");
     var year = date1[0];
     var month = date1[1];
-    var day = date1[2];
+    var day = Number(date1[2]) + 1;
     var hour = "0";
     var minute = "0";
     var centi = "5";

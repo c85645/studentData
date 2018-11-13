@@ -74,8 +74,9 @@ class WebController extends Controller
         $academy = Academy::where('year', $academyYear)->where('name_id', $academyType)->first();
         // 檢查是否為開放填寫期間，若非填寫期間則導頁
         $now = Carbon::now();
+
         $fill_out_sdate = Carbon::createFromFormat('Y-m-d', $academy->fill_out_sdate);
-        $fill_out_edate = Carbon::createFromFormat('Y-m-d', $academy->fill_out_edate);
+        $fill_out_edate = Carbon::createFromFormat('Y-m-d', $academy->fill_out_edate)->addDay(1);
         if (!$now->between($fill_out_sdate, $fill_out_edate)) {
             return redirect('studentData')->withErrors([
                 'errors' => '尚未開放填寫！',

@@ -33,9 +33,6 @@ class WebController extends Controller
                 case 'D':
                     $academyD = $academy;
                     break;
-                case 'E':
-                    $academyE = $academy;
-                    break;
                 case 'F':
                     $academyF = $academy;
                     break;
@@ -60,7 +57,6 @@ class WebController extends Controller
             'academyB' => $academyB,
             'academyC' => $academyC,
             'academyD' => $academyD,
-            'academyE' => $academyE,
             'academyF' => $academyF,
             'academyG' => $academyG,
             'academyH' => $academyH,

@@ -209,16 +209,16 @@
         <br>
         <div class="gtco-practice-area-item animate-box">
           <div class="gtco-icon">
-            <img src="{{ asset('images/png/lecture.png') }}" width="60px">
+            <img src="{{ asset('images/png/workspace.png') }}" width="60px">
           </div>
           <div class="gtco-copy">
-            <h3>學士後</h3>
+            <h3>學碩一貫</h3>
             <br>
             <div class="col-md-12">
-              @if ($academyE->isOpen())
-                <p>報名截止日期：{{ $academyE->fill_out_edate }}</p>
+              @if ($academyJ->isOpen())
+                <p>報名截止日期：{{ $academyJ->fill_out_edate }}</p>
                 <script type="text/javascript">
-                  var date = "<?php echo $academyE->fill_out_edate; ?>"
+                  var date = "<?php echo $academyJ->fill_out_edate; ?>"
                   counter();
                 </script>
               @else
@@ -227,13 +227,13 @@
               @endif
             </div>
             <div class="col-md-5">
-              <a @if ($academyE->pdf_url != '') href="{{ $academyE->pdf_url }}" target="_blank" @else href="#" @endif>
+              <a @if ($academyJ->pdf_url != '') href="{{ $academyJ->pdf_url }}" target="_blank" @else href="#" @endif>
                 <button class="button2" ><span>查看簡章</span></button>
               </a>
             </div>
             <div class="col-md-7">
-              @if ($academyE->isOpen())
-                <button class="button" onclick="goInput('E');"><span>點我報名</span></button>
+              @if ($academyJ->isOpen())
+                <button class="button" onclick="goInput('J');"><span>點我報名</span></button>
               @endif
             </div>
           </div>
@@ -368,39 +368,6 @@
             </div>
           </div>
         </div>
-        <br>
-        <div class="gtco-practice-area-item animate-box">
-          <div class="gtco-icon">
-            <img src="{{ asset('images/png/workspace.png') }}" width="60px">
-          </div>
-          <div class="gtco-copy">
-            <h3>學碩一貫</h3>
-            <br>
-            <div class="col-md-12">
-              @if ($academyJ->isOpen())
-                <p>報名截止日期：{{ $academyJ->fill_out_edate }}</p>
-                <script type="text/javascript">
-                  var date = "<?php echo $academyJ->fill_out_edate; ?>"
-                  counter();
-                </script>
-              @else
-                <p>尚未開放</p>
-                <p style="line-height: 34px">comming soon</p>
-              @endif
-            </div>
-            <div class="col-md-5">
-              <a @if ($academyJ->pdf_url != '') href="{{ $academyJ->pdf_url }}" target="_blank" @else href="#" @endif>
-                <button class="button2" ><span>查看簡章</span></button>
-              </a>
-            </div>
-            <div class="col-md-7">
-              @if ($academyJ->isOpen())
-                <button class="button" onclick="goInput('J');"><span>點我報名</span></button>
-              @endif
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>

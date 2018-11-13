@@ -30,10 +30,6 @@ class AcademyNameSeeder extends Seeder
             'name'  =>  '輔系',
           ],
           [
-            'id'    =>  'E',
-            'name'  =>  '學士後',
-          ],
-          [
             'id'    =>  'F',
             'name'  =>  '學程',
           ],

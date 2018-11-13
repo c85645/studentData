@@ -58,7 +58,7 @@
         <td>@if(in_array('B', $user->getAcademyPermission($year))) V @endif</td>
         <td>@if(in_array('C', $user->getAcademyPermission($year))) V @endif</td>
         <td>@if(in_array('D', $user->getAcademyPermission($year))) V @endif</td>
-        <td>@if(in_array('E', $user->getAcademyPermission($year))) V @endif</td>
+        {{-- <td>@if(in_array('E', $user->getAcademyPermission($year))) V @endif</td> --}}
         <td>@if(in_array('F', $user->getAcademyPermission($year))) V @endif</td>
         <td>@if(in_array('G', $user->getAcademyPermission($year))) V @endif</td>
         <td>@if(in_array('H', $user->getAcademyPermission($year))) V @endif</td>

@@ -1,6 +1,7 @@
 @extends('layout.web.master')
 
 @section('html')
+<script src="{{ asset('js/common/common.js') }}"/></script>
 <nav class="gtco-nav" role="navigation">
   <div class="container">
     <div class="row">

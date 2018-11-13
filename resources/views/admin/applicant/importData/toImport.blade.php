@@ -17,6 +17,7 @@
     <h1 class="page-header">匯入</h1>
   </div>
 </div>
+@include('layout.common.errors')
 <div class="row">
   <div class="col-xs-offset-2 col-xs-6">
     <form action="{{ route('importData.import') }}" method="post" enctype="multipart/form-data" class="form-horizontal">

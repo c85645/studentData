@@ -35,7 +35,7 @@
           </div>
           <div class="form-group">
             <label class="sr-only">手機</label>
-            <input name="mobile" type="text" class="form-control" placeholder="手機" maxlength="10" required onkeyup="enterNum(this);">
+            <input name="mobile" type="text" class="form-control" placeholder="手機" pattern=".{10,10}" required onkeyup="enterNum(this);">
           </div>
           <div class="form-group">
             <label class="sr-only">信箱</label>

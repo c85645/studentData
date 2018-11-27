@@ -60,6 +60,7 @@
           <div class="form-group">
             <label class="sr-only">上傳資料</label>
             <input name="file" type="file" class="form-control" placeholder="PDF上傳" accept=".pdf,application/pdf" required>
+            <h6 align="right" style="color: #888888">PS：上傳格式為PDF，檔案上限30MB</h6>
           </div>
           <div class="form-group">
             <input type="submit" value="確認送出" class="btn btn-primary">

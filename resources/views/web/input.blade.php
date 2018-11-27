@@ -43,7 +43,7 @@
           </div>
           <div class="form-group">
             <label class="sr-only">身分證後六碼</label>
-            <input name="personal_id" type="text" class="form-control" placeholder="身分證後六碼" maxlength="6" required onkeyup="enterNum(this);">
+            <input name="personal_id" type="text" class="form-control" placeholder="身分證後六碼" pattern=".{6,6}" required onkeyup="enterNum(this);">
           </div>
           @if ($academy->name_id == 'A')
           <div class="form-group">

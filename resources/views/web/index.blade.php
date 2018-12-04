@@ -11,7 +11,7 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-64640280-4');
-  ga('send', 'pageview');
+  gtag('send', 'pageview');
 </script>
 
 <nav class="gtco-nav" role="navigation">

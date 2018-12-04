@@ -3,6 +3,16 @@
 @section('html')
 <!-- Counter -->
 <script src="{{ asset('js/web/counter.js') }}"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-64640280-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-64640280-4');
+</script>
+
 <nav class="gtco-nav" role="navigation">
   <div class="container">
     <div class="row">
@@ -19,7 +29,7 @@
       </div>
       <div class="col-xs-2">
         <ul>
-          <li class="btn-cta"><a href="http://bigdata.scu.edu.tw" target="_blank"><span>東吳巨資官網</span></a></li>
+          <li class="btn-cta"><a href="http://bigdata.scu.edu.tw" target="_blank" onclick="ga('send','event','查看官網','Cilck','頂部','10');"><span>東吳巨資官網</span></a></li>
         </ul>
       </div>
     </div>
@@ -61,7 +71,7 @@
           <p>由榮譽院長張善政領軍，搭配院裡六位不同領域的教授們，結合豐富的業界與學術資源，希望給予學員最優質的教學品質，培育出擁有數據處理力與商業洞察力的人才。
           <br><br>
           東吳巨量資料管理學院擁有九種不同學制，用心培養人才的地方，提供對資料科學領域有興趣或是任何想精進自己的人來就讀！</p>
-          <p><a  href="http://bigdata.scu.edu.tw" target="_blank" class="read-more">了解更多 <i class="icon-chevron-right"></i></a></p>
+          <p><a  href="http://bigdata.scu.edu.tw" target="_blank" class="read-more" onclick="ga('send','event','查看官網','Cilck','中間','10');">了解更多 <i class="icon-chevron-right"></i></a></p>
         </div>
       </div>
     </div>
@@ -99,7 +109,7 @@
               @endif
             </div>
             <div class="col-md-5">
-              <a @if ($academyH->pdf_url != '') href="{{ $academyH->pdf_url }}" target="_blank" @else href="#" @endif>
+              <a @if ($academyH->pdf_url != '') href="{{ $academyH->pdf_url }}" target="_blank" @else href="#" @endif onclick="ga('send','event','查看簡章','Cilck','碩士甄試','10');">
                 <button class="button2" ><span>查看簡章</span></button>
               </a>
             </div>
@@ -131,7 +141,7 @@
               @endif
             </div>
             <div class="col-md-5">
-              <a @if ($academyI->pdf_url != '') href="{{ $academyI->pdf_url }}" target="_blank" @else href="#" @endif>
+              <a @if ($academyI->pdf_url != '') href="{{ $academyI->pdf_url }}" target="_blank" @else href="#" @endif onclick="ga('send','event','查看簡章','Cilck','碩士在職','10');">
                 <button class="button2" ><span>查看簡章</span></button>
               </a>
             </div>
@@ -163,7 +173,7 @@
               @endif
             </div>
             <div class="col-md-5">
-              <a @if ($academyB->pdf_url != '') href="{{ $academyB->pdf_url }}" target="_blank" @else href="#" @endif>
+              <a @if ($academyB->pdf_url != '') href="{{ $academyB->pdf_url }}" target="_blank" @else href="#" @endif onclick="ga('send','event','查看簡章','Cilck','轉系考試','10');">
                 <button class="button2" ><span>查看簡章</span></button>
               </a>
             </div>
@@ -195,7 +205,7 @@
               @endif
             </div>
             <div class="col-md-5">
-              <a @if ($academyC->pdf_url != '') href="{{ $academyC->pdf_url }}" target="_blank" @else href="#" @endif>
+              <a @if ($academyC->pdf_url != '') href="{{ $academyC->pdf_url }}" target="_blank" @else href="#" @endif onclick="ga('send','event','查看簡章','Cilck','雙主修','10');">
                 <button class="button2" ><span>查看簡章</span></button>
               </a>
             </div>
@@ -227,7 +237,7 @@
               @endif
             </div>
             <div class="col-md-5">
-              <a @if ($academyJ->pdf_url != '') href="{{ $academyJ->pdf_url }}" target="_blank" @else href="#" @endif>
+              <a @if ($academyJ->pdf_url != '') href="{{ $academyJ->pdf_url }}" target="_blank" @else href="#" @endif onclick="ga('send','event','查看簡章','Cilck','學碩一貫','10');">
                 <button class="button2" ><span>查看簡章</span></button>
               </a>
             </div>
@@ -261,7 +271,7 @@
               @endif
             </div>
             <div class="col-md-5">
-              <a @if ($academyG->pdf_url != '') href="{{ $academyG->pdf_url }}" target="_blank" @else href="#" @endif>
+              <a @if ($academyG->pdf_url != '') href="{{ $academyG->pdf_url }}" target="_blank" @else href="#" @endif onclick="ga('send','event','查看簡章','Cilck','碩士考試','10');">
                 <button class="button2" ><span>查看簡章</span></button>
               </a>
             </div>
@@ -293,7 +303,7 @@
               @endif
             </div>
             <div class="col-md-5">
-              <a @if ($academyA->pdf_url != '') href="{{ $academyA->pdf_url }}" target="_blank" @else href="#" @endif>
+              <a @if ($academyA->pdf_url != '') href="{{ $academyA->pdf_url }}" target="_blank" @else href="#" @endif onclick="ga('send','event','查看簡章','Cilck','轉學考試','10');">
                 <button class="button2" ><span>查看簡章</span></button>
               </a>
             </div>
@@ -325,7 +335,7 @@
               @endif
             </div>
             <div class="col-md-5">
-              <a @if ($academyD->pdf_url != '') href="{{ $academyD->pdf_url }}" target="_blank" @else href="#" @endif>
+              <a @if ($academyD->pdf_url != '') href="{{ $academyD->pdf_url }}" target="_blank" @else href="#" @endif onclick="ga('send','event','查看簡章','Cilck','輔系','10');">
                 <button class="button2" ><span>查看簡章</span></button>
               </a>
             </div>
@@ -357,7 +367,7 @@
               @endif
             </div>
             <div class="col-md-5">
-              <a @if ($academyF->pdf_url != '') href="{{ $academyF->pdf_url }}" target="_blank" @else href="#" @endif>
+              <a @if ($academyF->pdf_url != '') href="{{ $academyF->pdf_url }}" target="_blank" @else href="#" @endif onclick="ga('send','event','查看簡章','Cilck','學程','10');">
                 <button class="button2" ><span>查看簡章</span></button>
               </a>
             </div>
@@ -383,7 +393,7 @@
       <div class="col-md-6 col-md-push-7 animate-box">
         <div class="gtco-contact-info">
           <ul>
-            <li class="facebook"><a href="https://www.facebook.com/scubigdata/" target="_blank">東吳巨資粉絲專頁</a></li>
+            <li class="facebook"><a href="https://www.facebook.com/scubigdata/" target="_blank" onclick="ga('send','event','查看粉專','Cilck','底部','10');">東吳巨資粉絲專頁</a></li>
             <li class="fax">02-2880-3947</li>
             <li>&nbsp</li>
             <li class="email">amanda@scu.edu.tw</li>
@@ -397,7 +407,7 @@
       <div class="col-md-6 col-md-pull-4 animate-box">
         <div class="gtco-contact-info">
           <ul>
-            <li class="url"><a href="http://bigdata.scu.edu.tw" target="_blank">東吳巨資官網</a></li>
+            <li class="url"><a href="http://bigdata.scu.edu.tw" target="_blank" onclick="ga('send','event','查看官網','Cilck','底部','10');">東吳巨資官網</a></li>
             <li class="clock">承辦業務時間：星期一至五 8:30~17:00</li>
             <li class="user">曾淑晶秘書 &nbsp For 碩士學位學程</li>
             <li class="phone">02-2881-9471 #5934</li>

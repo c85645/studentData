@@ -41,6 +41,7 @@
     @foreach ($academy->scoreItems as $item)
       <th>{{ $item->name }}</th>
     @endforeach
+    <th>加總</th>
   </thead>
   <tbody>
     @foreach ($applicants as $applicant)
@@ -62,6 +63,7 @@
               <td></td>
             @endfor
           @endif
+          <td>{{ $applicant->sum }}</td>
         </tr>
       </form>
     @endforeach

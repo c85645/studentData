@@ -111,12 +111,19 @@ class GradeManageController extends Controller
             $applicants = ImportApplicant::where('academy_id', $academy->id)->get();
 
             foreach ($applicants as $applicant) {
-                $scores =  Score::where([
+                $query = Score::where([
                     ['academy_id', $academy->id],
                     ['student_id', $applicant->id],
                     ['teacher_id', auth()->user()->id]
-                ])->get();
-                $applicant->scores = $scores;
+                ]);
+
+                $applicant->scores = $query->get();
+                $sum = $query->sum('score');
+                if ($sum) {
+                    $applicant->sum = $sum;
+                } else {
+                    $applicant->sum = '';
+                }
             }
 
             return view('admin.gradeManagement.teacher.list')->with([

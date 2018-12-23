@@ -61,6 +61,11 @@
             <td>{{ $score->score }}</td>
           @endif
         @endforeach
+        @if (count($applicant->scores) < count($score_items))
+          @for ($i = 0; $i < (count($score_items) - count($applicant->scores)); $i++)
+            <td></td>
+          @endfor
+        @endif
       @else
         @for ($i = 0; $i < count($score_items); $i++)
           <td></td>

@@ -53,12 +53,17 @@
             <td>{{ number_format($score->average, 2) }}</td>
           @endif
         @endforeach
+        @if (count($applicant->avg) < count($score_items))
+          @for ($i = 0; $i < (count($score_items) - count($applicant->avg)); $i++)
+            <td></td>
+          @endfor
+        @endif
       @else
         @for ($i = 0; $i < count($score_items); $i++)
           <td></td>
         @endfor
       @endif
-      @if ($applicant->sum != null) 
+      @if ($applicant->sum != null)
         <td>{{ number_format($applicant->sum, 2) }}</td>
       @else
         <td></td>

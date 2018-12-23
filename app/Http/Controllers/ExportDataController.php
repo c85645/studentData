@@ -21,21 +21,46 @@ class ExportDataController extends Controller
             $excel->setDescription('考委成績確認表');
 
             // FIXME
-            // 若有兩階段的話會有問題
-            // 判斷若為有兩階段的話，則取資料方式增加條件step=1
-            $data = ImportApplicant::leftJoin('scores', 'import_applicants.id', 'scores.student_id')
-            ->select(DB::raw('import_applicants.exam_number, import_applicants.name, coalesce(sum(scores.score), 0)'))
-            ->groupBy('import_applicants.id')
-            ->orderBy('import_applicants.id')
-            ->where([
-                ['import_applicants.academy_id', request('academy_id')],
+            // 若有兩階段的話可會有問題，需要待確認
+            // 判斷若為有兩階段的話
+            // $data = ImportApplicant::leftJoin('scores', 'import_applicants.id', 'scores.student_id')
+            // ->select(DB::raw('import_applicants.exam_number, import_applicants.name, coalesce(sum(scores.score), 0)'))
+            // ->groupBy('import_applicants.id')
+            // ->orderBy('import_applicants.id')
+            // ->where([
+            //     ['import_applicants.academy_id', request('academy_id')],
             //     ['scores.teacher_id', request('teacher_id')],
             //     ['scores.step', 1]
-            ])->get()->toArray();
+            // ])->get()->toArray();
+
+            // 學生名單
+            $students = ImportApplicant::where('academy_id', request('academy_id'))->get();
+
+            $data = array();
+            foreach ($students as $student) {
+                // 組合到陣列內
+                $result = array($student->exam_number, $student->name);
+
+                // 取得分數
+                $scores_array = ImportApplicant::leftJoin('scores', 'import_applicants.id', 'scores.student_id')
+                ->select(DB::raw('coalesce(sum(scores.score), 0) as score'))
+                ->groupBy('import_applicants.id')
+                ->orderBy('import_applicants.id')
+                ->where([
+                    ['import_applicants.academy_id', request('academy_id')],
+                    ['scores.teacher_id', request('teacher_id')],
+                    ['scores.step', 1],
+                    ['scores.student_id', $student->id]
+                ])->get()->pluck('score')->toArray();
+
+                $result = array_merge($result, $scores_array);
+
+                // 整理好的資料丟到要給excel的data
+                array_push($data, $result);
+            }
 
             $teacher = User::find(request('teacher_id'));
             $academy = Academy::find(request('academy_id'));
-            $academy->name = $academy->name->name;
 
             $excel->sheet('sheet', function ($sheet) use ($data, $teacher, $academy) {
                 $sheet->setFontSize(15);
@@ -43,7 +68,7 @@ class ExportDataController extends Controller
                 $sheet->setPageMargin(0.25);
                 $sheet->setWidth('A', 20);
 
-                $sheet->row(1, array($academy->year . ' 學年度巨資學院 ' . $academy->name));
+                $sheet->row(1, array($academy->year . ' 學年度巨資學院 ' . $academy->name->name));
                 $sheet->row(2, array('招生考試書面資料審查成績評分表(' . $teacher->name . ')'));
                 $sheet->row(3, array('報名序號', '姓名', '總分'));
                 $sheet->fromArray($data, null, 'A4', true, false);
@@ -77,14 +102,18 @@ class ExportDataController extends Controller
 
             // 取得學制資料
             $academy = Academy::find(request('academy_id'));
-            $academy->name = $academy->name->name;
 
             // 老師名單
             $teacher_name = User::join('role_user', 'users.id', 'role_user.user_id')
-            ->where('role_user.role_id', 3)
+            ->leftJoin('academy_teacher', 'users.id', 'academy_teacher.teacher_id')
+            ->where([
+                ['role_user.role_id', 3],
+                ['academy_teacher.academy_id', $academy->id]
+            ])
             ->select('users.name')
             ->orderBy('users.id')
             ->get()->pluck('name')->toArray();
+
             // 老師數量
             $count_of_teacher = count($teacher_name);
 
@@ -108,15 +137,12 @@ class ExportDataController extends Controller
                 $score_array = $query_scores->get()->pluck('score')->toArray();
                 $result = array_merge($result, $score_array);
 
-                // 比較老師數量與成績數量，若兩者不一致則補滿0分字串到與老師數量一致
+                // 比較老師數量與成績數量，若兩者不一致則補空字串到與老師數量一致
                 $count_of_scores = count($score_array);
-                if ($count_of_teacher != $count_of_scores) {
-                    if ($count_of_teacher > $count_of_scores) {
-                        $diff_num = $count_of_teacher - $count_of_scores;
-                        for ($i = 0; $i < $diff_num; $i++) {
-                            $zeroNum = array('0');
-                            $result = array_merge($result, $zeroNum);
-                        }
+                if ($count_of_teacher != $count_of_scores && $count_of_teacher > $count_of_scores) {
+                    $diff_num = $count_of_teacher - $count_of_scores;
+                    for ($i = 0; $i < $diff_num; $i++) {
+                        $result = array_merge($result, array(''));
                     }
                 }
 
@@ -124,7 +150,15 @@ class ExportDataController extends Controller
                 $query_avg = DB::table(DB::raw("({$query_scores->toSql()}) as sub"))
                 ->mergeBindings($query_scores->getQuery())
                 ->avg('score');
-                $result = array_merge($result, array(number_format($query_avg, 2)));
+
+                $query_avg_array;
+                if ($query_avg) {
+                    $query_avg_array = array(number_format($query_avg, 2));
+                } else {
+                    $query_avg_array = array('');
+                }
+
+                $result = array_merge($result, $query_avg_array);
 
                 // 整理好的資料丟到要給excel的data
                 array_push($data, $result);
@@ -146,7 +180,7 @@ class ExportDataController extends Controller
                 $last_column = $this->getNameFromNumber(count($result));
 
                 // 放入資料
-                $sheet->row(1, array($academy->year . ' 學年度巨量資料管理學院 ' . $academy->name ));
+                $sheet->row(1, array($academy->year . ' 學年度巨量資料管理學院 ' . $academy->name->name ));
                 $sheet->row(2, array('書面資料審查評分總表'));
                 $sheet->row(3, $result);
                 $sheet->fromArray($data, null, 'A4', false, false);

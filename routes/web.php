@@ -12,12 +12,12 @@
 */
 // 預設登入機制，先不使用
 // Auth::routes();
-// Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 
 // 前台
 Route::group(['prefix' => 'studentData'], function(){
     // 前台首頁-先進入controller再導頁
-    Route::get('/', 'WebController@index');
+    Route::get('/', 'WebController@index')->name('home');
     Route::get('input', 'WebController@redirectToIndex');
     // 輸入資料頁
     Route::post('input', 'WebController@toInput');

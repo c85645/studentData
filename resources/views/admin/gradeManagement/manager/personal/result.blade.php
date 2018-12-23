@@ -45,7 +45,8 @@
     <th>姓名</th>
     <th>准考證號碼</th>
     @foreach ($score_items as $key => $items)
-      <th>評分項目{{ $key+1 }}</th>
+      <!-- <th>評分項目{{ $key+1 }}</th> -->
+      <th>{{ $items->name }}</th>
     @endforeach
     <th>總分</th>
     <th>評分時間</th>

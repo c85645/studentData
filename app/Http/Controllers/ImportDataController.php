@@ -207,6 +207,7 @@ class ImportDataController extends Controller
             if (!empty($data) && $data->count()) {
                 $count = 0;
                 $errorMsg = '';
+                $resultDataArray = [];
 
                 foreach ($data->toArray() as $row) {
                     $count++;
@@ -273,6 +274,7 @@ class ImportDataController extends Controller
                                 'created_at' => Carbon::now()->toDateTimeString(),
                                 'updated_at' => Carbon::now()->toDateTimeString(),
                             ];
+                            array_push($resultDataArray, $dataArray);
                         } else {
                             $errorMsg = $errorMsg . $msg;
                         }
@@ -285,9 +287,9 @@ class ImportDataController extends Controller
                         'errors' => $errorMsg,
                     ]);
                 } else {
-                    if (!empty($dataArray)) {
+                    if (!empty($resultDataArray)) {
                         ImportApplicant::where('academy_id', $academy->id)->delete();
-                        ImportApplicant::insert($dataArray);
+                        ImportApplicant::insert($resultDataArray);
                         return redirect()->route('applicant.search');
                     }
                 }

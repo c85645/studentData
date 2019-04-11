@@ -288,7 +288,7 @@ class GradeManageController extends Controller
             ]);
         } else {
             // 總成績
-            if ($academy->name_id == 'H' || $academy->name_id == 'I' || $academy->name_id == 'J') {
+            if ($academy->name_id == 'H' || $academy->name_id == 'I' || $academy->name_id == 'J' || $academy->name_id == 'K') {
                 $applicants = ImportApplicant::where('academy_id', $academy->id)->get();
                 // 複製申請人清單給第二個表格使用
                 $applicants2 = $applicants;

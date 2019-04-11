@@ -20,19 +20,6 @@ class ExportDataController extends Controller
             $excel->setCreator('DLAB ADMIN')->setCompany('DLAB ADMIN');
             $excel->setDescription('考委成績確認表');
 
-            // FIXME
-            // 若有兩階段的話可會有問題，需要待確認
-            // 判斷若為有兩階段的話
-            // $data = ImportApplicant::leftJoin('scores', 'import_applicants.id', 'scores.student_id')
-            // ->select(DB::raw('import_applicants.exam_number, import_applicants.name, coalesce(sum(scores.score), 0)'))
-            // ->groupBy('import_applicants.id')
-            // ->orderBy('import_applicants.id')
-            // ->where([
-            //     ['import_applicants.academy_id', request('academy_id')],
-            //     ['scores.teacher_id', request('teacher_id')],
-            //     ['scores.step', 1]
-            // ])->get()->toArray();
-
             // 學生名單
             $students = ImportApplicant::where('academy_id', request('academy_id'))->get();
 

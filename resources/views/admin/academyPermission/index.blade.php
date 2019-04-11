@@ -56,14 +56,15 @@
         <td>{{ $user->getRoleName() }}</td>
         <td>@if(in_array('A', $user->getAcademyPermission($year))) V @endif</td>
         <td>@if(in_array('B', $user->getAcademyPermission($year))) V @endif</td>
-        <td>@if(in_array('C', $user->getAcademyPermission($year))) V @endif</td>
-        <td>@if(in_array('D', $user->getAcademyPermission($year))) V @endif</td>
+        {{-- <td>@if(in_array('C', $user->getAcademyPermission($year))) V @endif</td> --}}
+        {{-- <td>@if(in_array('D', $user->getAcademyPermission($year))) V @endif</td> --}}
         {{-- <td>@if(in_array('E', $user->getAcademyPermission($year))) V @endif</td> --}}
-        <td>@if(in_array('F', $user->getAcademyPermission($year))) V @endif</td>
+        {{-- <td>@if(in_array('F', $user->getAcademyPermission($year))) V @endif</td> --}}
         <td>@if(in_array('G', $user->getAcademyPermission($year))) V @endif</td>
         <td>@if(in_array('H', $user->getAcademyPermission($year))) V @endif</td>
         <td>@if(in_array('I', $user->getAcademyPermission($year))) V @endif</td>
         <td>@if(in_array('J', $user->getAcademyPermission($year))) V @endif</td>
+        <td>@if(in_array('K', $user->getAcademyPermission($year))) V @endif</td>
         <td><button class="btn btn-success" type="submit"><i class="fa fa-pencil"></i></button></td>
       </tr>
     </form>

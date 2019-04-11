@@ -27,15 +27,6 @@ class WebController extends Controller
                 case 'B':
                     $academyB = $academy;
                     break;
-                case 'C':
-                    $academyC = $academy;
-                    break;
-                case 'D':
-                    $academyD = $academy;
-                    break;
-                case 'F':
-                    $academyF = $academy;
-                    break;
                 case 'G':
                     $academyG = $academy;
                     break;
@@ -48,6 +39,9 @@ class WebController extends Controller
                 case 'J':
                     $academyJ = $academy;
                     break;
+                case 'K':
+                    $academyK = $academy;
+                    break;
             }
         }
 
@@ -55,13 +49,11 @@ class WebController extends Controller
             'sysYear' => $sysYear,
             'academyA' => $academyA,
             'academyB' => $academyB,
-            'academyC' => $academyC,
-            'academyD' => $academyD,
-            'academyF' => $academyF,
             'academyG' => $academyG,
             'academyH' => $academyH,
             'academyI' => $academyI,
             'academyJ' => $academyJ,
+            'academyK' => $academyK,
         ]);
     }
 

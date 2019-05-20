@@ -40,7 +40,55 @@ class ExportDataController extends Controller
                     ['scores.student_id', $student->id]
                 ])->get()->pluck('score')->toArray();
 
-                $result = array_merge($result, $scores_array);
+                $scores_array1 = ImportApplicant::leftJoin('scores', 'import_applicants.id', 'scores.student_id', 'scores.score')
+                ->select(DB::raw('coalesce(sum(scores.score), 0) as score'))
+                ->groupBy('import_applicants.id')
+                ->orderBy('import_applicants.id')
+                ->where([
+                    ['import_applicants.academy_id', request('academy_id')],
+                    ['scores.teacher_id', request('teacher_id')],
+                    ['scores.step', 1],
+                    ['scores.no', 1],
+                    ['scores.student_id', $student->id]
+                ])->get()->pluck('score')->toArray();
+
+                $scores_array2 = ImportApplicant::leftJoin('scores', 'import_applicants.id', 'scores.student_id')
+                ->select(DB::raw('coalesce(sum(scores.score), 0) as score'))
+                ->groupBy('import_applicants.id')
+                ->orderBy('import_applicants.id')
+                ->where([
+                    ['import_applicants.academy_id', request('academy_id')],
+                    ['scores.teacher_id', request('teacher_id')],
+                    ['scores.step', 1],
+                    ['scores.no', 2],
+                    ['scores.student_id', $student->id]
+                ])->get()->pluck('score')->toArray();
+
+                $scores_array3 = ImportApplicant::leftJoin('scores', 'import_applicants.id', 'scores.student_id')
+                ->select(DB::raw('coalesce(sum(scores.score), 0) as score'))
+                ->groupBy('import_applicants.id')
+                ->orderBy('import_applicants.id')
+                ->where([
+                    ['import_applicants.academy_id', request('academy_id')],
+                    ['scores.teacher_id', request('teacher_id')],
+                    ['scores.step', 1],
+                    ['scores.no', 3],
+                    ['scores.student_id', $student->id]
+                ])->get()->pluck('score')->toArray();
+
+                $scores_array4 = ImportApplicant::leftJoin('scores', 'import_applicants.id', 'scores.student_id')
+                ->select(DB::raw('coalesce(sum(scores.score), 0) as score'))
+                ->groupBy('import_applicants.id')
+                ->orderBy('import_applicants.id')
+                ->where([
+                    ['import_applicants.academy_id', request('academy_id')],
+                    ['scores.teacher_id', request('teacher_id')],
+                    ['scores.step', 1],
+                    ['scores.no',4],
+                    ['scores.student_id', $student->id]
+                ])->get()->pluck('score')->toArray();
+
+                $result = array_merge($result, $scores_array1, $scores_array2, $scores_array3, $scores_array4, $scores_array);
 
                 // 整理好的資料丟到要給excel的data
                 array_push($data, $result);
@@ -57,7 +105,7 @@ class ExportDataController extends Controller
 
                 $sheet->row(1, array($academy->year . ' 學年度巨資學院 ' . $academy->name->name));
                 $sheet->row(2, array('招生考試書面資料審查成績評分表(' . $teacher->name . ')'));
-                $sheet->row(3, array('報名序號', '姓名', '總分'));
+                $sheet->row(3, array('報名序號', '姓名','基本資料','自傳與讀書計畫','工作與bigdata相關性','有利證照', '總分'));
                 $sheet->fromArray($data, null, 'A4', true, false);
 
                 // 20180721修改為最後一筆資料的往下兩行
@@ -65,9 +113,9 @@ class ExportDataController extends Controller
                 $num = count($data) + 3 + 2;
                 $sheet->row($num, array('委員簽名：'));
 
-                $sheet->mergeCells('A1:E1');
-                $sheet->mergeCells('A2:E2');
-                $sheet->mergeCells('A' . $num . ':E' . $num);
+                $sheet->mergeCells('A1:G1');
+                $sheet->mergeCells('A2:G2');
+                $sheet->mergeCells('A' . $num . ':G' . $num);
 
                 $sheet->cells('A1:E2', function ($cells) {
                     $cells->setAlignment('center');

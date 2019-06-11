@@ -300,7 +300,7 @@
             </div>
             <div class="col-md-7">
               @if ($academyK->isOpen())
-                <button class="button" onclick="goInput('D');"><span>點我報名</span></button>
+                <button class="button" onclick="goInput('K');"><span>點我報名</span></button>
               @endif
             </div>
           </div>
